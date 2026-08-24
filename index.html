@@ -211,25 +211,18 @@
     <section id="tab-debug" class="tab-panel">
       <div class="debug-hero glass">
         <div><span class="eyebrow">TESTER MODE</span><h2>Build diagnostics without guesswork.</h2><p>Turn on Tester Mode while testing a new upload. The panel shows the exact build, library size, VIP member ID, render timestamp, and latest JavaScript error.</p></div>
-        <div class="debug-build"><strong>BUILD</strong><span>2.1.0 • VIP • TESTER • UI</span></div>
+        <div class="debug-build"><strong>BUILD</strong><span>3.4.0 • VIP ADMIN • TESTER • UI</span></div>
       </div>
       <div id="debug-report-card" class="glass debug-report-card"><div class="debug-report-title"><i class="fa-solid fa-terminal"></i><strong>Runtime report</strong></div><div id="debug-report-lines" class="debug-report-lines"><span>Enable Tester mode to see diagnostics.</span></div></div>
     </section>
 
-  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile-first • Fast UI • v3.0.0</span></footer>
+  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile-first • Fast UI • v3.4.0</span></footer>
 
   <div id="toast-root" class="toast-root" aria-live="polite"></div>
 
   <dialog id="details-modal" class="modal glass">
     <button class="modal-close" data-close="details-modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
     <div id="modal-body"></div>
-  </dialog>
-
-  <dialog id="comments-modal" class="modal glass wide">
-    <button class="modal-close" data-close="comments-modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-    <div class="modal-title"><span class="eyebrow">COMMUNITY</span><h2 id="comments-title">Comments</h2></div>
-    <div id="comment-list" class="comment-list"></div>
-    <div class="comment-form"><input id="guest-name" placeholder="Your name (optional)"><textarea id="guest-comment" rows="3" placeholder="Drop a comment..."></textarea><button class="primary-btn" id="submit-comment">Post</button></div>
   </dialog>
 
   <dialog id="settings-modal" class="modal glass settings-modal-v33">
@@ -259,6 +252,25 @@
     </div>
   </section>
 
+  <section class="settings-section creator-admin-section">
+    <div class="settings-section-head"><div><span class="settings-kicker">CREATOR</span><h3>VIP role manager</h3><p class="settings-subtitle">Only an approved creator account can change VIP roles.</p></div></div>
+    <div id="creator-admin-shell" class="creator-admin-shell glass-lite">
+      <div class="creator-auth-row"><span id="creator-auth-status">Not signed in</span><span id="creator-auth-email"></span></div>
+      <div class="details-actions">
+        <button class="primary-btn" id="creator-login" type="button"><i class="fa-brands fa-google"></i> Creator login</button>
+        <button class="ghost-btn" id="creator-logout" type="button" hidden>Sign out</button>
+      </div>
+      <div id="creator-admin-panel" hidden>
+        <div class="creator-admin-grid">
+          <input id="creator-member-id" class="settings-input" placeholder="Member ID" autocomplete="off">
+          <button class="primary-btn" id="creator-grant-vip" type="button"><i class="fa-solid fa-crown"></i> Member to VIP</button>
+          <button class="ghost-btn" id="creator-remove-vip" type="button"><i class="fa-solid fa-user-minus"></i> Remove VIP</button>
+        </div>
+        <small>Use the member ID the user sends you. VIP status is stored in Firebase.</small>
+      </div>
+    </div>
+  </section>
+
   <button class="danger-btn settings-clear" id="clear-local" data-i18n="clearData">Clear local settings</button>
 </dialog>
 
@@ -282,7 +294,7 @@
     </div>
   </dialog>
 
-  <div id="debug-panel" class="debug-panel" hidden></div>
+  <div id="debug-panel" class="debug-panel" hidden><button id="debug-close" class="debug-close" type="button" aria-label="Close debug"><i class="fa-solid fa-xmark"></i></button><div id="debug-panel-content"></div></div>
 
   <template id="skin-card-template">
     <article class="script-card glass">
@@ -307,7 +319,6 @@
           <span class="card-type-dot"></span>
         </div>
         <div class="actions">
-          <button class="icon-btn comment-btn" title="Comments"><i class="fa-solid fa-comments"></i></button>
           <button class="icon-btn details-btn" title="Details"><i class="fa-solid fa-circle-info"></i></button>
           <button class="primary-btn download-btn" title="Download"><i class="fa-solid fa-download"></i></button>
         </div>

@@ -87,3 +87,15 @@ body.ui-minimal .card-glow,body.ui-minimal .orb,body.ui-minimal .bg-grid{opacity
 @media (max-width:760px){
   .gate-shell-v33{padding:2px}.gate-hero-v33 h1{font-size:clamp(34px,11vw,52px)}.quest-board{padding:12px;border-radius:20px}.quest-item{grid-template-columns:36px 1fr 42px;padding:10px}.quest-item-icon{width:36px;height:36px}.quest-open-v33{width:38px;height:38px}.quest-foot-row{flex-direction:column;gap:3px}.style-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.settings-card-grid{grid-template-columns:1fr}.language-grid-v33{grid-template-columns:1fr}.settings-modal-v33,.language-modal-v33{width:min(100% - 14px,760px);padding:18px}.modal-close{width:34px;height:34px}.gate-reset-v33{font-size:10px}.gate-mini-note{font-size:8px}}
 @media (max-width:440px){.style-grid{grid-template-columns:1fr 1fr}.ui-style-preview{height:64px}.settings-big-btn{padding:10px}.quest-board-head h2{font-size:20px}}
+
+
+/* v3.4 creator admin + debug close */
+.debug-panel { position: fixed; right: 18px; bottom: 18px; z-index: 9999; max-width: min(560px, calc(100vw - 36px)); padding: 44px 16px 16px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; background: rgba(8,10,18,.95); backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+.debug-close { position:absolute; right:10px; top:10px; width:34px; height:34px; border:0; border-radius:10px; background:rgba(255,255,255,.08); color:inherit; cursor:pointer; }
+#debug-panel-content { display:block; }
+.creator-admin-shell { padding: 16px; border-radius: 16px; }
+.creator-auth-row { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px; font-size:13px; opacity:.9; }
+.creator-admin-grid { display:grid; grid-template-columns: minmax(0,1fr) auto auto; gap:10px; margin-top:14px; }
+.settings-input { width:100%; min-height:46px; padding:0 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); color:inherit; outline:none; }
+.creator-admin-shell small { display:block; margin-top:10px; opacity:.7; line-height:1.5; }
+@media (max-width:720px){ .creator-admin-grid { grid-template-columns:1fr; } .debug-panel { left:12px; right:12px; bottom:12px; max-width:none; } }

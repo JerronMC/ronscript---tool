@@ -7,6 +7,12 @@ let getDoc = null;
 let updateDoc = null;
 let increment = null;
 let arrayUnion = null;
+let getAuth = null;
+let GoogleAuthProvider = null;
+let signInWithPopup = null;
+let signOut = null;
+let onAuthStateChanged = null;
+let auth = null;
 let db = null;
 let firebaseBooted = false;
 
@@ -34,9 +40,16 @@ async function bootFirebase() {
     updateDoc = fsModule.updateDoc;
     increment = fsModule.increment;
     arrayUnion = fsModule.arrayUnion;
+    const authModule = await import("https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js");
+    getAuth = authModule.getAuth;
+    GoogleAuthProvider = authModule.GoogleAuthProvider;
+    signInWithPopup = authModule.signInWithPopup;
+    signOut = authModule.signOut;
+    onAuthStateChanged = authModule.onAuthStateChanged;
 
     const app = initializeApp(firebaseConfig);
     db = getFirestore(app);
+    auth = getAuth(app);
     firebaseBooted = true;
     return true;
   } catch (error) {
@@ -49,10 +62,10 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "3.2.0",
-  build: "RON-ULTIMATE-V3.2-2026.08.24.1",
+  version: "3.4.0",
+  build: "RON-ULTIMATE-V3.4-2026.08.24.1",
   channel: "ULTIMATE",
-  release: "RANDOM QUEST • VIP • TESTER • CUSTOM LAB • UI",
+  release: "QUEST • VIP ADMIN • TESTER • UI",
   updated: "2026-08-24"
 };
 
@@ -84,11 +97,13 @@ const scriptData = [
 
   {
     id: "argus_aizen",
-    title: "Argus x Sosuke Aizen",
+    title: "Argus x Sosuke Aizen — VIP",
     url: "https://sfile.co/ms4tmWTzw7j",
     hero: "Argus",
-    type: "Crossover",
-    tags: ["aizen", "bleach"]
+    type: "Access",
+    tags: ["aizen", "bleach", "VIP"],
+    accessOnly: true,
+    accessMessage: "VIP access required. Send your Member ID to the creator for approval."
   },
 
   {
@@ -120,11 +135,13 @@ const scriptData = [
 
   {
     id: "argus_hidan2",
-    title: "Argus x Hidan 2 (Transform)",
+    title: "Argus x Hidan 2 (Transform) — VIP",
     url: "https://www.mediafire.com/file/0lmz5xm85oks3z8/ARGUS_X_HIDAN_2_%2528TRANSFORM%2529_BY_RON_replace_Default.zip/file",
     hero: "Argus",
-    type: "Effects",
-    tags: ["transform"]
+    type: "Access",
+    tags: ["transform", "VIP"],
+    accessOnly: true,
+    accessMessage: "VIP access required. Send your Member ID to the creator for approval."
   },
 
   {
@@ -1434,6 +1451,75 @@ async function requestVip() {
   }
 }
 
+
+async function checkCreatorAccess() {
+  if (!auth || !getDoc || !db || !state.user) {
+    state.isCreator = false;
+    updateCreatorUI();
+    return false;
+  }
+  try {
+    const snap = await getDoc(doc(db, "creatorAdmins", state.user.uid));
+    state.isCreator = snap.exists() && snap.data()?.active === true;
+  } catch (e) {
+    console.warn("Creator access check failed", e);
+    state.isCreator = false;
+  }
+  updateCreatorUI();
+  return state.isCreator;
+}
+
+async function creatorSignIn() {
+  if (!auth || !signInWithPopup || !GoogleAuthProvider) {
+    return toast("Creator login is unavailable until Firebase Auth is enabled.");
+  }
+  try {
+    await signInWithPopup(auth, new GoogleAuthProvider());
+  } catch (e) {
+    console.warn("Creator sign-in failed", e);
+    toast("Creator login failed. Try again.");
+  }
+}
+
+async function creatorSignOut() {
+  if (!auth || !signOut) return;
+  try { await signOut(auth); } catch (e) { console.warn(e); }
+}
+
+async function creatorSetVip(active) {
+  if (!state.isCreator) return toast("Creator access required.");
+  const input = $("#creator-member-id");
+  const id = input?.value.trim();
+  if (!id) return toast("Enter a Member ID first.");
+  try {
+    await setDoc(doc(db, "vipMembers", id), {
+      active,
+      updatedAt: new Date().toISOString(),
+      updatedBy: state.user.uid
+    }, { merge: true });
+    toast(active ? "VIP enabled for this member." : "VIP removed for this member.");
+    if (id === getVipId()) await refreshVipStatus();
+    updateCreatorUI();
+  } catch (e) {
+    console.warn("VIP role change failed", e);
+    toast("Could not change VIP role. Check Firestore rules.");
+  }
+}
+
+function updateCreatorUI() {
+  const gate = $("#creator-admin-panel");
+  const signed = $("#creator-auth-status");
+  const email = $("#creator-auth-email");
+  const login = $("#creator-login");
+  const logout = $("#creator-logout");
+  if (!gate) return;
+  gate.hidden = !state.isCreator;
+  if (signed) signed.textContent = state.isCreator ? "Creator verified" : (state.user ? "Signed in — not approved as creator" : "Not signed in");
+  if (email) email.textContent = state.user?.email || "";
+  if (login) login.hidden = !!state.user;
+  if (logout) logout.hidden = !state.user;
+}
+
 function updateVipUI() {
   const badge = $("#vip-status-badge");
   const dot = $("#vip-status-dot");
@@ -1478,6 +1564,15 @@ function openVipDownload(s) {
   });
 }
 
+function closeDebugPanel() {
+  state.debug = false;
+  localStorage.setItem("ron_debug", "0");
+  const panel = $("#debug-panel");
+  if (panel) panel.hidden = true;
+  const toggle = $("#debug-toggle");
+  if (toggle) toggle.textContent = "Off";
+}
+
 function updateDebugPanel(extra = "") {
   const panel = $("#debug-panel");
   if (!panel) return;
@@ -1494,7 +1589,8 @@ function updateDebugPanel(extra = "") {
     `Last error: ${state.lastError}`,
     extra ? `Event: ${extra}` : ""
   ].filter(Boolean);
-  panel.innerHTML = lines.map(x => `<span>${escapeHTML(x)}</span>`).join("");
+  const content = $("#debug-panel-content");
+  if (content) content.innerHTML = lines.map(x => `<span>${escapeHTML(x)}</span>`).join("");
   const report = $("#debug-report-lines");
   if (report) report.innerHTML = lines.map(x => `<span>${escapeHTML(x)}</span>`).join("");
 }
@@ -1556,7 +1652,18 @@ function hydrateControls() {
     compactToggle.textContent = state.compact ? "On" : "Off";
   }
 
-  const debugToggle = $("#debug-toggle");
+  const creatorLogin = $("#creator-login");
+if (creatorLogin) creatorLogin.addEventListener("click", creatorSignIn);
+const creatorLogout = $("#creator-logout");
+if (creatorLogout) creatorLogout.addEventListener("click", creatorSignOut);
+const grantVipBtn = $("#creator-grant-vip");
+if (grantVipBtn) grantVipBtn.addEventListener("click", () => creatorSetVip(true));
+const removeVipBtn = $("#creator-remove-vip");
+if (removeVipBtn) removeVipBtn.addEventListener("click", () => creatorSetVip(false));
+
+const debugClose = $("#debug-close");
+if (debugClose) debugClose.addEventListener("click", closeDebugPanel);
+const debugToggle = $("#debug-toggle");
   if (debugToggle) debugToggle.textContent = state.debug ? "On" : "Off";
 
   document.body.className =
@@ -1744,8 +1851,6 @@ function cardTemplate(s) {
     });
   }
 
-  const commentBtn = $(".comment-btn", card);
-  commentBtn.addEventListener("click", () => openComments(s.id));
   const detailsBtn = $(".details-btn", card);
   detailsBtn.addEventListener("click", () => openDetails(s.id));
 
@@ -1916,90 +2021,11 @@ function openDetails(id) {
     <div class="details-grid"><div class="detail-stat"><b>${s.likes || 0}</b><span>Likes</span></div><div class="detail-stat"><b>${s.views || 0}</b><span>Views</span></div><div class="detail-stat"><b>${rating}</b><span>Rating</span></div></div>
     <div class="details-description"><p>${escapeHTML(shortDescription(s))}</p></div>
     ${notice}
-    <div class="details-actions">${actionButton}<button class="ghost-btn" id="details-copy"><i class="fa-solid fa-link"></i> Copy ID</button><button class="ghost-btn" id="details-comment"><i class="fa-regular fa-comment"></i> Comments</button></div>`;
+    <div class="details-actions">${actionButton}<button class="ghost-btn" id="details-copy"><i class="fa-solid fa-link"></i> Copy ID</button></div>`;
   if (s.accessOnly) $("#details-access").addEventListener("click", e => { e.preventDefault(); openVipDownload(s); });
   if (s.customOnly) $("#details-custom").addEventListener("click", () => toast("Custom concept only — create a release file before publishing a download link."));
   $("#details-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(s.id); toast("Skin ID copied."); } catch { toast(s.id); } });
-  $("#details-comment").addEventListener("click", () => { $("#details-modal").close(); openComments(id); });
   $("#details-modal").showModal();
-}
-
-function openComments(id) {
-  state.currentCommentId = id;
-
-  const s = scriptData.find(x => x.id === id) || customScriptSkins.find(x => x.id === id);
-
-  $("#comments-title").textContent =
-    `Comments • ${s?.title || "Skin"}`;
-
-  renderComments(
-    cache[id]?.comments || []
-  );
-
-  $("#comments-modal").showModal();
-
-  ensureDoc(id);
-}
-
-function renderComments(comments) {
-  const list = $("#comment-list");
-
-  list.innerHTML = comments?.length
-    ? comments
-        .map(
-          c => `
-            <div class="comment">
-              <strong>
-                ${escapeHTML(c.name || "Anonymous Guest")}
-              </strong>
-
-              <time>community</time>
-
-              <p>
-                ${escapeHTML(c.text || "")}
-              </p>
-            </div>
-          `
-        )
-        .join("")
-    : `
-      <div class="empty-state">
-        <p>No comments yet. Be the first.</p>
-      </div>
-    `;
-
-  list.scrollTop = list.scrollHeight;
-}
-
-async function submitComment() {
-  const id = state.currentCommentId;
-
-  if (!id) return;
-
-  const text =
-    $("#guest-comment").value.trim();
-
-  if (!text) {
-    return toast("Write a comment first.");
-  }
-
-  const name =
-    $("#guest-name").value.trim() ||
-    "Anonymous Guest";
-
-  const comment = {
-    name: name.slice(0, 40),
-    text: text.slice(0, 600)
-  };
-
-  const ok = await mutate(id, {
-    comments: arrayUnion(comment)
-  });
-
-  if (ok) {
-    $("#guest-comment").value = "";
-    toast("Comment posted.");
-  }
 }
 
 function wireRealtime() {
@@ -2023,9 +2049,6 @@ function wireRealtime() {
           if (snap.exists()) {
             cache[id] = snap.data();
             renderScripts();
-            if (state.currentCommentId === id) {
-              renderComments(cache[id]?.comments || []);
-            }
           }
         }
       );
@@ -2370,31 +2393,11 @@ $("#debug-toggle")?.addEventListener("click", () => {
 });
 
 $("#clear-local")?.addEventListener("click", () => {
-  Object.keys(localStorage).filter(k => k.startsWith("ron_")).forEach(k => localStorage.removeItem(k));
+  const keep = new Set(["ron_vip_id", "ron_vip_active", "ron_gate_complete_v3_3"]);
+  Object.keys(localStorage).filter(k => k.startsWith("ron_") && !keep.has(k)).forEach(k => localStorage.removeItem(k));
   toast("Local settings cleared. Reloading…");
   setTimeout(() => location.reload(), 450);
 });
-
-// =========================================================
-// COMMENTS
-// =========================================================
-
-$("#submit-comment").addEventListener(
-  "click",
-  submitComment
-);
-
-$("#guest-comment").addEventListener(
-  "keydown",
-  e => {
-    if (
-      (e.ctrlKey || e.metaKey) &&
-      e.key === "Enter"
-    ) {
-      submitComment();
-    }
-  }
-);
 
 // =========================================================
 // CLOSE MODALS
@@ -2451,6 +2454,17 @@ const vipRequestBtn2 = $("#vip-request-btn-2");
 if (vipRequestBtn2) vipRequestBtn2.addEventListener("click", requestVip);
 const vipRefreshBtn2 = $("#vip-refresh-btn-2");
 if (vipRefreshBtn2) vipRefreshBtn2.addEventListener("click", async () => { await refreshVipStatus(); updateVipModalUI(); toast(state.vipActive ? "VIP access is active." : "VIP access is not active yet."); });
+const creatorLogin = $("#creator-login");
+if (creatorLogin) creatorLogin.addEventListener("click", creatorSignIn);
+const creatorLogout = $("#creator-logout");
+if (creatorLogout) creatorLogout.addEventListener("click", creatorSignOut);
+const grantVipBtn = $("#creator-grant-vip");
+if (grantVipBtn) grantVipBtn.addEventListener("click", () => creatorSetVip(true));
+const removeVipBtn = $("#creator-remove-vip");
+if (removeVipBtn) removeVipBtn.addEventListener("click", () => creatorSetVip(false));
+
+const debugClose = $("#debug-close");
+if (debugClose) debugClose.addEventListener("click", closeDebugPanel);
 const debugToggle = $("#debug-toggle");
 if (debugToggle) debugToggle.addEventListener("click", () => { state.debug = !state.debug; localStorage.setItem("ron_debug", state.debug ? "1" : "0"); debugToggle.textContent = state.debug ? "On" : "Off"; updateDebugPanel("toggle"); });
 const debugNavBtn = $(`[data-tab="debug"]`);
@@ -2718,6 +2732,16 @@ bootFirebase().then(ok => {
   refreshVipStatus();
   wireRealtime();
 });
+
+function wireCreatorAuth() {
+  if (!auth || !onAuthStateChanged) return;
+  onAuthStateChanged(auth, async user => {
+    state.user = user || null;
+    await checkCreatorAccess();
+    updateCreatorUI();
+  });
+}
+
 
 window.addEventListener("error", event => {
   state.lastError = event?.error?.stack || event?.message || "Unknown error";
