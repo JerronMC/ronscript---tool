@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0b1020" />
   <meta name="description" content="RON SCRIPTS — premium skin script and hero hub." />
-  <title>RON SCRIPTS — Ultimate Skin Hub</title>
+  <title>RON SCRIPTS — V5.0 Ultimate Skin Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   </head>
-<body class="theme-neon gate-locked">
+<body class="theme-neon gate-locked ui-hypernova">
   <section id="access-gate" class="access-gate" aria-label="RON SCRIPTS quest gate">
   <div class="gate-orbit gate-orbit-a" aria-hidden="true"></div>
   <div class="gate-orbit gate-orbit-b" aria-hidden="true"></div>
   <div class="gate-shell gate-shell-v33">
     <div class="gate-brand">
       <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
-      <div><strong>RON SCRIPTS</strong><small>QUEST ACCESS • V3.3</small></div>
+      <div><strong>RON SCRIPTS</strong><small>QUEST ACCESS • V5.0</small></div>
     </div>
 
     <div class="gate-hero gate-hero-v33">
@@ -211,12 +211,12 @@
     <section id="tab-debug" class="tab-panel">
       <div class="debug-hero glass">
         <div><span class="eyebrow">TESTER MODE</span><h2>Build diagnostics without guesswork.</h2><p>Turn on Tester Mode while testing a new upload. The panel shows the exact build, library size, VIP member ID, render timestamp, and latest JavaScript error.</p></div>
-        <div class="debug-build"><strong>BUILD</strong><span>3.4.0 • VIP ADMIN • TESTER • UI</span></div>
+        <div class="debug-build"><strong>BUILD</strong><span>3.4.1.1 • VIP ADMIN • TESTER • UI</span></div>
       </div>
       <div id="debug-report-card" class="glass debug-report-card"><div class="debug-report-title"><i class="fa-solid fa-terminal"></i><strong>Runtime report</strong></div><div id="debug-report-lines" class="debug-report-lines"><span>Enable Tester mode to see diagnostics.</span></div></div>
     </section>
 
-  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile-first • Fast UI • v3.4.0</span></footer>
+  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile-first • Fast UI • v3.4.1.1</span></footer>
 
   <div id="toast-root" class="toast-root" aria-live="polite"></div>
 
@@ -294,6 +294,14 @@
     </div>
   </dialog>
 
+
+<dialog id="approval-modal" class="modal glass approval-modal">
+  <button class="modal-close" data-close="approval-modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <div class="approval-head"><span class="eyebrow"><i class="fa-solid fa-shield-halved"></i> APPROVAL</span><h2 id="approval-title">Approval</h2><p id="approval-level">VIP APPROVAL</p></div>
+  <form id="approval-form" class="approval-form"><div id="approval-questions"></div><button id="approval-submit" class="primary-btn approval-submit" type="button"><i class="fa-solid fa-check-double"></i> Submit answers</button></form>
+  <section id="approval-result" class="approval-result" hidden><div class="approval-result-icon"><i id="approval-result-icon" class="fa-solid fa-circle-check"></i></div><h3 id="approval-result-title">You've been approved</h3><p id="approval-result-message"></p><strong id="approval-result-status"></strong><div class="details-actions"><button id="approval-retry" class="ghost-btn" type="button"><i class="fa-solid fa-rotate"></i> Try again</button><button class="primary-btn" data-close="approval-modal" type="button"><i class="fa-solid fa-check"></i> Done</button></div></section>
+</dialog>
+
   <div id="debug-panel" class="debug-panel" hidden><button id="debug-close" class="debug-close" type="button" aria-label="Close debug"><i class="fa-solid fa-xmark"></i></button><div id="debug-panel-content"></div></div>
 
   <template id="skin-card-template">
@@ -326,6 +334,6 @@
     </article>
   </template>
 
-  <script type="module" src="script.js?v=20260824-3-3"></script>
+  <script type="module" src="script.js?v=20260824-5-0"></script>
 </body>
 </html>

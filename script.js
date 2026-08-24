@@ -62,8 +62,8 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "3.4.0",
-  build: "RON-ULTIMATE-V3.4-2026.08.24.1",
+  version: "3.4.1.2",
+  build: "RON-ULTIMATE-V3.4.1-CREATOR-VIP-2026.08.24.2",
   channel: "ULTIMATE",
   release: "QUEST • VIP ADMIN • TESTER • UI",
   updated: "2026-08-24"
@@ -92,18 +92,16 @@ const scriptData = [
     tags: ["VIP", "Access"],
     accessOnly: true,
     accessMessage:
-      "To get Access Download on Vergil Skin Script you need to ask The Creator On Discord or TikTok: ranzee.ron\n\nDiscord: larkdev\n\nDM it to get permission to download."
+      "Ask the creator to get the script. You need approval."
   },
 
   {
     id: "argus_aizen",
-    title: "Argus x Sosuke Aizen — VIP",
+    title: "Argus x Sosuke Aizen",
     url: "https://sfile.co/ms4tmWTzw7j",
     hero: "Argus",
-    type: "Access",
-    tags: ["aizen", "bleach", "VIP"],
-    accessOnly: true,
-    accessMessage: "VIP access required. Send your Member ID to the creator for approval."
+    type: "Crossover",
+    tags: ["aizen", "bleach"]
   },
 
   {
@@ -135,13 +133,11 @@ const scriptData = [
 
   {
     id: "argus_hidan2",
-    title: "Argus x Hidan 2 (Transform) — VIP",
+    title: "Argus x Hidan 2 (Transform)",
     url: "https://www.mediafire.com/file/0lmz5xm85oks3z8/ARGUS_X_HIDAN_2_%2528TRANSFORM%2529_BY_RON_replace_Default.zip/file",
     hero: "Argus",
-    type: "Access",
-    tags: ["transform", "VIP"],
-    accessOnly: true,
-    accessMessage: "VIP access required. Send your Member ID to the creator for approval."
+    type: "Effects",
+    tags: ["transform"]
   },
 
   {
@@ -149,8 +145,10 @@ const scriptData = [
     title: "Argus x Hidan V3.5",
     url: "https://sfile.co/mEvqZNGg1Pz",
     hero: "Argus",
-    type: "Crossover",
-    tags: []
+    type: "Premium",
+    tags: ["premium", "hidan", "v3.5"],
+    premiumApprovalOnly: true,
+    approvalLevel: "hard"
   },
 
   {
@@ -1312,11 +1310,13 @@ const state = {
   favoritesOnly: false,
   view: localStorage.getItem("ron_view") || "grid",
   theme: localStorage.getItem("ron_theme") || "neon",
-  uiStyle: localStorage.getItem("ron_ui_style") || "aurora",
+  uiStyle: localStorage.getItem("ron_ui_style") || "hypernova",
   language: localStorage.getItem("ron_language") || "en",
   reduceMotion: localStorage.getItem("ron_motion") === "off",
   compact: localStorage.getItem("ron_compact") === "on",
   currentCommentId: null,
+  user: null,
+  isCreator: false,
   vipId: localStorage.getItem("ron_vip_id") || "",
   vipActive: localStorage.getItem("ron_vip_active") === "1",
   debug: new URLSearchParams(location.search).get("debug") === "1" || localStorage.getItem("ron_debug") === "1",
@@ -1352,13 +1352,14 @@ function shortDescription(s) {
 }
 
 function initials(name) {
-  return name
+  const safeName = typeof name === "string" ? name : String(name ?? "");
+  return safeName
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
     .map(x => x[0])
     .join("")
-    .toUpperCase();
+    .toUpperCase() || "?";
 }
 
 function toast(msg) {
@@ -1415,6 +1416,20 @@ function getVipId() {
 
 async function refreshVipStatus() {
   const id = getVipId();
+
+  // The authenticated creator is always VIP.
+  if (state.isCreator === true) {
+    state.vipActive = true;
+    localStorage.setItem("ron_vip_active", "1");
+    updateVipUI();
+    try {
+      if (typeof renderScripts === "function") renderScripts();
+    } catch (e) {
+      console.warn("VIP UI refresh failed", e);
+    }
+    return true;
+  }
+
   if (!firestoreReady()) {
     state.vipActive = localStorage.getItem("ron_vip_active") === "1";
     updateVipUI();
@@ -1428,6 +1443,15 @@ async function refreshVipStatus() {
     console.warn("VIP status check failed", e);
   }
   updateVipUI();
+
+  // Re-render the cards after the async VIP check so approved members
+  // immediately see Download instead of VIP Access.
+  try {
+    if (typeof renderScripts === "function") renderScripts();
+  } catch (e) {
+    console.warn("VIP UI refresh failed", e);
+  }
+
   return state.vipActive;
 }
 
@@ -1460,7 +1484,8 @@ async function checkCreatorAccess() {
   }
   try {
     const snap = await getDoc(doc(db, "creatorAdmins", state.user.uid));
-    state.isCreator = snap.exists() && snap.data()?.active === true;
+    const data = snap.exists() ? (snap.data() || {}) : {};
+    state.isCreator = data.active === true || data.role === "creator";
   } catch (e) {
     console.warn("Creator access check failed", e);
     state.isCreator = false;
@@ -1792,69 +1817,68 @@ function setupAccessButton(button, s) {
   });
 }
 
-function cardTemplate(s) {
-  const t = $("#skin-card-template").content.cloneNode(true);
-  const card = $(".script-card", t);
-  if (!card) throw new Error("Skin card template is missing .script-card");
 
-  card.dataset.id = s.id;
-  card.classList.toggle("is-vip", !!s.accessOnly);
-  card.classList.toggle("is-custom", !!s.customOnly);
-  card.dataset.preserveDefault = s.preserveDefault ? "true" : "false";
+function getApprovalKey(s){ return `${getVipId()}::${s.id}`; }
+function getApprovalStatus(s){ return state.approvals?.[getApprovalKey(s)] || "none"; }
+function setApprovalStatus(s,status){ state.approvals[getApprovalKey(s)]=status; localStorage.setItem("ron_approvals",JSON.stringify(state.approvals)); }
 
-  $(".skin-badge", card).textContent = (s.type || "Custom").toUpperCase();
-  $(".hero-letter", card).textContent = initials(s.hero);
-  $(".skin-title", card).textContent = s.title;
-  $(".hero-name", card).textContent = s.hero;
-  $(".skin-description", card).textContent = shortDescription(s);
-  $(".card-status", card).textContent = s.accessOnly ? "VIP" : (s.customOnly ? (s.preserveDefault ? "LAB • SAFE SLOT" : "LAB") : "READY");
-  $(".card-type-dot", card).className = `card-type-dot ${s.accessOnly ? "vip" : s.customOnly ? "custom" : "ready"}`;
+function openApprovalModal(s){
+  const modal=$("#approval-modal"), title=$("#approval-title"), level=$("#approval-level"), form=$("#approval-form"), result=$("#approval-result"), questions=$("#approval-questions");
+  if(!modal||!title||!level||!form||!result||!questions) return;
+  title.textContent=s.title; level.textContent=s.approvalLevel==="hard"?"HARD PREMIUM APPROVAL":"VIP APPROVAL";
+  result.hidden=true; form.hidden=false;
+  const q=s.approvalLevel==="hard"?[
+    {q:"What will you use the script for?",a:["I use it for content","I use it for gameplay"],w:[1,1]},
+    {q:"Do you really need Hidan V3.5?",a:["Yes, I really need it","Maybe","No"],w:[1,.4,0]},
+    {q:"Will you keep the file private?",a:["Yes","Maybe","No"],w:[1,.4,0]},
+    {q:"Will you re-upload or sell the file?",a:["No","Maybe","Yes"],w:[1,.2,0]},
+    {q:"Do you understand that this is a premium script?",a:["Yes, I understand","No"],w:[1,0]},
+    {q:"Do you really want it?",a:["Yes, I really want it","Yes, I really want it for my gameplay or content","No I don't want it","Decline the approval questions"],w:[1,1,0,0]}
+  ]:[
+    {q:"What are you going to do with the script?",a:["I use it for content","I use it for gameplay"],w:[1,1]},
+    {q:"Do you want it for something?",a:["Yes","No","Maybe","Probably"],w:[1,0,.5,.5]},
+    {q:"Do you really want it?",a:["Yes because I really want it","Yes I really want it for my gameplay or content","No I don't want it","Decline the approval questions"],w:[1,1,0,0]}
+  ];
+  questions.innerHTML=q.map((item,i)=>`<section class="approval-question-card"><div class="approval-q-number">${String(i+1).padStart(2,"0")}</div><h3>${escapeHTML(item.q)}</h3><div class="approval-options">${item.a.map((a,j)=>`<label class="approval-option"><input type="radio" name="approval_${i}" value="${j}" data-weight="${item.w[j]}"><span class="approval-radio"></span><span>${escapeHTML(a)}</span></label>`).join("")}</div></section>`).join("");
+  form.dataset.skinId=s.id; form.dataset.questions=JSON.stringify(q); modal.showModal();
+}
+async function submitApprovalForm(){
+  const form=$("#approval-form"), result=$("#approval-result"); if(!form||!result) return;
+  const s=scriptData.find(x=>x.id===form.dataset.skinId); if(!s) return;
+  const q=JSON.parse(form.dataset.questions||"[]"); let score=0,max=0; const answers=[];
+  for(let i=0;i<q.length;i++){const sel=form.querySelector(`input[name="approval_${i}"]:checked`); if(!sel)return toast("Answer every question first."); const w=Number(sel.dataset.weight||0),idx=Number(sel.value); score+=w; max+=Math.max(...q[i].w); answers.push({question:q[i].q,answer:q[i].a[idx],weight:w});}
+  const ratio=max?score/max:0, status=ratio>=.9?"approved_proof":ratio>=.6?"review":"declined";
+  setApprovalStatus(s,status);
+  if(firestoreReady())try{await setDoc(doc(db,"premiumRequests",`${getVipId()}_${s.id}`),{memberId:getVipId(),skinId:s.id,skinTitle:s.title,answers,score,maxScore:max,ratio,status,updatedAt:new Date().toISOString(),appVersion:APP_META.version},{merge:true});watchApprovalRequest(s);}catch(e){console.warn("Approval save failed",e);}
+  form.hidden=true; result.hidden=false; const approved=status==="approved_proof",review=status==="review";
+  $("#approval-result-icon").className=`fa-solid ${approved?"fa-circle-check":review?"fa-hourglass-half":"fa-circle-xmark"}`;
+  $("#approval-result-title").textContent=approved?"You've been approved":review?"Approval needs a creator review":"Approval declined";
+  $("#approval-result-message").textContent=approved?"You've been approved please screenshot and send it to the creator as a proof that you got approved to get the vip script!":review?"Your answers need a creator review. Screenshot this result and send it to the creator.":"The answers did not pass this approval.";
+  $("#approval-result-status").textContent=`Status: ${status.replaceAll("_"," ").toUpperCase()}`;
+}
+function watchApprovalRequest(s){
+  if(!firestoreReady())return;
+  try{if(approvalUnsub)approvalUnsub();approvalUnsub=onSnapshot(doc(db,"premiumRequests",`${getVipId()}_${s.id}`),snap=>{if(!snap.exists())return;const status=snap.data()?.status;if(!status)return;setApprovalStatus(s,status);if(status==="approved")renderScripts();});}catch(e){console.warn("Approval realtime watcher failed",e);}
+}
+function openPremiumDownload(s){if(getApprovalStatus(s)==="approved"){window.open(s.url,"_blank","noopener,noreferrer");}else openApprovalModal(s);}
 
-  $(".tag-row", card).innerHTML = (s.tags || [])
-    .slice(0, 4)
-    .map(tag => `<span class="tag">#${escapeHTML(tag)}</span>`)
-    .join("");
-
-  $(".likes", card).textContent = s.likes || 0;
-  $(".views", card).textContent = s.views || 0;
-
-  const fav = $(".favorite-btn", card);
-  fav.classList.toggle("active", isFavorite(s.id));
-  fav.innerHTML = isFavorite(s.id)
-    ? '<i class="fa-solid fa-star"></i>'
-    : '<i class="fa-regular fa-star"></i>';
-  fav.addEventListener("click", e => {
-    e.stopPropagation();
-    const on = !isFavorite(s.id);
-    setFavorite(s.id, on);
-    fav.classList.toggle("active", on);
-    fav.innerHTML = on ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
-    updateCounters();
-    if (state.favoritesOnly) renderScripts();
-  });
-
-  const actionBtn = $(".download-btn", card);
-  if (s.accessOnly) {
-    setupAccessButton(actionBtn, s);
-  } else if (s.customOnly) {
-    actionBtn.removeAttribute("href");
-    actionBtn.innerHTML = '<i class="fa-solid fa-eye"></i> Preview';
-    actionBtn.title = "Preview custom concept";
-    actionBtn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); openDetails(s.id); });
-  } else if (s.url) {
-    actionBtn.removeAttribute("href");
-    actionBtn.innerHTML = '<i class="fa-solid fa-download"></i> Download';
-    actionBtn.addEventListener("click", e => {
-      e.preventDefault();
-      e.stopPropagation();
-      window.open(s.url, "_blank", "noopener,noreferrer");
-    });
-  }
-
-  const detailsBtn = $(".details-btn", card);
-  detailsBtn.addEventListener("click", () => openDetails(s.id));
-
-  return t;
+function cardTemplate(s){
+  const t=$("#skin-card-template").content.cloneNode(true),card=$(".script-card",t); if(!card)throw new Error("Skin card template is missing .script-card");
+  const premium=!!s.premiumApprovalOnly,vip=!!s.accessOnly;
+  card.dataset.id=s.id;card.classList.toggle("is-vip",vip);card.classList.toggle("is-premium",premium);card.classList.toggle("is-custom",!!s.customOnly);card.dataset.preserveDefault=s.preserveDefault?"true":"false";
+  $(".skin-badge",card).textContent=(s.type||"Custom").toUpperCase();$(".hero-letter",card).textContent=initials(s.hero);$(".skin-title",card).textContent=s.title;$(".hero-name",card).textContent=s.hero;$(".skin-description",card).textContent=shortDescription(s);
+  $(".card-status",card).textContent=vip?"VIP":premium?"PREMIUM":(s.customOnly?"LAB • SAFE SLOT":"FREE");$(".card-type-dot",card).className=`card-type-dot ${vip?"vip":premium?"premium":s.customOnly?"custom":"ready"}`;
+  $(".tag-row",card).innerHTML=(s.tags||[]).slice(0,4).map(tag=>`<span class="tag">#${escapeHTML(tag)}</span>`).join("");$(".likes",card).textContent=s.likes||0;$(".views",card).textContent=s.views||0;
+  const fav=$(".favorite-btn",card);fav.classList.toggle("active",isFavorite(s.id));fav.innerHTML=isFavorite(s.id)?'<i class="fa-solid fa-star"></i>':'<i class="fa-regular fa-star"></i>';
+  fav.addEventListener("click",e=>{e.stopPropagation();const on=!isFavorite(s.id);setFavorite(s.id,on);fav.classList.toggle("active",on);fav.innerHTML=on?'<i class="fa-solid fa-star"></i>':'<i class="fa-regular fa-star"></i>';updateCounters();if(state.favoritesOnly)renderScripts();});
+  const action=$(".download-btn",card),approved=premium&&getApprovalStatus(s)==="approved";
+  if(vip&&state.vipActive&&s.url){action.href=s.url;action.innerHTML='<i class="fa-solid fa-download"></i> Download';}
+  else if(vip)setupAccessButton(action,s);
+  else if(premium&&approved&&s.url){action.href=s.url;action.innerHTML='<i class="fa-solid fa-download"></i> Download';}
+  else if(premium){action.removeAttribute("href");action.innerHTML='<i class="fa-solid fa-lock"></i> Approval';action.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openPremiumDownload(s);});}
+  else if(s.customOnly){action.removeAttribute("href");action.innerHTML='<i class="fa-solid fa-eye"></i> Preview';action.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openDetails(s.id);});}
+  else if(s.url){action.removeAttribute("href");action.innerHTML='<i class="fa-solid fa-download"></i> Download';action.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();window.open(s.url,"_blank","noopener,noreferrer");});}
+  $(".details-btn",card).addEventListener("click",()=>openDetails(s.id)); return t;
 }
 
 function renderFeatured() {
@@ -1995,37 +2019,19 @@ function updateCounters() {
 }
 
 
-function openDetails(id) {
-  const base = scriptData.find(x => x.id === id) || customScriptSkins.find(x => x.id === id);
-  if (!base) return;
-  const s = { ...base, ...(cache[id] || {}) };
-  const rating = Array.isArray(s.ratings) && s.ratings.length ? (s.ratings.reduce((a,b)=>a+b,0)/s.ratings.length).toFixed(1) : "0.0";
-  let actionButton = "";
-  if (s.accessOnly) {
-    actionButton = `<button class="primary-btn" id="details-access"><i class="fa-solid fa-lock"></i> Access</button>`;
-  } else if (s.customOnly) {
-    actionButton = `<button class="primary-btn" id="details-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> Custom Concept</button>`;
-  } else {
-    actionButton = `<a class="primary-btn" href="${escapeHTML(s.url || "#")}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download</a>`;
-  }
-  const notice = s.accessOnly
-    ? `<div class="access-notice"><strong><i class="fa-solid fa-crown"></i> VIP Access Required</strong><p>${escapeHTML(getAccessMessage(s))}</p></div>`
-    : s.customOnly
-      ? `<div class="access-notice custom-notice"><strong><i class="fa-solid fa-flask"></i> Custom Lab Entry</strong><p>${escapeHTML(shortDescription(s))}</p><small>No public file is attached to this concept yet.</small></div>`
-      : "";
-  $("#modal-body").innerHTML = `
-    <div class="details-hero">
-      <div class="details-orb">${initials(s.hero)}</div>
-      <div><span class="eyebrow">${escapeHTML((s.type || "SKIN").toUpperCase())}</span><h3>${escapeHTML(s.title)}</h3><p>${escapeHTML(s.hero)}</p><div class="details-tags">${(s.tags || []).map(t => `<span class="tag">#${escapeHTML(t)}</span>`).join("")}</div></div>
-    </div>
-    <div class="details-grid"><div class="detail-stat"><b>${s.likes || 0}</b><span>Likes</span></div><div class="detail-stat"><b>${s.views || 0}</b><span>Views</span></div><div class="detail-stat"><b>${rating}</b><span>Rating</span></div></div>
-    <div class="details-description"><p>${escapeHTML(shortDescription(s))}</p></div>
-    ${notice}
-    <div class="details-actions">${actionButton}<button class="ghost-btn" id="details-copy"><i class="fa-solid fa-link"></i> Copy ID</button></div>`;
-  if (s.accessOnly) $("#details-access").addEventListener("click", e => { e.preventDefault(); openVipDownload(s); });
-  if (s.customOnly) $("#details-custom").addEventListener("click", () => toast("Custom concept only — create a release file before publishing a download link."));
-  $("#details-copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(s.id); toast("Skin ID copied."); } catch { toast(s.id); } });
-  $("#details-modal").showModal();
+function openDetails(id){
+  const base=scriptData.find(x=>x.id===id)||customScriptSkins.find(x=>x.id===id);if(!base)return;const s={...base,...(cache[id]||{})};
+  const rating=Array.isArray(s.ratings)&&s.ratings.length?(s.ratings.reduce((a,b)=>a+b,0)/s.ratings.length).toFixed(1):"0.0";let action="";
+  if(s.accessOnly&&state.vipActive&&s.url)action=`<a class="primary-btn" href="${escapeHTML(s.url)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download</a>`;
+  else if(s.accessOnly)action=`<button class="primary-btn" id="details-access"><i class="fa-solid fa-lock"></i> VIP Access</button>`;
+  else if(s.premiumApprovalOnly&&getApprovalStatus(s)==="approved"&&s.url)action=`<a class="primary-btn" href="${escapeHTML(s.url)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download</a>`;
+  else if(s.premiumApprovalOnly)action=`<button class="primary-btn" id="details-premium"><i class="fa-solid fa-lock"></i> Approval</button>`;
+  else if(s.customOnly)action=`<button class="primary-btn" id="details-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> Custom Concept</button>`;
+  else action=`<a class="primary-btn" href="${escapeHTML(s.url||"#")}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download</a>`;
+  const notice=s.accessOnly?`<div class="access-notice"><strong><i class="fa-solid fa-crown"></i> VIP Access Required</strong><p>${escapeHTML(getAccessMessage(s))}</p></div>`:s.premiumApprovalOnly?`<div class="access-notice premium-notice"><strong><i class="fa-solid fa-gem"></i> Premium Approval</strong><p>Answer the approval questions. Your result is saved in real time.</p></div>`:s.customOnly?`<div class="access-notice custom-notice"><strong><i class="fa-solid fa-flask"></i> Custom Lab Entry</strong><p>${escapeHTML(shortDescription(s))}</p></div>`:"";
+  $("#modal-body").innerHTML=`<div class="details-hero"><div class="details-orb">${initials(s.hero)}</div><div><span class="eyebrow">${escapeHTML((s.type||"SKIN").toUpperCase())}</span><h3>${escapeHTML(s.title)}</h3><p>${escapeHTML(s.hero)}</p><div class="details-tags">${(s.tags||[]).map(t=>`<span class="tag">#${escapeHTML(t)}</span>`).join("")}</div></div></div><div class="details-grid"><div class="detail-stat"><b>${s.likes||0}</b><span>Likes</span></div><div class="detail-stat"><b>${s.views||0}</b><span>Views</span></div><div class="detail-stat"><b>${rating}</b><span>Rating</span></div></div><div class="details-description"><p>${escapeHTML(shortDescription(s))}</p></div>${notice}<div class="details-actions">${action}<button class="ghost-btn" id="details-copy"><i class="fa-solid fa-link"></i> Copy ID</button></div>`;
+  if(s.accessOnly)$("#details-access").addEventListener("click",e=>{e.preventDefault();openVipDownload(s);});if(s.premiumApprovalOnly)$("#details-premium").addEventListener("click",e=>{e.preventDefault();openPremiumDownload(s);});if(s.customOnly)$("#details-custom").addEventListener("click",()=>toast("Custom concept only."));
+  $("#details-copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(s.id);toast("Skin ID copied.");}catch{toast(s.id);}});$("#details-modal").showModal();
 }
 
 function wireRealtime() {
@@ -2226,11 +2232,32 @@ $("#shuffle-btn").addEventListener(
 // V3.3 SETTINGS • UI STYLE • FULL SCREEN • LANGUAGE
 // =========================================================
 const UI_STYLES = [
-  { id: "aurora", title: "Aurora Glass", text: "Soft glow + glass", icon: "fa-solid fa-wand-magic-sparkles" },
-  { id: "cyber", title: "Cyber Grid", text: "Sharp neon + grid", icon: "fa-solid fa-microchip" },
-  { id: "midnight", title: "Midnight", text: "Dark + calm", icon: "fa-solid fa-moon" },
-  { id: "arcade", title: "Arcade", text: "Bright + playful", icon: "fa-solid fa-gamepad" },
-  { id: "minimal", title: "Minimal", text: "Clean + quiet", icon: "fa-solid fa-circle-half-stroke" }
+  { id:"hypernova",title:"Hypernova",text:"New RON main style",icon:"fa-solid fa-atom" },
+  { id:"aurora",title:"Aurora Glass",text:"Soft glow + glass",icon:"fa-solid fa-wand-magic-sparkles" },
+  { id:"cyber",title:"Cyber Grid",text:"Sharp grid + tech",icon:"fa-solid fa-microchip" },
+  { id:"midnight",title:"Midnight",text:"Dark + calm",icon:"fa-solid fa-moon" },
+  { id:"arcade",title:"Arcade",text:"Bright + playful",icon:"fa-solid fa-gamepad" },
+  { id:"minimal",title:"Minimal",text:"Clean + quiet",icon:"fa-solid fa-circle-half-stroke" },
+  { id:"nebula",title:"Nebula",text:"Deep space glow",icon:"fa-solid fa-star" },
+  { id:"ocean",title:"Ocean Pulse",text:"Cool wave lights",icon:"fa-solid fa-water" },
+  { id:"ember",title:"Ember Core",text:"Warm fire energy",icon:"fa-solid fa-fire" },
+  { id:"matrix",title:"Matrix",text:"Terminal green",icon:"fa-solid fa-terminal" },
+  { id:"violet",title:"Violet Ray",text:"Purple focus",icon:"fa-solid fa-gem" },
+  { id:"crimson",title:"Crimson",text:"Red battle UI",icon:"fa-solid fa-bolt" },
+  { id:"mint",title:"Mint Wave",text:"Fresh aqua",icon:"fa-solid fa-leaf" },
+  { id:"solar",title:"Solar",text:"Bright gold",icon:"fa-solid fa-sun" },
+  { id:"frost",title:"Frost",text:"Ice glass",icon:"fa-solid fa-snowflake" },
+  { id:"royal",title:"Royal",text:"Premium blue",icon:"fa-solid fa-crown" },
+  { id:"graphite",title:"Graphite",text:"Dark steel",icon:"fa-solid fa-layer-group" },
+  { id:"plasma",title:"Plasma",text:"Electric color",icon:"fa-solid fa-burst" },
+  { id:"hologram",title:"Hologram",text:"Glass spectrum",icon:"fa-solid fa-cube" },
+  { id:"tokyo",title:"Tokyo",text:"Night city",icon:"fa-solid fa-city" },
+  { id:"ghost",title:"Ghost",text:"Pale stealth",icon:"fa-solid fa-ghost" },
+  { id:"toxic",title:"Toxic",text:"Acid neon",icon:"fa-solid fa-skull-crossbones" },
+  { id:"sandstorm",title:"Sandstorm",text:"Dust + amber",icon:"fa-solid fa-wind" },
+  { id:"deepsea",title:"Deep Sea",text:"Dark blue depth",icon:"fa-solid fa-fish" },
+  { id:"sakura",title:"Sakura",text:"Soft pink night",icon:"fa-solid fa-seedling" },
+  { id:"monochrome",title:"Monochrome",text:"Pure black + white",icon:"fa-solid fa-circle-half-stroke" }
 ];
 
 const LANGUAGES = [
@@ -2289,13 +2316,8 @@ function applyUIStyle(styleId) {
 function renderUIStyles() {
   const grid = $("#ui-style-grid");
   if (!grid) return;
-  grid.innerHTML = UI_STYLES.map(style => `
-    <button type="button" class="ui-style-card ${state.uiStyle === style.id ? "active" : ""}" data-style="${style.id}">
-      <span class="ui-style-preview ui-preview-${style.id}"><i class="${style.icon}"></i><b>RON</b><span></span></span>
-      <span class="ui-style-copy"><b>${escapeHTML(style.title)}</b><small>${escapeHTML(style.text)}</small></span>
-      <span class="ui-style-check"><i class="fa-solid fa-check"></i></span>
-    </button>
-  `).join("");
+  const swatches={hypernova:["#60a5fa","#a78bfa"],aurora:["#22d3ee","#a78bfa"],cyber:["#00e5ff","#7c3aed"],midnight:["#8b5cf6","#ec4899"],arcade:["#f97316","#eab308"],minimal:["#dbeafe","#94a3b8"],nebula:["#c084fc","#60a5fa"],ocean:["#38bdf8","#2dd4bf"],ember:["#fb923c","#ef4444"],matrix:["#22c55e","#86efac"],violet:["#a78bfa","#f0abfc"],crimson:["#f43f5e","#fb7185"],mint:["#2dd4bf","#67e8f9"],solar:["#facc15","#fb923c"],frost:["#bae6fd","#93c5fd"],royal:["#60a5fa","#fbbf24"],graphite:["#94a3b8","#e2e8f0"],plasma:["#f472b6","#22d3ee"],hologram:["#67e8f9","#f0abfc"],tokyo:["#fb7185","#38bdf8"],ghost:["#e2e8f0","#cbd5e1"],toxic:["#a3e635","#22c55e"],sandstorm:["#fbbf24","#f97316"],deepsea:["#38bdf8","#1d4ed8"],sakura:["#f9a8d4","#c084fc"],monochrome:["#fff","#aaa"]};
+  grid.innerHTML=UI_STYLES.map(style=>{const c=swatches[style.id]||["#60a5fa","#a78bfa"];return `<button type="button" class="ui-style-card ${state.uiStyle===style.id?"active":""}" data-style="${style.id}"><span class="ui-style-preview" style="background:linear-gradient(135deg,${c[0]},#07111d 52%,${c[1]});"><i class="${style.icon}"></i><b>RON</b><span style="background:${c[0]}"></span></span><span class="ui-style-copy"><b>${escapeHTML(style.title)}</b><small>${escapeHTML(style.text)}</small></span><span class="ui-style-check"><i class="fa-solid fa-check"></i></span></button>`;}).join("");
   $$(".ui-style-card", grid).forEach(card => card.addEventListener("click", () => applyUIStyle(card.dataset.style)));
 }
 
@@ -2398,6 +2420,12 @@ $("#clear-local")?.addEventListener("click", () => {
   toast("Local settings cleared. Reloading…");
   setTimeout(() => location.reload(), 450);
 });
+
+// =========================================================
+// PREMIUM APPROVAL
+// =========================================================
+$("#approval-submit")?.addEventListener("click",submitApprovalForm);
+$("#approval-retry")?.addEventListener("click",()=>{const id=$("#approval-form")?.dataset.skinId;const s=scriptData.find(x=>x.id===id);if(s)openApprovalModal(s);});
 
 // =========================================================
 // CLOSE MODALS
@@ -2729,6 +2757,7 @@ bootFirebase().then(ok => {
     return;
   }
 
+  wireCreatorAuth();
   refreshVipStatus();
   wireRealtime();
 });
@@ -2738,6 +2767,7 @@ function wireCreatorAuth() {
   onAuthStateChanged(auth, async user => {
     state.user = user || null;
     await checkCreatorAccess();
+    await refreshVipStatus();
     updateCreatorUI();
   });
 }
