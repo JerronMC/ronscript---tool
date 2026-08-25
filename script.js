@@ -62,8 +62,8 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "10.0.0",
-  build: "RON-ULTIMATE-V10.0.0-BIG-UPDATE-2026.08.25.1",
+  version: "10.1.0",
+  build: "RON-ULTIMATE-V10.1.0-HUMAN-UI-2026.08.25.1",
   channel: "ULTIMATE",
   release: "100 FEATURES • VIP APPROVAL • PREMIUM APPROVAL • PRISM UI",
   updated: "2026-08-25"
@@ -1366,7 +1366,7 @@ const state = {
   debug: new URLSearchParams(location.search).get("debug") === "1" || localStorage.getItem("ron_debug") === "1",
   lastRender: "never",
   lastError: "none",
-  approvals: JSON.parse(localStorage.getItem("ron_approvals") || "{}")
+  approvals: (() => { try { return JSON.parse(localStorage.getItem("ron_approvals") || "{}"); } catch { localStorage.removeItem("ron_approvals"); return {}; } })()
 };
 
 const cache = {};
@@ -2363,7 +2363,7 @@ $("#shuffle-btn").addEventListener(
 // =========================================================
 const UPDATE_FEATURES_V10 = ["Prism OS main dashboard", "Animated command bar", "Animated nav icons", "Micro-interaction buttons", "Card hover depth", "Mobile bottom actions", "Desktop keyboard focus", "Instant filter chips", "Faster search debounce", "Lazy card paint", "Virtualized-style contain hints", "Better empty state", "Script tier badges", "VIP approval workflow", "Premium approval workflow", "One-question approval flow", "Approval progress bar", "Approval back button", "Approval proof screen", "Real-time approval status", "VIP request watcher", "Premium request watcher", "Creator approval sync", "Creator sign-in status", "Creator role guard", "VIP member lookup", "Member ID persistence", "Member ID copy flow", "VIP status refresh", "Protected download refresh", "Download action animation", "Access lock animation", "Debug close control", "Debug query cleanup", "Debug event feed", "Build version sync", "Release label sync", "Theme persistence", "Prism style persistence", "Style picker searchless visual grid", "26+ UI styles", "Aurora style", "Cyber style", "Midnight style", "Arcade style", "Nebula style", "Ocean style", "Ember style", "Matrix style", "Violet style", "Crimson style", "Mint style", "Solar style", "Frost style", "Royal style", "Graphite style", "Plasma style", "Hologram style", "Tokyo style", "Ghost style", "Toxic style", "Sandstorm style", "Deep Sea style", "Sakura style", "Monochrome style", "Prism style", "Language search", "Custom language cards", "Language selection animation", "Language persistence", "Fullscreen toggle", "Fullscreen status", "Motion toggle", "Compact cards", "Favorite persistence", "Favorite filtering", "Hero grouping", "Hero vault expansion", "Custom lab expansion", "Custom safe-slot labels", "Default-skin safety metadata", "Premium badge polish", "VIP badge polish", "Crossover badge polish", "Script count sync", "Hero count sync", "Category count sync", "Featured strip refresh", "Spotlight cards", "Tester build panel", "Runtime error capture", "Unhandled rejection capture", "Firebase lazy boot", "Firebase offline fallback", "Realtime script metrics", "Cloud write warnings", "Local preference safety", "Safer clear-local behavior", "Responsive settings modal", "Responsive language picker", "Responsive approval modal", "Mobile approval layout", "Desktop approval layout", "Animated quest buttons", "Quest progress bar", "Quest return tracking", "Simple English UI copy", "Reduced backdrop work", "Content visibility cards", "GPU-friendly transforms"];
 
-function renderUpdateFeatures(){ const grid=$("#updates-grid"); if(!grid)return; grid.innerHTML=UPDATE_FEATURES_V10.map((x,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">${String(i+1).padStart(3,"0")}</span><h3>${escapeHTML(x)}</h3><p>Included in RON SCRIPTS v10.0.0.</p></article>`).join(""); }
+function renderUpdateFeatures(){ const grid=$("#updates-grid"); if(!grid)return; grid.innerHTML=UPDATE_FEATURES_V10.map((x,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">${String(i+1).padStart(3,"0")}</span><h3>${escapeHTML(x)}</h3><p>Included in RON SCRIPTS v10.1.0.</p></article>`).join(""); }
 
 const UI_STYLES = [
   { id:"prism",title:"Prism OS",text:"New RON main interface",icon:"fa-solid fa-diamond" },
@@ -2643,7 +2643,7 @@ if (debugNavBtn) debugNavBtn.addEventListener("click", () => { state.debug = tru
 // =========================================================
 // RANDOM REAL-TIME QUEST GATE (no CAPTCHA)
 // =========================================================
-const GATE_STORAGE_KEY = "ron_gate_complete_v3_3";
+const GATE_STORAGE_KEY = "ron_gate_complete_v10_1";
 const QUEST_MIN_SECONDS = 30;
 const QUEST_COUNT = 3;
 
@@ -2691,7 +2691,7 @@ function renderQuest() {
       <div class="quest-item-main">
         <strong>${escapeHTML(task.title)}</strong>
         <span>${escapeHTML(task.subtitle)}</span>
-        <small class="quest-item-state" data-state="${task.id}">Tap the arrow to open</small>
+        <small class="quest-item-state" data-state="${task.id}">Open task</small>
       </div>
       <button class="quest-open quest-open-v33" data-quest-open="${task.id}" type="button" aria-label="Open quest">
         <i class="fa-solid fa-arrow-right"></i>
@@ -2713,7 +2713,7 @@ function questProgress() {
   const next = $("#gate-next-1");
   if (fill) fill.style.width = `${percent}%`;
   if (text) text.textContent = `${done} / ${QUEST_COUNT}`;
-  if (intro) intro.textContent = done === QUEST_COUNT ? "All quests are done. You can enter." : "Open each quest and come back to this page.";
+  if (intro) intro.textContent = done === QUEST_COUNT ? "All 3 tasks are done. You can enter." : "Open each task, then come back.";
   if (next) next.disabled = done !== QUEST_COUNT;
 }
 
@@ -2755,7 +2755,7 @@ function completeTask(id) {
   setQuestStateText(id, "Done", "complete");
   setQuestButton(id, "complete");
   const timerText = $("#quest-timer-text");
-  if (timerText) timerText.textContent = "Check passed";
+  if (timerText) timerText.textContent = "Done";
   questProgress();
 }
 
@@ -2774,7 +2774,7 @@ function startReturnTimer(id) {
     setQuestButton(id, "timer", remaining);
     setQuestStateText(id, `Checking • ${remaining}s left`, "checking");
     const timerText = $("#quest-timer-text");
-    if (timerText) timerText.textContent = `Return check: ${remaining}s`;
+    if (timerText) timerText.textContent = `Checking: ${remaining}s`;
   };
 
   tick();
@@ -2799,10 +2799,10 @@ function openQuestTask(id) {
   questState.openStarted.set(id, now);
   questState.returnSeen.delete(id);
   stopQuestTimer(id);
-  setQuestStateText(id, "Open link… then come back", "checking");
+  setQuestStateText(id, "Return here when you are done", "checking");
   setQuestButton(id, "timer", 30);
   const timerText = $("#quest-timer-text");
-  if (timerText) timerText.textContent = "Waiting for return";
+  if (timerText) timerText.textContent = "Waiting for you to return";
 
   window.open(task.url, "_blank", "noopener,noreferrer");
 }
@@ -2868,6 +2868,19 @@ function bootGate() {
   });
 }
 
+
+function ensureGatePainted() {
+  const list = document.querySelector("#quest-list");
+  if (!list || list.children.length > 0) return;
+  try {
+    questState.tasks = pickQuestTasks();
+    renderQuest();
+    questProgress();
+  } catch (error) {
+    console.warn("Quest fallback failed", error);
+  }
+}
+
 function bootUI() {
   if (gateComplete()) {
     document.body.classList.remove("gate-locked");
@@ -2877,6 +2890,7 @@ function bootUI() {
     bootMainUI();
   } else {
     bootGate();
+    setTimeout(ensureGatePainted, 100);
   }
 }
 
@@ -2932,4 +2946,5 @@ document.addEventListener("click", e => {
   if (panel) panel.hidden = true;
   const toggle = document.getElementById("debug-toggle");
   if (toggle) toggle.textContent = "Off";
+  document.body.classList.remove("debug-open");
 });

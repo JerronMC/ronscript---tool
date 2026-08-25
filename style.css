@@ -129,3 +129,62 @@ body.ui-prism .quick-chip.active{background:linear-gradient(135deg,rgba(94,234,2
 .approval-stepbar{height:7px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin:4px 0 14px}.approval-stepbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .25s ease}.approval-nav{display:flex;gap:8px;justify-content:space-between}.approval-nav .primary-btn,.approval-nav .ghost-btn{flex:1;justify-content:center}.approval-question-card.step-active{animation:approvalIn .22s ease}.approval-question-card.step-active .approval-option{animation:optionIn .2s ease both}.approval-question-card.step-active .approval-option:nth-child(2){animation-delay:.03s}.approval-question-card.step-active .approval-option:nth-child(3){animation-delay:.06s}.approval-question-card.step-active .approval-option:nth-child(4){animation-delay:.09s}.approval-question-card.step-active .approval-option:nth-child(5){animation-delay:.12s}@keyframes approvalIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}@keyframes optionIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 .feature-v10{min-height:150px}.feature-v10 h3{font-size:14px}.feature-v10 p{font-size:10px;color:var(--muted)}
 @media(max-width:640px){body.ui-prism .script-card:hover{transform:none}.approval-nav{position:sticky;bottom:0;padding-top:8px;background:linear-gradient(180deg,transparent,var(--panel) 35%)}.feature-v10{min-height:0}}
+
+
+/* =========================================================
+   v10.1 HUMAN UI PASS
+   Cleaner product UI: fewer gradients, fewer glow effects,
+   stronger hierarchy, tighter spacing.
+   ========================================================= */
+:root{--human-bg:#0c0e12;--human-panel:#14171d;--human-panel-2:#101318;--human-line:#262b33;--human-text:#f3f5f7;--human-muted:#9aa3ae;--human-accent:#7c8cff;--human-green:#43d17a}
+body.ui-toolbench{background:var(--human-bg);color:var(--human-text)}
+body.ui-toolbench .bg-grid{opacity:.035}
+body.ui-toolbench .orb{opacity:.06;filter:none}
+body.ui-toolbench .glass,.body.ui-toolbench .glass-lite{background:var(--human-panel);border-color:var(--human-line);box-shadow:0 10px 30px rgba(0,0,0,.14)}
+body.ui-toolbench .topbar{background:rgba(12,14,18,.94);border-bottom:1px solid var(--human-line);backdrop-filter:blur(10px)}
+body.ui-toolbench .brand-mark{background:#1f2530;border:1px solid #303743;box-shadow:none}
+body.ui-toolbench .live-ribbon{background:#11151b;border-color:var(--human-line);box-shadow:none}
+body.ui-toolbench .hero-panel{background:#12161b;border:1px solid var(--human-line);box-shadow:0 12px 40px rgba(0,0,0,.16)}
+body.ui-toolbench .hero-copy h1 span{background:none;color:var(--human-accent)}
+body.ui-toolbench .primary-btn{background:#6676e9;border:1px solid #7987ef;box-shadow:none}
+body.ui-toolbench .primary-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(102,118,233,.16)}
+body.ui-toolbench .ghost-btn,.body.ui-toolbench .icon-btn{background:#171b22;border-color:var(--human-line);box-shadow:none}
+body.ui-toolbench .script-card{background:#14181e;border-color:var(--human-line);box-shadow:0 10px 30px rgba(0,0,0,.13)}
+body.ui-toolbench .script-card:hover{transform:translateY(-2px);border-color:#39414d}
+
+.access-gate-v10{background:#0c0e12;}
+.access-gate-v10 .gate-shell-clean{width:min(780px,100%);margin:0 auto}
+.gate-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:28px}
+.gate-brand-clean{display:flex;align-items:center;gap:11px}
+.brand-mark-clean{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#20252d;border:1px solid #303640;color:#e7ebf0}
+.gate-brand-clean strong{display:block;font-size:14px;letter-spacing:.08em}
+.gate-brand-clean small{display:block;margin-top:3px;color:#7f8894;font-size:8px;letter-spacing:.13em}
+.gate-build{font-size:9px;color:#7f8894;letter-spacing:.08em;background:#12161c;border:1px solid #262b33;padding:7px 9px;border-radius:8px}
+.gate-intro-clean{margin-bottom:18px}
+.gate-kicker-clean{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.16em;color:#8f9cff}
+.gate-intro-clean h1{font-size:clamp(34px,6vw,54px);line-height:1.02;letter-spacing:-.04em;margin:8px 0 10px;font-family:Inter,sans-serif;font-weight:800}
+.gate-intro-clean p{max-width:620px;color:#9aa3ae;font-size:13px;line-height:1.6;margin:0}
+.quest-board-clean{padding:16px;border:1px solid #282e37!important;background:#12161c!important;box-shadow:none!important;border-radius:16px}
+.quest-board-head-clean{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.quest-board-head-clean h2{font-size:20px;margin:5px 0 0;font-weight:750}
+.quest-progress-pill-clean{min-width:62px;padding:8px 9px;border-radius:10px;border:1px solid #2a3038;background:#171b22;text-align:center}
+.quest-progress-pill-clean b{display:block;font-size:15px}.quest-progress-pill-clean span{font-size:8px;color:#7f8894;text-transform:uppercase;letter-spacing:.1em}
+.quest-list-v33{display:grid;gap:8px}
+.quest-list-v33 .quest-item{display:grid;grid-template-columns:38px 1fr 42px;gap:10px;align-items:center;padding:10px;border-radius:12px;background:#15191f!important;border:1px solid #252b33!important;box-shadow:none!important}
+.quest-list-v33 .quest-item:hover{transform:none;border-color:#343b45!important}
+.quest-list-v33 .quest-item.complete{background:#121b16!important;border-color:#234b33!important}
+.quest-list-v33 .quest-item.checking{background:#12191d!important;border-color:#27434c!important}
+.quest-list-v33 .quest-item-icon{width:38px;height:38px;border-radius:10px;background:#1d232b;color:#9da8b6;font-size:14px}
+.quest-list-v33 .quest-item-main strong{font-size:12px;font-weight:700}.quest-list-v33 .quest-item-main span{font-size:9px;color:#8e98a3}.quest-list-v33 .quest-item-state{font-size:8px;color:#78838f}
+.quest-open-v33{width:38px;height:38px;border-radius:10px;background:#171c23;border:1px solid #2b323b;color:#c9ced5;box-shadow:none}
+.quest-open-v33:hover:not(:disabled){transform:none;border-color:#7c8cff;color:#aab3ff}
+.quest-open-v33.timer{background:#161d22;color:#8fd8ea;border-color:#35515b}.quest-open-v33.complete{background:#162119;color:#54d787;border-color:#2a6341}
+.quest-progress-v33{height:5px;margin:12px 0 8px;background:#1a1f25;border-radius:999px}.quest-progress-v33 span{background:#7c8cff;box-shadow:none}
+.quest-foot-clean{font-size:9px;color:#747e89}
+.gate-note-clean{display:flex;align-items:center;gap:8px;margin:10px 0;color:#717b87;font-size:9px}
+.gate-note-clean i{color:#8e98a3}
+.gate-enter-clean{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:12px;padding:13px 16px;border-radius:12px;border:1px solid #343c47;background:#1b2027;color:#f1f4f8;font-weight:750;font-size:12px;cursor:pointer;transition:.18s ease}
+.gate-enter-clean:not(:disabled):hover{background:#232a33;border-color:#4b5561;transform:translateY(-1px)}
+.gate-enter-clean:disabled{opacity:.45;cursor:not-allowed}
+.gate-reset-v33{color:#66717e;margin-top:9px}.gate-reset-v33:hover{color:#a8b0b9}
+@media(max-width:620px){.access-gate-v10{padding:14px}.gate-top{margin-bottom:20px}.gate-intro-clean h1{font-size:36px}.gate-intro-clean p{font-size:12px}.quest-board-clean{padding:12px}.quest-list-v33 .quest-item{grid-template-columns:34px 1fr 38px;padding:9px}.quest-list-v33 .quest-item-icon{width:34px;height:34px}.quest-open-v33{width:34px;height:34px}.gate-build{display:none}}

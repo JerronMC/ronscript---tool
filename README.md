@@ -21,3 +21,10 @@ This release adds the Prism OS main UI, step-by-step VIP/Premium approvals, crea
 
 ### Approval model
 VIP and Premium requests are sent to Firestore and remain protected until creator approval changes the request status. The question flow is one question at a time; protected files are not unlocked merely because the user reached the final question.
+
+
+## v10.1.0
+- Fixed gate initialization so the 3 random tasks always render.
+- Added a safe recovery path for broken local approval data.
+- Reworked the gate UI into a clean, human product style with fewer decorative gradients.
+- Updated build/version labels to 10.1.0.

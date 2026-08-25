@@ -3,49 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1020" />
+  <meta name="theme-color" content="#0c0e12" />
   <meta name="description" content="RON SCRIPTS — premium skin script and hero hub." />
-  <title>RON SCRIPTS — V10.0 Ultimate Skin Hub</title>
+  <title>RON SCRIPTS — v10.1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   </head>
-<body class="theme-neon gate-locked ui-hypernova">
-  <section id="access-gate" class="access-gate" aria-label="RON SCRIPTS quest gate">
-  <div class="gate-orbit gate-orbit-a" aria-hidden="true"></div>
-  <div class="gate-orbit gate-orbit-b" aria-hidden="true"></div>
-  <div class="gate-shell gate-shell-v33">
-    <div class="gate-brand">
-      <span class="brand-mark"><i class="fa-solid fa-bolt"></i></span>
-      <div><strong>RON SCRIPTS</strong><small>QUEST ACCESS • V10.0</small></div>
+<body class="theme-midnight gate-locked ui-toolbench">
+  <section id="access-gate" class="access-gate access-gate-v10" aria-label="RON SCRIPTS access check">
+    <div class="gate-shell gate-shell-clean">
+      <header class="gate-top">
+        <div class="gate-brand-clean">
+          <span class="brand-mark-clean"><i class="fa-solid fa-bolt"></i></span>
+          <div><strong>RON SCRIPTS</strong><small>ACCESS CHECK • V10.1</small></div>
+        </div>
+        <span class="gate-build">BUILD 10.1.0</span>
+      </header>
+
+      <section class="gate-intro-clean">
+        <span class="gate-kicker-clean">STEP 1</span>
+        <h1>Quick check before you enter.</h1>
+        <p>Open the tasks below. When you come back, the site marks each one by itself.</p>
+      </section>
+
+      <section class="quest-board quest-board-clean">
+        <div class="quest-board-head-clean">
+          <div><span class="gate-kicker-clean">YOUR TASKS</span><h2>Finish 3 tasks</h2></div>
+          <div class="quest-progress-pill-clean"><b id="quest-progress-text">0 / 3</b><span>done</span></div>
+        </div>
+        <div id="quest-list" class="quest-list quest-list-v33"></div>
+        <div class="quest-progress quest-progress-v33"><span id="quest-progress-fill"></span></div>
+        <div class="quest-foot-row quest-foot-clean"><span id="quest-intro">3 tasks are waiting.</span><span id="quest-timer-text">Ready</span></div>
+      </section>
+
+      <div class="gate-note-clean"><i class="fa-solid fa-lock"></i><span>No manual complete button. Each task updates on its own.</span></div>
+
+      <button id="gate-next-1" class="gate-enter-clean" type="button" disabled>
+        <span>Enter RON SCRIPTS</span><i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <button id="gate-reset" class="gate-reset gate-reset-v33" type="button"><i class="fa-solid fa-shuffle"></i> New random tasks</button>
     </div>
-
-    <div class="gate-hero gate-hero-v33">
-      <span class="eyebrow"><span class="pulse"></span> STEP 1</span>
-      <h1>Finish the <span>creator quests.</span></h1>
-      <p>Open each quest. When you come back, the site checks your return time. Come back too fast and the quest starts a 30 second timer.</p>
-    </div>
-
-    <div class="quest-board glass-lite">
-      <div class="quest-board-head">
-        <div><span class="gate-kicker">YOUR QUEST</span><h2>Do every task</h2></div>
-        <div class="quest-progress-pill"><b id="quest-progress-text">0 / 3</b><span>done</span></div>
-      </div>
-      <div id="quest-list" class="quest-list quest-list-v33"></div>
-      <div class="quest-progress quest-progress-v33"><span id="quest-progress-fill"></span></div>
-      <div class="quest-foot-row"><span id="quest-intro">Making your quest…</span><span id="quest-timer-text">Ready</span></div>
-    </div>
-
-    <div class="gate-mini-note"><i class="fa-solid fa-circle-info"></i><span>There are no “I completed it” buttons. Each quest changes by itself.</span></div>
-
-    <button id="gate-next-1" class="primary-btn gate-next gate-open-main" type="button" disabled>
-      <i class="fa-solid fa-arrow-right"></i> Open RON SCRIPTS
-    </button>
-    <button id="gate-reset" class="gate-reset gate-reset-v33" type="button"><i class="fa-solid fa-shuffle"></i> New random quest</button>
-  </div>
-</section>
+  </section>
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="orb orb-a" aria-hidden="true"></div>
   <div class="orb orb-b" aria-hidden="true"></div>
@@ -334,6 +335,6 @@
     </article>
   </template>
 
-  <script type="module" src="script.js?v=20260825-10-0"></script>
+  <script type="module" src="script.js?v=20260825-10-1"></script>
 </body>
 </html>
