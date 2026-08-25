@@ -62,11 +62,11 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "3.4.1.2",
-  build: "RON-ULTIMATE-V3.4.1-CREATOR-VIP-2026.08.24.2",
+  version: "10.0.0",
+  build: "RON-ULTIMATE-V10.0.0-BIG-UPDATE-2026.08.25.1",
   channel: "ULTIMATE",
-  release: "QUEST • VIP ADMIN • TESTER • UI",
-  updated: "2026-08-24"
+  release: "100 FEATURES • VIP APPROVAL • PREMIUM APPROVAL • PRISM UI",
+  updated: "2026-08-25"
 };
 
 const scriptData = [
@@ -1043,6 +1043,27 @@ const customScriptSkins = [
   { id: "custom_nana_anya", title: "Nana — Twilight Sprite", hero: "Nana", type: "Custom", tags: ["sprite", "twilight", "magic"], customOnly: true, preserveDefault: true, description: "Original playful concept with twilight particles, tiny sprites, and soft magical bursts." },
   { id: "custom_nolan_toji", title: "Nolan x Toji — Rift Hunter", hero: "Nolan", type: "Custom", tags: ["toji", "hunter", "rift"], customOnly: true, preserveDefault: true, description: "Custom concept focused on silent mobility, dimensional cuts, and dark steel accents." },
   { id: "custom_ruby_harley", title: "Ruby — Harlequin Moon", hero: "Ruby", type: "Custom", tags: ["harlequin", "moon", "scythe"], customOnly: true, preserveDefault: true, description: "Original custom concept with crescent moon particles, carnival accents, and a spectral scythe." },
+
+  { id:"custom_masha_frost", title:"Masha — Frostbite Rework", hero:"Masha", type:"Custom", tags:["frost", "rework"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_khufra_void", title:"Khufra — Void Chains", hero:"Khufra", type:"Custom", tags:["void", "chains"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_guin_winter", title:"Guinevere — Winter Bloom", hero:"Guinevere", type:"Custom", tags:["winter", "bloom"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_layla_starcannon", title:"Layla — Star Cannon", hero:"Layla", type:"Custom", tags:["star", "cannon"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_beatrix_raven", title:"Beatrix — Raven Arsenal", hero:"Beatrix", type:"Custom", tags:["raven", "arsenal"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_claude_neon", title:"Claude — Neon Bandit", hero:"Claude", type:"Custom", tags:["neon", "bandit"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_mathilda_sky", title:"Mathilda — Sky Relic", hero:"Mathilda", type:"Custom", tags:["sky", "relic"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_floryn_moon", title:"Floryn — Moon Garden", hero:"Floryn", type:"Custom", tags:["moon", "garden"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_atlas_mecha", title:"Atlas — Black Mecha", hero:"Atlas", type:"Custom", tags:["mecha"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_esme_cosmic", title:"Esmeralda — Cosmic Shield", hero:"Esmeralda", type:"Custom", tags:["cosmic", "shield"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_masha_ember", title:"Masha — Ember Claw", hero:"Masha", type:"Custom", tags:["ember"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_hylos_arc", title:"Hylos — Arc Sentinel", hero:"Hylos", type:"Custom", tags:["arc"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_minotaur_rune", title:"Minotaur — Rune Breaker", hero:"Minotaur", type:"Custom", tags:["rune"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_phoveus_gravity", title:"Phoveus — Gravity Core", hero:"Phoveus", type:"Custom", tags:["gravity"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_terizla_iron", title:"Terizla — Iron Forge", hero:"Terizla", type:"Custom", tags:["iron"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_silvanna_lumen", title:"Silvanna — Lumen Guard", hero:"Silvanna", type:"Custom", tags:["lumen"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_hanabi_fox", title:"Hanabi — Foxfire", hero:"Hanabi", type:"Custom", tags:["foxfire"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_baxia_magma", title:"Baxia — Magma Wheel", hero:"Baxia", type:"Custom", tags:["magma"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_barats_dino", title:"Barats — Dino Reactor", hero:"Barats", type:"Custom", tags:["dino"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
+  { id:"custom_diggie_clock", title:"Diggie — Clockwork Star", hero:"Diggie", type:"Custom", tags:["clockwork"], customOnly:true, preserveDefault:true, description:"New v10 custom concept slot. No public download URL attached yet." },
 ];
 
 // Keep custom concepts in the main searchable vault too.
@@ -1300,7 +1321,30 @@ const heroVault = [
     tags: ["neobeast", "default"]
   }
 
-];
+,
+  "Masha",
+  "Khufra",
+  "Esmeralda",
+  "Guinevere",
+  "Lylia",
+  "Atlas",
+  "Barats",
+  "Beatrix",
+  "Claude",
+  "Clint",
+  "Diggie",
+  "Mathilda",
+  "Floryn",
+  "Flamita",
+  "Baxia",
+  "Hylos",
+  "Minotaur",
+  "Phoveus",
+  "Terizla",
+  "Silvanna",
+  "Hanabi",
+  "Kalea",
+  "Sora"];
 
 const state = {
   query: "",
@@ -1310,7 +1354,7 @@ const state = {
   favoritesOnly: false,
   view: localStorage.getItem("ron_view") || "grid",
   theme: localStorage.getItem("ron_theme") || "neon",
-  uiStyle: localStorage.getItem("ron_ui_style") || "hypernova",
+  uiStyle: localStorage.getItem("ron_ui_style") || "prism",
   language: localStorage.getItem("ron_language") || "en",
   reduceMotion: localStorage.getItem("ron_motion") === "off",
   compact: localStorage.getItem("ron_compact") === "on",
@@ -1321,7 +1365,8 @@ const state = {
   vipActive: localStorage.getItem("ron_vip_active") === "1",
   debug: new URLSearchParams(location.search).get("debug") === "1" || localStorage.getItem("ron_debug") === "1",
   lastRender: "never",
-  lastError: "none"
+  lastError: "none",
+  approvals: JSON.parse(localStorage.getItem("ron_approvals") || "{}")
 };
 
 const cache = {};
@@ -1822,45 +1867,130 @@ function getApprovalKey(s){ return `${getVipId()}::${s.id}`; }
 function getApprovalStatus(s){ return state.approvals?.[getApprovalKey(s)] || "none"; }
 function setApprovalStatus(s,status){ state.approvals[getApprovalKey(s)]=status; localStorage.setItem("ron_approvals",JSON.stringify(state.approvals)); }
 
-function openApprovalModal(s){
-  const modal=$("#approval-modal"), title=$("#approval-title"), level=$("#approval-level"), form=$("#approval-form"), result=$("#approval-result"), questions=$("#approval-questions");
-  if(!modal||!title||!level||!form||!result||!questions) return;
-  title.textContent=s.title; level.textContent=s.approvalLevel==="hard"?"HARD PREMIUM APPROVAL":"VIP APPROVAL";
-  result.hidden=true; form.hidden=false;
-  const q=s.approvalLevel==="hard"?[
-    {q:"What will you use the script for?",a:["I use it for content","I use it for gameplay"],w:[1,1]},
-    {q:"Do you really need Hidan V3.5?",a:["Yes, I really need it","Maybe","No"],w:[1,.4,0]},
-    {q:"Will you keep the file private?",a:["Yes","Maybe","No"],w:[1,.4,0]},
+function approvalQuestionsFor(s){
+  const hard = s.approvalLevel === "hard";
+  if (hard) return [
+    {q:"What are you going to do with the script?",a:["I use it for content","I use it for gameplay"],w:[1,1]},
+    {q:"Do you really need Hidan V3.5?",a:["Yes, I really need it","Maybe","No"],w:[1,.35,0]},
+    {q:"Will you keep the file private?",a:["Yes","Maybe","No"],w:[1,.35,0]},
     {q:"Will you re-upload or sell the file?",a:["No","Maybe","Yes"],w:[1,.2,0]},
-    {q:"Do you understand that this is a premium script?",a:["Yes, I understand","No"],w:[1,0]},
-    {q:"Do you really want it?",a:["Yes, I really want it","Yes, I really want it for my gameplay or content","No I don't want it","Decline the approval questions"],w:[1,1,0,0]}
-  ]:[
+    {q:"Do you understand this is a premium script?",a:["Yes, I understand","No"],w:[1,0]},
+    {q:"Do you really want it?",a:["Yes because I really want it","Yes I really want it for my gameplay or content","No I don't want it","Decline the approval questions"],w:[1,1,0,0]}
+  ];
+  return [
     {q:"What are you going to do with the script?",a:["I use it for content","I use it for gameplay"],w:[1,1]},
     {q:"Do you want it for something?",a:["Yes","No","Maybe","Probably"],w:[1,0,.5,.5]},
     {q:"Do you really want it?",a:["Yes because I really want it","Yes I really want it for my gameplay or content","No I don't want it","Decline the approval questions"],w:[1,1,0,0]}
   ];
-  questions.innerHTML=q.map((item,i)=>`<section class="approval-question-card"><div class="approval-q-number">${String(i+1).padStart(2,"0")}</div><h3>${escapeHTML(item.q)}</h3><div class="approval-options">${item.a.map((a,j)=>`<label class="approval-option"><input type="radio" name="approval_${i}" value="${j}" data-weight="${item.w[j]}"><span class="approval-radio"></span><span>${escapeHTML(a)}</span></label>`).join("")}</div></section>`).join("");
-  form.dataset.skinId=s.id; form.dataset.questions=JSON.stringify(q); modal.showModal();
 }
-async function submitApprovalForm(){
-  const form=$("#approval-form"), result=$("#approval-result"); if(!form||!result) return;
-  const s=scriptData.find(x=>x.id===form.dataset.skinId); if(!s) return;
-  const q=JSON.parse(form.dataset.questions||"[]"); let score=0,max=0; const answers=[];
-  for(let i=0;i<q.length;i++){const sel=form.querySelector(`input[name="approval_${i}"]:checked`); if(!sel)return toast("Answer every question first."); const w=Number(sel.dataset.weight||0),idx=Number(sel.value); score+=w; max+=Math.max(...q[i].w); answers.push({question:q[i].q,answer:q[i].a[idx],weight:w});}
-  const ratio=max?score/max:0, status=ratio>=.9?"approved_proof":ratio>=.6?"review":"declined";
+
+function resetApprovalModalState(){
+  const form=$("#approval-form"), result=$("#approval-result"), questions=$("#approval-questions");
+  if(!form||!result||!questions)return;
+  form.hidden=false; result.hidden=true; form.dataset.step="0"; form.dataset.answers="[]";
+}
+
+function renderApprovalStep(){
+  const form=$("#approval-form"), questions=$("#approval-questions"), next=$("#approval-next"), back=$("#approval-back"), progress=$("#approval-progress"), title=$("#approval-title"), level=$("#approval-level");
+  if(!form||!questions)return;
+  const skin=scriptData.find(x=>x.id===form.dataset.skinId); if(!skin)return;
+  const q=JSON.parse(form.dataset.questions||"[]");
+  const step=Math.max(0,Math.min(Number(form.dataset.step||0),q.length-1));
+  const item=q[step];
+  questions.innerHTML=`<section class="approval-question-card step-active"><div class="approval-q-number">QUESTION ${String(step+1).padStart(2,"0")} / ${String(q.length).padStart(2,"0")}</div><h3>${escapeHTML(item.q)}</h3><div class="approval-options">${item.a.map((a,j)=>`<label class="approval-option"><input type="radio" name="approval_current" value="${j}" data-weight="${item.w[j]}"><span class="approval-radio"></span><span>${escapeHTML(a)}</span></label>`).join("")}</div></section>`;
+  if(progress)progress.style.width=`${((step+1)/q.length)*100}%`;
+  if(next)next.innerHTML=step===q.length-1?'<i class="fa-solid fa-paper-plane"></i> Send approval request':'<i class="fa-solid fa-arrow-right"></i> Next';
+  if(back)back.hidden=step===0;
+  if(level)level.textContent=skin.approvalLevel==="hard"?"HARD PREMIUM APPROVAL":(skin.accessOnly?"VIP APPROVAL":"APPROVAL");
+}
+
+function openApprovalModal(s){
+  const modal=$("#approval-modal"), title=$("#approval-title"), level=$("#approval-level"), form=$("#approval-form"), result=$("#approval-result");
+  if(!modal||!title||!level||!form||!result)return;
+  title.textContent=s.title;
+  form.dataset.skinId=s.id;
+  form.dataset.questions=JSON.stringify(approvalQuestionsFor(s));
+  form.dataset.step="0";
+  form.dataset.answers="[]";
+  form.hidden=false; result.hidden=true;
+  renderApprovalStep();
+  modal.showModal();
+}
+
+async function submitApprovalStep(){
+  const form=$("#approval-form"); if(!form)return;
+  const s=scriptData.find(x=>x.id===form.dataset.skinId); if(!s)return;
+  const q=JSON.parse(form.dataset.questions||"[]");
+  const step=Number(form.dataset.step||0);
+  const selected=form.querySelector('input[name="approval_current"]:checked');
+  if(!selected)return toast("Choose one answer first.");
+  const answers=JSON.parse(form.dataset.answers||"[]");
+  const item=q[step], idx=Number(selected.value), weight=Number(selected.dataset.weight||0);
+  answers[step]={question:item.q,answer:item.a[idx],weight};
+  form.dataset.answers=JSON.stringify(answers);
+  if(step<q.length-1){form.dataset.step=String(step+1);renderApprovalStep();return;}
+
+  const score=answers.reduce((n,a)=>n+Number(a?.weight||0),0);
+  const max=q.reduce((n,item)=>n+Math.max(...item.w),0);
+  const ratio=max?score/max:0;
+  const passed=ratio>=0.9;
+  const status = s.accessOnly ? (passed?"pending_creator":"declined") : (passed?"pending_creator":ratio>=0.6?"review":"declined");
   setApprovalStatus(s,status);
-  if(firestoreReady())try{await setDoc(doc(db,"premiumRequests",`${getVipId()}_${s.id}`),{memberId:getVipId(),skinId:s.id,skinTitle:s.title,answers,score,maxScore:max,ratio,status,updatedAt:new Date().toISOString(),appVersion:APP_META.version},{merge:true});watchApprovalRequest(s);}catch(e){console.warn("Approval save failed",e);}
-  form.hidden=true; result.hidden=false; const approved=status==="approved_proof",review=status==="review";
-  $("#approval-result-icon").className=`fa-solid ${approved?"fa-circle-check":review?"fa-hourglass-half":"fa-circle-xmark"}`;
-  $("#approval-result-title").textContent=approved?"You've been approved":review?"Approval needs a creator review":"Approval declined";
-  $("#approval-result-message").textContent=approved?"You've been approved please screenshot and send it to the creator as a proof that you got approved to get the vip script!":review?"Your answers need a creator review. Screenshot this result and send it to the creator.":"The answers did not pass this approval.";
-  $("#approval-result-status").textContent=`Status: ${status.replaceAll("_"," ").toUpperCase()}`;
+
+  if(firestoreReady()){
+    const collection=s.accessOnly?"vipRequests":"premiumRequests";
+    const key=`${getVipId()}_${s.id}`;
+    try{
+      await setDoc(doc(db,collection,key),{
+        memberId:getVipId(),skinId:s.id,skinTitle:s.title,answers,score,maxScore:max,ratio,status,
+        requestedAt:new Date().toISOString(),updatedAt:new Date().toISOString(),appVersion:APP_META.version,build:APP_META.build
+      },{merge:true});
+      watchApprovalRequest(s);
+    }catch(e){console.warn("Approval save failed",e);}
+  }
+
+  form.hidden=true;
+  const result=$("#approval-result"); result.hidden=false;
+  const icon=$("#approval-result-icon"), ttl=$("#approval-result-title"), msg=$("#approval-result-message"), st=$("#approval-result-status");
+  const approvedForCreator=passed;
+  icon.className=`fa-solid ${approvedForCreator?"fa-circle-check":"fa-circle-xmark"}`;
+  ttl.textContent=approvedForCreator?"You've been approved":"Approval declined";
+  msg.textContent=approvedForCreator?"You've been approved. Please screenshot and send it to the creator as proof that you passed the approval questions. Creator approval is still required before the protected script unlocks.":"The answers did not pass this approval.";
+  st.textContent=`Status: ${status.replaceAll("_"," ").toUpperCase()}`;
 }
+
 function watchApprovalRequest(s){
   if(!firestoreReady())return;
-  try{if(approvalUnsub)approvalUnsub();approvalUnsub=onSnapshot(doc(db,"premiumRequests",`${getVipId()}_${s.id}`),snap=>{if(!snap.exists())return;const status=snap.data()?.status;if(!status)return;setApprovalStatus(s,status);if(status==="approved")renderScripts();});}catch(e){console.warn("Approval realtime watcher failed",e);}
+  try{
+    if(approvalUnsub)approvalUnsub();
+    const collection=s.accessOnly?"vipRequests":"premiumRequests";
+    approvalUnsub=onSnapshot(doc(db,collection,`${getVipId()}_${s.id}`),snap=>{
+      if(!snap.exists())return;
+      const status=snap.data()?.status;
+      if(!status)return;
+      if(status==="approved"){
+        setApprovalStatus(s,"approved");
+        renderScripts();
+        toast(`${s.title} approved.`);
+      }else if(status==="declined"){
+        setApprovalStatus(s,"declined");
+        renderScripts();
+      }
+    });
+  }catch(e){console.warn("Approval realtime watcher failed",e);}
 }
-function openPremiumDownload(s){if(getApprovalStatus(s)==="approved"){window.open(s.url,"_blank","noopener,noreferrer");}else openApprovalModal(s);}
+
+function openPremiumDownload(s){
+  if(getApprovalStatus(s)==="approved"){window.open(s.url,"_blank","noopener,noreferrer");}
+  else openApprovalModal(s);
+}
+
+function openVipDownload(s){
+  refreshVipStatus().then(active=>{
+    if(active){window.open(s.url,"_blank","noopener,noreferrer");}
+    else openApprovalModal(s);
+  });
+}
 
 function cardTemplate(s){
   const t=$("#skin-card-template").content.cloneNode(true),card=$(".script-card",t); if(!card)throw new Error("Skin card template is missing .script-card");
@@ -1871,7 +2001,7 @@ function cardTemplate(s){
   $(".tag-row",card).innerHTML=(s.tags||[]).slice(0,4).map(tag=>`<span class="tag">#${escapeHTML(tag)}</span>`).join("");$(".likes",card).textContent=s.likes||0;$(".views",card).textContent=s.views||0;
   const fav=$(".favorite-btn",card);fav.classList.toggle("active",isFavorite(s.id));fav.innerHTML=isFavorite(s.id)?'<i class="fa-solid fa-star"></i>':'<i class="fa-regular fa-star"></i>';
   fav.addEventListener("click",e=>{e.stopPropagation();const on=!isFavorite(s.id);setFavorite(s.id,on);fav.classList.toggle("active",on);fav.innerHTML=on?'<i class="fa-solid fa-star"></i>':'<i class="fa-regular fa-star"></i>';updateCounters();if(state.favoritesOnly)renderScripts();});
-  const action=$(".download-btn",card),approved=premium&&getApprovalStatus(s)==="approved";
+  const action=$(".download-btn",card),approvedPremium=premium&&getApprovalStatus(s)==="approved",approvedVip=vip&&(state.vipActive||getApprovalStatus(s)==="approved");
   if(vip&&state.vipActive&&s.url){action.href=s.url;action.innerHTML='<i class="fa-solid fa-download"></i> Download';}
   else if(vip)setupAccessButton(action,s);
   else if(premium&&approved&&s.url){action.href=s.url;action.innerHTML='<i class="fa-solid fa-download"></i> Download';}
@@ -2231,7 +2361,12 @@ $("#shuffle-btn").addEventListener(
 // =========================================================
 // V3.3 SETTINGS • UI STYLE • FULL SCREEN • LANGUAGE
 // =========================================================
+const UPDATE_FEATURES_V10 = ["Prism OS main dashboard", "Animated command bar", "Animated nav icons", "Micro-interaction buttons", "Card hover depth", "Mobile bottom actions", "Desktop keyboard focus", "Instant filter chips", "Faster search debounce", "Lazy card paint", "Virtualized-style contain hints", "Better empty state", "Script tier badges", "VIP approval workflow", "Premium approval workflow", "One-question approval flow", "Approval progress bar", "Approval back button", "Approval proof screen", "Real-time approval status", "VIP request watcher", "Premium request watcher", "Creator approval sync", "Creator sign-in status", "Creator role guard", "VIP member lookup", "Member ID persistence", "Member ID copy flow", "VIP status refresh", "Protected download refresh", "Download action animation", "Access lock animation", "Debug close control", "Debug query cleanup", "Debug event feed", "Build version sync", "Release label sync", "Theme persistence", "Prism style persistence", "Style picker searchless visual grid", "26+ UI styles", "Aurora style", "Cyber style", "Midnight style", "Arcade style", "Nebula style", "Ocean style", "Ember style", "Matrix style", "Violet style", "Crimson style", "Mint style", "Solar style", "Frost style", "Royal style", "Graphite style", "Plasma style", "Hologram style", "Tokyo style", "Ghost style", "Toxic style", "Sandstorm style", "Deep Sea style", "Sakura style", "Monochrome style", "Prism style", "Language search", "Custom language cards", "Language selection animation", "Language persistence", "Fullscreen toggle", "Fullscreen status", "Motion toggle", "Compact cards", "Favorite persistence", "Favorite filtering", "Hero grouping", "Hero vault expansion", "Custom lab expansion", "Custom safe-slot labels", "Default-skin safety metadata", "Premium badge polish", "VIP badge polish", "Crossover badge polish", "Script count sync", "Hero count sync", "Category count sync", "Featured strip refresh", "Spotlight cards", "Tester build panel", "Runtime error capture", "Unhandled rejection capture", "Firebase lazy boot", "Firebase offline fallback", "Realtime script metrics", "Cloud write warnings", "Local preference safety", "Safer clear-local behavior", "Responsive settings modal", "Responsive language picker", "Responsive approval modal", "Mobile approval layout", "Desktop approval layout", "Animated quest buttons", "Quest progress bar", "Quest return tracking", "Simple English UI copy", "Reduced backdrop work", "Content visibility cards", "GPU-friendly transforms"];
+
+function renderUpdateFeatures(){ const grid=$("#updates-grid"); if(!grid)return; grid.innerHTML=UPDATE_FEATURES_V10.map((x,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">${String(i+1).padStart(3,"0")}</span><h3>${escapeHTML(x)}</h3><p>Included in RON SCRIPTS v10.0.0.</p></article>`).join(""); }
+
 const UI_STYLES = [
+  { id:"prism",title:"Prism OS",text:"New RON main interface",icon:"fa-solid fa-diamond" },
   { id:"hypernova",title:"Hypernova",text:"New RON main style",icon:"fa-solid fa-atom" },
   { id:"aurora",title:"Aurora Glass",text:"Soft glow + glass",icon:"fa-solid fa-wand-magic-sparkles" },
   { id:"cyber",title:"Cyber Grid",text:"Sharp grid + tech",icon:"fa-solid fa-microchip" },
@@ -2304,7 +2439,7 @@ function applyTranslations() {
 }
 
 function applyUIStyle(styleId) {
-  const style = UI_STYLES.some(x => x.id === styleId) ? styleId : "aurora";
+  const style = UI_STYLES.some(x => x.id === styleId) ? styleId : "prism";
   state.uiStyle = style;
   localStorage.setItem("ron_ui_style", style);
   document.documentElement.dataset.uiStyle = style;
@@ -2316,7 +2451,7 @@ function applyUIStyle(styleId) {
 function renderUIStyles() {
   const grid = $("#ui-style-grid");
   if (!grid) return;
-  const swatches={hypernova:["#60a5fa","#a78bfa"],aurora:["#22d3ee","#a78bfa"],cyber:["#00e5ff","#7c3aed"],midnight:["#8b5cf6","#ec4899"],arcade:["#f97316","#eab308"],minimal:["#dbeafe","#94a3b8"],nebula:["#c084fc","#60a5fa"],ocean:["#38bdf8","#2dd4bf"],ember:["#fb923c","#ef4444"],matrix:["#22c55e","#86efac"],violet:["#a78bfa","#f0abfc"],crimson:["#f43f5e","#fb7185"],mint:["#2dd4bf","#67e8f9"],solar:["#facc15","#fb923c"],frost:["#bae6fd","#93c5fd"],royal:["#60a5fa","#fbbf24"],graphite:["#94a3b8","#e2e8f0"],plasma:["#f472b6","#22d3ee"],hologram:["#67e8f9","#f0abfc"],tokyo:["#fb7185","#38bdf8"],ghost:["#e2e8f0","#cbd5e1"],toxic:["#a3e635","#22c55e"],sandstorm:["#fbbf24","#f97316"],deepsea:["#38bdf8","#1d4ed8"],sakura:["#f9a8d4","#c084fc"],monochrome:["#fff","#aaa"]};
+  const swatches={prism:["#5eead4","#f472b6"],hypernova:["#60a5fa","#a78bfa"],aurora:["#22d3ee","#a78bfa"],cyber:["#00e5ff","#7c3aed"],midnight:["#8b5cf6","#ec4899"],arcade:["#f97316","#eab308"],minimal:["#dbeafe","#94a3b8"],nebula:["#c084fc","#60a5fa"],ocean:["#38bdf8","#2dd4bf"],ember:["#fb923c","#ef4444"],matrix:["#22c55e","#86efac"],violet:["#a78bfa","#f0abfc"],crimson:["#f43f5e","#fb7185"],mint:["#2dd4bf","#67e8f9"],solar:["#facc15","#fb923c"],frost:["#bae6fd","#93c5fd"],royal:["#60a5fa","#fbbf24"],graphite:["#94a3b8","#e2e8f0"],plasma:["#f472b6","#22d3ee"],hologram:["#67e8f9","#f0abfc"],tokyo:["#fb7185","#38bdf8"],ghost:["#e2e8f0","#cbd5e1"],toxic:["#a3e635","#22c55e"],sandstorm:["#fbbf24","#f97316"],deepsea:["#38bdf8","#1d4ed8"],sakura:["#f9a8d4","#c084fc"],monochrome:["#fff","#aaa"]};
   grid.innerHTML=UI_STYLES.map(style=>{const c=swatches[style.id]||["#60a5fa","#a78bfa"];return `<button type="button" class="ui-style-card ${state.uiStyle===style.id?"active":""}" data-style="${style.id}"><span class="ui-style-preview" style="background:linear-gradient(135deg,${c[0]},#07111d 52%,${c[1]});"><i class="${style.icon}"></i><b>RON</b><span style="background:${c[0]}"></span></span><span class="ui-style-copy"><b>${escapeHTML(style.title)}</b><small>${escapeHTML(style.text)}</small></span><span class="ui-style-check"><i class="fa-solid fa-check"></i></span></button>`;}).join("");
   $$(".ui-style-card", grid).forEach(card => card.addEventListener("click", () => applyUIStyle(card.dataset.style)));
 }
@@ -2370,6 +2505,7 @@ function renderLanguagePicker(filter = "") {
 // SETTINGS / THEME
 // =========================================================
 
+renderUpdateFeatures();
 renderUIStyles();
 applyUIStyle(state.uiStyle);
 applyTranslations();
@@ -2424,7 +2560,8 @@ $("#clear-local")?.addEventListener("click", () => {
 // =========================================================
 // PREMIUM APPROVAL
 // =========================================================
-$("#approval-submit")?.addEventListener("click",submitApprovalForm);
+$("#approval-next")?.addEventListener("click",submitApprovalStep);
+$("#approval-back")?.addEventListener("click",()=>{const f=$("#approval-form");if(!f)return;f.dataset.step=String(Math.max(0,Number(f.dataset.step||0)-1));renderApprovalStep();});
 $("#approval-retry")?.addEventListener("click",()=>{const id=$("#approval-form")?.dataset.skinId;const s=scriptData.find(x=>x.id===id);if(s)openApprovalModal(s);});
 
 // =========================================================
@@ -2781,4 +2918,18 @@ window.addEventListener("error", event => {
 window.addEventListener("unhandledrejection", event => {
   state.lastError = String(event?.reason?.stack || event?.reason || "Unhandled promise rejection");
   updateDebugPanel("promise error");
+});
+
+// v10.0 bulletproof debug close handler
+document.addEventListener("click", e => {
+  const closeBtn = e.target.closest("#debug-close");
+  if (!closeBtn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  state.debug = false;
+  localStorage.setItem("ron_debug", "0");
+  const panel = document.getElementById("debug-panel");
+  if (panel) panel.hidden = true;
+  const toggle = document.getElementById("debug-toggle");
+  if (toggle) toggle.textContent = "Off";
 });

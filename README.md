@@ -11,3 +11,13 @@
 - Mobile + desktop responsive
 
 Note: client-side question approval is a site-level workflow. For secure access, enforce the final download permission with Firebase rules/creator approval.
+
+
+## v10.0.0 BIG UPDATE
+
+Build: RON-ULTIMATE-V10.0.0-BIG-UPDATE-2026.08.25.1
+
+This release adds the Prism OS main UI, step-by-step VIP/Premium approvals, creator-controlled approval status, a working debug close control, 26+ UI themes, persistent Member IDs, responsive settings, and a 100-item update catalog rendered in the Upgrade Log.
+
+### Approval model
+VIP and Premium requests are sent to Firestore and remain protected until creator approval changes the request status. The question flow is one question at a time; protected files are not unlocked merely because the user reached the final question.
