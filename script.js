@@ -11,6 +11,7 @@ let getAuth = null;
 let GoogleAuthProvider = null;
 let signInWithPopup = null;
 let signInWithRedirect = null;
+let getRedirectResult = null;
 let signOut = null;
 let onAuthStateChanged = null;
 let auth = null;
@@ -46,6 +47,7 @@ async function bootFirebase() {
     GoogleAuthProvider = authModule.GoogleAuthProvider;
     signInWithPopup = authModule.signInWithPopup;
     signInWithRedirect = authModule.signInWithRedirect;
+    getRedirectResult = authModule.getRedirectResult;
     signOut = authModule.signOut;
     onAuthStateChanged = authModule.onAuthStateChanged;
 
@@ -64,8 +66,8 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "12.2.2",
-  build: "RON-ULTIMATE-V12.2.2-100-REAL-LINKS-2026.08.25.2",
+  version: "12.2.3",
+  build: "RON-ULTIMATE-V12.2.3-100-REAL-LINKS-2026.08.25.3",
   channel: "ULTIMATE",
   release: "100 MICRO-UPDATES • VIP • PREMIUM • NEW UI",
   updated: "2026-08-25"
@@ -2745,9 +2747,14 @@ function closeDebugPanel() {
   state.debug = false;
   localStorage.setItem("ron_debug", "0");
   const panel = $("#debug-panel");
-  if (panel) panel.hidden = true;
+  if (panel) {
+    panel.hidden = true;
+    panel.setAttribute("aria-hidden", "true");
+    panel.style.display = "none";
+  }
   const toggle = $("#debug-toggle");
   if (toggle) toggle.textContent = "Off";
+  document.body.classList.remove("debug-open");
 }
 
 function updateDebugPanel(extra = "") {
@@ -3061,7 +3068,7 @@ async function submitApprovalStep(){
   const approvedForCreator=passed;
   icon.className=`fa-solid ${approvedForCreator?"fa-circle-check":"fa-circle-xmark"}`;
   ttl.textContent=approvedForCreator?"You've been approved":"Approval declined";
-  msg.textContent=approvedForCreator?"You've been approved. Please screenshot and send it to the creator as proof that you passed the approval questions. Creator approval is still required before the protected script unlocks.":"The answers did not pass this approval.";
+  msg.textContent=approvedForCreator?"You passed the approval questions. Screenshot this and send it to the creator. The protected script stays locked until the creator approves you.":"The answers did not pass this approval.";
   st.textContent=`Status: ${status.replaceAll("_"," ").toUpperCase()}`;
 }
 
@@ -3110,7 +3117,7 @@ function cardTemplate(s){
   const action=$(".download-btn",card),approvedPremium=premium&&getApprovalStatus(s)==="approved",approvedVip=vip&&(state.vipActive||getApprovalStatus(s)==="approved");
   if(vip&&state.vipActive&&s.url){action.href=s.url;action.innerHTML='<i class="fa-solid fa-download"></i> Download';}
   else if(vip)setupAccessButton(action,s);
-  else if(premium&&approved&&s.url){action.href=s.url;action.innerHTML='<i class="fa-solid fa-download"></i> Download';}
+  else if(premium&&approvedPremium&&s.url){action.href=s.url;action.innerHTML='<i class="fa-solid fa-download"></i> Download';}
   else if(premium){action.removeAttribute("href");action.innerHTML='<i class="fa-solid fa-lock"></i> Approval';action.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openPremiumDownload(s);});}
   else if(s.customOnly){action.removeAttribute("href");action.innerHTML='<i class="fa-solid fa-eye"></i> Preview';action.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openDetails(s.id);});}
   else if(s.url){action.removeAttribute("href");action.innerHTML='<i class="fa-solid fa-download"></i> Download';action.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();window.open(s.url,"_blank","noopener,noreferrer");});}
@@ -3215,7 +3222,8 @@ function switchHero(hero) {
   state.hero = hero;
   state.favoritesOnly = false;
 
-  $('[data-tab="skins"]').click();
+  const skinsTab = $('[data-tab="skins"]');
+  if (skinsTab) skinsTab.click();
 
   $("#hero-filter").value = hero;
 
@@ -4030,6 +4038,9 @@ bootFirebase().then(ok => {
   }
 
   wireCreatorAuth();
+  if (auth && getRedirectResult) {
+    try { await getRedirectResult(auth); } catch (e) { console.warn("Google redirect result failed", e); }
+  }
   refreshVipStatus();
   wireRealtime();
 });
