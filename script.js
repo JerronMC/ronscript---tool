@@ -2835,33 +2835,32 @@ function cycleTheme() {
 }
 
 function fillFilters() {
-  const heroes = [
-    ...new Set(scriptData.map(s => s.hero))
-  ].sort((a, b) => a.localeCompare(b));
+  const heroes = [...new Set(scriptData.map(s => String(s.hero ?? "Unknown")))]
+    .sort((a, b) => a.localeCompare(b));
 
-  $("#hero-filter").innerHTML =
-    '<option value="all">All heroes</option>' +
-    heroes
-      .map(
-        h =>
-          `<option value="${escapeHTML(h)}">${escapeHTML(h)}</option>`
-      )
-      .join("");
+  const heroFilter = $("#hero-filter");
+  if (heroFilter) {
+    heroFilter.innerHTML =
+      '<option value="all">All heroes</option>' +
+      heroes
+        .map(h => `<option value="${escapeHTML(h)}">${escapeHTML(h)}</option>`)
+        .join("");
+  }
 
-  const types = [
-    ...new Set(scriptData.map(s => s.type))
-  ].sort();
+  const types = [...new Set(scriptData.map(s => String(s.type ?? "Custom")))]
+    .sort((a, b) => a.localeCompare(b));
 
-  $("#type-filter").innerHTML =
-    '<option value="all">All types</option>' +
-    types
-      .map(
-        t =>
-          `<option value="${escapeHTML(t)}">${escapeHTML(t)}</option>`
-      )
-      .join("");
+  const typeFilter = $("#type-filter");
+  if (typeFilter) {
+    typeFilter.innerHTML =
+      '<option value="all">All types</option>' +
+      types
+        .map(t => `<option value="${escapeHTML(t)}">${escapeHTML(t)}</option>`)
+        .join("");
+  }
 
-  $("#stat-types").textContent = types.length;
+  const statTypes = $("#stat-types");
+  if (statTypes) statTypes.textContent = String(types.length);
 }
 
 function mergedData() {
@@ -3113,76 +3112,70 @@ function renderScripts() {
   if (!grid) return;
   grid.classList.toggle("compact", state.view === "compact");
   grid.innerHTML = "";
-  const data = filteredData();
-  data.forEach(s => { try { grid.appendChild(cardTemplate(s)); } catch (error) { console.error("Card error:", s.id, error); } });
+
+  let data = [];
+  try { data = filteredData(); } catch (e) { console.error("Filter error:", e); }
+
+  data.forEach(s => {
+    try { grid.appendChild(cardTemplate(s)); }
+    catch (error) { console.error("Card error:", s?.id, error); }
+  });
+
   state.lastRender = new Date().toLocaleTimeString();
-  $("#result-summary").textContent = `Showing ${data.length} of ${scriptData.length} skin scripts`;
-  updateDebugPanel("renderScripts");
-  $("#empty-state").hidden = !!data.length;
+  const summary = $("#result-summary");
+  if (summary) summary.textContent = `Showing ${data.length} of ${scriptData.length} skin scripts`;
+  const emptyState = $("#empty-state");
+  if (emptyState) emptyState.hidden = !!data.length;
+
   const gridView = $('.view-btn[data-view="grid"]');
   const compactView = $('.view-btn[data-view="compact"]');
   if (gridView) gridView.classList.toggle("active", state.view === "grid");
   if (compactView) compactView.classList.toggle("active", state.view === "compact");
+
   const favGrid = $("#favorites-grid");
   if (favGrid) {
     favGrid.innerHTML = "";
-    getFavorites().forEach(s => favGrid.appendChild(cardTemplate({ ...s, ...(cache[s.id] || {}) })));
+    getFavorites().forEach(s => {
+      try { favGrid.appendChild(cardTemplate({ ...s, ...(cache[s.id] || {}) })); }
+      catch (error) { console.error("Favorite card error:", s?.id, error); }
+    });
   }
+
   const empty = $("#favorites-empty");
   if (empty) empty.style.display = getFavorites().length ? "none" : "block";
-  renderFeatured();
+  try { renderFeatured(); } catch (e) { console.warn("Featured render failed", e); }
+  try { updateDebugPanel("renderScripts"); } catch {}
 }
 
 function renderHeroes() {
-  const byHero = {};
+  const grid = $("#heroes-grid");
+  if (!grid) return;
 
+  const byHero = {};
   scriptData.forEach(s => {
-    (byHero[s.hero] ??= []).push(s);
+    const hero = String(s.hero ?? "Unknown");
+    (byHero[hero] ??= []).push(s);
   });
 
-  const grid = $("#heroes-grid");
+  const heroes = Array.isArray(heroVault) ? heroVault : [];
 
-  grid.innerHTML = heroVault
-    .map(h => {
-      const ready = !!byHero[h]?.length;
+  grid.innerHTML = heroes.map(h => {
+    const name = String(h ?? "Unknown");
+    const ready = !!byHero[name]?.length;
+    return `
+      <article class="hero-card glass ${ready ? "ready" : ""}" data-hero="${escapeHTML(name)}">
+        <div class="hero-orb">${initials(name)}</div>
+        <h3>${escapeHTML(name)}</h3>
+        <p>${ready ? `${byHero[name].length} skin script${byHero[name].length === 1 ? "" : "s"}` : "New hero slot • coming soon"}</p>
+        <span class="request">${ready ? "View skins →" : "Request a skin →"}</span>
+      </article>`;
+  }).join("");
 
-      return `
-        <article
-          class="hero-card glass ${ready ? "ready" : ""}"
-          data-hero="${escapeHTML(h)}"
-        >
-          <div class="hero-orb">${initials(h)}</div>
-          <h3>${escapeHTML(h)}</h3>
-          <p>
-            ${
-              ready
-                ? `${byHero[h].length} skin script${
-                    byHero[h].length === 1 ? "" : "s"
-                  }`
-                : "New hero slot • coming soon"
-            }
-          </p>
-          <span class="request">
-            ${ready ? "View skins →" : "Request a skin →"}
-          </span>
-        </article>
-      `;
-    })
-    .join("");
-
-  $$(".hero-card", grid).forEach(card =>
-    card.addEventListener("click", () => {
-      const h = card.dataset.hero;
-
-      if (byHero[h]?.length) {
-        switchHero(h);
-      } else {
-        toast(
-          `${h} is a ready-to-fill hero slot — add a real download URL when the script is available.`
-        );
-      }
-    })
-  );
+  $$(".hero-card", grid).forEach(card => card.addEventListener("click", () => {
+    const h = card.dataset.hero;
+    if (byHero[h]?.length) switchHero(h);
+    else toast(`${h} is a ready-to-fill hero slot.`);
+  }));
 }
 
 function switchHero(hero) {
@@ -3203,23 +3196,22 @@ function switchHero(hero) {
 
 function updateCounters() {
   const fav = getFavorites().length;
+  const heroCount = new Set(scriptData.map(s => String(s.hero ?? "Unknown"))).size;
 
-  $("#stat-skins").textContent = scriptData.length;
+  const setText = (selector, value) => {
+    const el = $(selector);
+    if (el) el.textContent = String(value);
+  };
 
-  $("#stat-heroes").textContent =
-    new Set(scriptData.map(s => s.hero)).size;
+  setText("#stat-skins", scriptData.length);
+  setText("#stat-heroes", heroCount);
+  setText("#stat-favorites", fav);
+  setText("#fav-badge", fav);
+  setText("#hero-count", `${scriptData.length} skins`);
+  setText("#hero-heroes", `${heroCount} heroes`);
+  setText("#custom-badge", customScriptSkins.length);
 
-  $("#stat-favorites").textContent = fav;
-
-  $("#fav-badge").textContent = fav;
-
-  $("#hero-count").textContent =
-    `${scriptData.length} skins`;
-
-  $("#hero-heroes").textContent =
-    `${new Set(scriptData.map(s => s.hero)).size} heroes`;
-  if ($("#custom-badge")) $("#custom-badge").textContent = customScriptSkins.length;
-  updateVipUI();
+  try { updateVipUI(); } catch (e) { console.warn("VIP UI update failed", e); }
 }
 
 
@@ -3910,16 +3902,30 @@ function setGateStep(step) {
 window.addEventListener("ron:gatecomplete", () => { try { bootMainUI(); } catch(e) { console.warn("Main UI boot failed", e); } });
 
 function bootMainUI() {
-  fillFilters();
-  hydrateControls();
-  updateCounters();
-  renderScripts();
-  renderHeroes();
-  if (typeof renderFeatured === "function") renderFeatured();
-  if (typeof renderCustomLab === "function") renderCustomLab();
-  applyTranslations();
-  applyUIStyle(state.uiStyle);
-  updateFullscreenStatus();
+  const steps = [
+    ["filters", fillFilters],
+    ["controls", hydrateControls],
+    ["counters", updateCounters],
+    ["scripts", renderScripts],
+    ["heroes", renderHeroes],
+    ["featured", () => { if (typeof renderFeatured === "function") renderFeatured(); }],
+    ["custom lab", () => { if (typeof renderCustomLab === "function") renderCustomLab(); }],
+    ["translations", applyTranslations],
+    ["style", () => applyUIStyle(state.uiStyle)],
+    ["fullscreen", updateFullscreenStatus]
+  ];
+
+  for (const [name, fn] of steps) {
+    try { fn(); } catch (e) {
+      console.error(`Boot step failed: ${name}`, e);
+      state.lastError = e?.stack || String(e);
+    }
+  }
+
+  const summary = $("#result-summary");
+  if (summary && summary.textContent === "Loading your library…") {
+    summary.textContent = `Showing ${scriptData.length} skin scripts`;
+  }
 }
 
 function unlockGate() {
