@@ -3747,37 +3747,8 @@ const questState = {
   openStarted: new Map(),
   returnSeen: new Set(),
   currentTask: null,
-  timers: new Map(),
-  mistakes: 0,
-  lockUntil: 0
+  timers: new Map()
 };
-
-function questLocked() {
-  return Date.now() < questState.lockUntil;
-}
-
-function recordQuestMistake() {
-  questState.mistakes += 1;
-
-  if (questState.mistakes >= QUEST_MISTAKE_LIMIT) {
-    questState.mistakes = 0;
-    questState.lockUntil = Date.now() + QUEST_LOCKOUT_SECONDS * 1000;
-    questState.currentTask = null;
-    questState.openStarted.clear();
-    questState.returnSeen.clear();
-    questState.timers.forEach(t => clearInterval(t));
-    questState.timers.clear();
-
-    setTimeout(() => {
-      questState.lockUntil = 0;
-      questProgress();
-      renderQuest();
-    }, QUEST_LOCKOUT_SECONDS * 1000);
-  }
-
-  questProgress();
-  renderQuest();
-}
 
 function gateComplete() {
   return localStorage.getItem(GATE_STORAGE_KEY) === "1";
@@ -3799,9 +3770,6 @@ function pickQuestTasks() {
 function renderQuest() {
   const list = $("#quest-list");
   if (!list) return;
-
-  const locked = questLocked();
-
   list.innerHTML = questState.tasks.map(task => `
     <article class="quest-item" data-quest-id="${task.id}">
       <div class="quest-item-icon"><i class="${task.icon}"></i></div>
@@ -3810,8 +3778,8 @@ function renderQuest() {
         <span>${escapeHTML(task.subtitle)}</span>
         <small class="quest-item-state" data-state="${task.id}">Open task</small>
       </div>
-      <button class="quest-open quest-open-v33 ${questState.completed.has(task.id) ? "complete" : locked ? "locked" : ""}" data-quest-open="${task.id}" type="button" aria-label="Open quest" ${questState.completed.has(task.id) || locked ? "disabled" : ""}>
-        <i class="fa-solid ${questState.completed.has(task.id) ? "fa-check" : locked ? "fa-lock" : "fa-arrow-right"}"></i>
+      <button class="quest-open quest-open-v33" data-quest-open="${task.id}" type="button" aria-label="Open quest">
+        <i class="fa-solid fa-arrow-right"></i>
       </button>
     </article>
   `).join("");
@@ -3828,24 +3796,10 @@ function questProgress() {
   const text = $("#quest-progress-text");
   const intro = $("#quest-intro");
   const next = $("#gate-next-1");
-
   if (fill) fill.style.width = `${percent}%`;
   if (text) text.textContent = `${done} / ${QUEST_COUNT}`;
-
-  if (questLocked()) {
-    const remaining = Math.ceil((questState.lockUntil - Date.now()) / 1000);
-    if (intro) intro.textContent = `Too many mistakes. Wait ${remaining}s.`;
-    if (next) next.disabled = true;
-  } else {
-    if (intro) intro.textContent =
-      done === QUEST_COUNT
-        ? "All tasks are done. You can enter."
-        : "Open each task, then come back.";
-    if (next) next.disabled = done !== QUEST_COUNT;
-  }
-
-  const mistakeText = $("#quest-mistake-text");
-  if (mistakeText) mistakeText.textContent = `${questState.mistakes} / ${QUEST_MISTAKE_LIMIT}`;
+  if (intro) intro.textContent = done === QUEST_COUNT ? "All 3 tasks are done. You can enter." : "Open each task, then come back.";
+  if (next) next.disabled = done !== QUEST_COUNT;
 }
 
 function setQuestStateText(id, text, stateClass = "") {
@@ -3913,7 +3867,6 @@ function startReturnTimer(id) {
 }
 
 function onQuestReturn() {
-  if (questLocked()) return;
   const id = questState.currentTask;
   if (!id || questState.completed.has(id)) return;
   if (!questState.returnSeen.has(id)) {
@@ -3923,33 +3876,20 @@ function onQuestReturn() {
 }
 
 function openQuestTask(id) {
-  if (questLocked()) return;
-
   const task = questState.tasks.find(t => t.id === id);
   if (!task || questState.completed.has(id)) return;
-
-  // Opening a different task while another one is still active counts as a mistake.
-  if (questState.currentTask && questState.currentTask !== id) {
-    recordQuestMistake();
-    return;
-  }
 
   questState.currentTask = id;
   const now = Date.now();
   questState.openStarted.set(id, now);
   questState.returnSeen.delete(id);
   stopQuestTimer(id);
-
-  setQuestStateText(id, "Come back when you're done", "checking");
-  setQuestButton(id, "timer", QUEST_MIN_SECONDS);
-
+  setQuestStateText(id, "Return here when you are done", "checking");
+  setQuestButton(id, "timer", 30);
   const timerText = $("#quest-timer-text");
   if (timerText) timerText.textContent = "Waiting for you to return";
 
-  const popup = window.open(task.url, "_blank", "noopener,noreferrer");
-  if (!popup) {
-    window.location.href = task.url;
-  }
+  window.open(task.url, "_blank", "noopener,noreferrer");
 }
 
 function initGateListeners() {
@@ -4028,27 +3968,21 @@ function ensureGatePainted() {
   }
 }
 
+// Start the single quest gate from the external module.
+if (document.querySelector("#access-gate")) {
+  try { bootGate(); } catch (error) { console.error("Quest gate failed to start:", error); }
+}
+
 function bootUI() {
-  try {
-    if (gateComplete()) {
-      document.body.classList.remove("gate-locked");
-      document.body.classList.add("gate-open");
-      const gate = $("#access-gate");
-      if (gate) gate.remove();
-      bootMainUI();
-      return;
-    }
-
-    if (document.querySelector("#access-gate")) {
-      bootGate();
-      return;
-    }
-
-    bootMainUI();
-  } catch (e) {
-    state.lastError = e?.stack || String(e);
-    console.warn("UI boot failed", e);
+  // v11 uses the standalone gate in index.html. Do not boot the old gate again.
+  if (window.__RON_GATE_V11_BOOTED) {
+    try { bootMainUI(); } catch (e) { console.warn("Main UI boot failed", e); }
+    return;
   }
+  if (document.querySelector("#access-gate")) {
+    return;
+  }
+  try { bootMainUI(); } catch (e) { console.warn("Main UI boot failed", e); }
 }
 
 if (document.readyState === "loading") {
