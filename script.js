@@ -3968,20 +3968,10 @@ function ensureGatePainted() {
   }
 }
 
-// Start the single quest gate from the external module.
-if (document.querySelector("#access-gate")) {
-  try { bootGate(); } catch (error) { console.error("Quest gate failed to start:", error); }
-}
+// v12.2: quest gate disabled. Main UI opens directly.
 
 function bootUI() {
-  // v11 uses the standalone gate in index.html. Do not boot the old gate again.
-  if (window.__RON_GATE_V11_BOOTED) {
-    try { bootMainUI(); } catch (e) { console.warn("Main UI boot failed", e); }
-    return;
-  }
-  if (document.querySelector("#access-gate")) {
-    return;
-  }
+  // v12.2: direct entry. No quest gate.
   try { bootMainUI(); } catch (e) { console.warn("Main UI boot failed", e); }
 }
 
@@ -3991,6 +3981,7 @@ if (document.readyState === "loading") {
   bootUI();
 }
 
+// Direct-entry build: main UI loads immediately. Firebase is optional and lazy.
 // Load Firebase after the UI is already visible. The site works in local mode
 // even when the Firebase CDN is unavailable.
 bootFirebase().then(ok => {

@@ -5,47 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0c0e12" />
   <meta name="description" content="RON SCRIPTS — premium skin script and hero hub." />
-  <title>RON SCRIPTS — v12.1.1</title>
+  <title>RON SCRIPTS — v12.2.0</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
   </head>
-<body class="theme-midnight gate-locked ui-toolbench">
-  <section id="access-gate" class="access-gate access-gate-v10" aria-label="RON SCRIPTS access check">
-    <div class="gate-shell gate-shell-clean">
-      <header class="gate-top">
-        <div class="gate-brand-clean">
-          <span class="brand-mark-clean"><i class="fa-solid fa-bolt"></i></span>
-          <div><strong>RON SCRIPTS</strong><small>ACCESS CHECK • V12.1</small></div>
-        </div>
-        <span class="gate-build">BUILD 12.1.1</span>
-      </header>
-
-      <section class="gate-intro-clean">
-        <span class="gate-kicker-clean">STEP 1</span>
-        <h1>Before you enter</h1>
-        <p>Open both tasks. Come back when you are done.</p>
-      </section>
-
-      <section class="quest-board quest-board-clean">
-        <div class="quest-board-head-clean">
-          <div><span class="gate-kicker-clean">YOUR TASKS</span><h2>2 quick tasks</h2></div>
-          <div class="quest-progress-pill-clean"><b id="quest-progress-text">0 / 2</b><span>done</span></div><div class="quest-mistake-pill"><b id="quest-mistake-text">0 / 3</b><span>mistakes</span></div>
-        </div>
-        <div id="quest-list" class="quest-list quest-list-v33"></div>
-        <div class="quest-progress quest-progress-v33"><span id="quest-progress-fill"></span></div>
-        <div class="quest-foot-row quest-foot-clean"><span id="quest-intro">Open a task, then come back.</span><span id="quest-timer-text">Ready</span></div>
-      </section>
-
-      <div class="gate-note-clean"><i class="fa-solid fa-lock"></i><span>Tap the arrow to open a task. Come back when you finish it.</span></div>
-
-      <button id="gate-next-1" class="gate-enter-clean" type="button" disabled>
-        <span>Continue</span><i class="fa-solid fa-arrow-right"></i>
-      </button>
-    </div>
-  </section>
+<body class="theme-midnight ui-toolbench">
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="orb orb-a" aria-hidden="true"></div>
   <div class="orb orb-b" aria-hidden="true"></div>
@@ -69,7 +36,7 @@
     <span>•</span><span id="live-clock">--:--</span>
   </div>
 
-  <section class="command-deck glass" aria-label="Quick actions"><div class="command-deck-head"><div><span class="eyebrow">RON CONSOLE</span><h2>Quick actions</h2></div><span class="command-version">v12.1.1</span></div><div class="command-grid"><button class="command-card" id="command-explore"><i class="fa-solid fa-layer-group"></i><span><b>Skin Vault</b><small>Browse scripts</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-heroes"><i class="fa-solid fa-mask-face"></i><span><b>Hero Vault</b><small>Browse heroes</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-vip"><i class="fa-solid fa-crown"></i><span><b>VIP Center</b><small>Check access</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-settings"><i class="fa-solid fa-sliders"></i><span><b>Settings</b><small>Change the site</small></span><i class="fa-solid fa-arrow-right"></i></button></div></section>
+  <section class="command-deck glass" aria-label="Quick actions"><div class="command-deck-head"><div><span class="eyebrow">RON CONSOLE</span><h2>Quick actions</h2></div><span class="command-version">v12.2.0</span></div><div class="command-grid"><button class="command-card" id="command-explore"><i class="fa-solid fa-layer-group"></i><span><b>Skin Vault</b><small>Browse scripts</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-heroes"><i class="fa-solid fa-mask-face"></i><span><b>Hero Vault</b><small>Browse heroes</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-vip"><i class="fa-solid fa-crown"></i><span><b>VIP Center</b><small>Check access</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-settings"><i class="fa-solid fa-sliders"></i><span><b>Settings</b><small>Change the site</small></span><i class="fa-solid fa-arrow-right"></i></button></div></section>
 
 <main id="top" class="app-shell">
     <section class="hero-panel glass">
@@ -103,7 +70,7 @@
     </section>
 
     <section class="desktop-quickbar glass" aria-label="Quick overview">
-      <div class="quick-stat"><span>BUILD</span><strong id="quick-build">12.1.1</strong></div>
+      <div class="quick-stat"><span>BUILD</span><strong id="quick-build">12.2.0</strong></div>
       <div class="quick-stat"><span>STATUS</span><strong class="status-live"><i class="fa-solid fa-circle"></i> ONLINE</strong></div>
       <div class="quick-stat"><span>MODE</span><strong>FAST UI</strong></div>
       <div class="quick-stat"><span>ACCESS</span><strong>VIP READY</strong></div>
@@ -213,12 +180,12 @@
     <section id="tab-debug" class="tab-panel">
       <div class="debug-hero glass">
         <div><span class="eyebrow">TESTER MODE</span><h2>Build diagnostics without guesswork.</h2><p>Turn on Tester Mode while testing a new upload. The panel shows the exact build, library size, VIP member ID, render timestamp, and latest JavaScript error. Use the × button to close it at any time.</p></div>
-        <div class="debug-build"><strong>BUILD</strong><span id="debug-build-version">12.1.1</span><small>100 REAL LINKS • VIP • PREMIUM • TESTER</small></div>
+        <div class="debug-build"><strong>BUILD</strong><span id="debug-build-version">12.2.0</span><small>100 REAL LINKS • VIP • PREMIUM • TESTER</small></div>
       </div>
       <div id="debug-report-card" class="glass debug-report-card"><div class="debug-report-title"><i class="fa-solid fa-terminal"></i><strong>Runtime report</strong></div><div id="debug-report-lines" class="debug-report-lines"><span>Enable Tester mode to see diagnostics.</span></div></div>
     </section>
 
-  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile + desktop • RON Console • v12.1.1</span></footer>
+  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile + desktop • RON Console • v12.2.0</span></footer>
 
   <div id="toast-root" class="toast-root" aria-live="polite"></div>
 
