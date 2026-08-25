@@ -3737,7 +3737,7 @@ const QUEST_MISTAKE_LIMIT = 3;
 const QUEST_LOCKOUT_SECONDS = 60;
 
 const QUEST_POOL = [
-  { id: "yt_sub", platform: "YouTube", title: "Subscribe on YouTube", subtitle: "@NCRONNMLBB", icon: "fa-brands fa-youtube", url: "https://www.youtube.com/@NCRONNMLBB" },
+  { id: "yt_sub", platform: "YouTube", title: "Subscribe on YouTube", subtitle: "@NCRONNMLBB", icon: "fa-brands fa-youtube", url: "https://www.youtube.com/@NCRONNMLBB?sub_confirmation=1" },
   { id: "tt_follow", platform: "TikTok", title: "Follow on TikTok", subtitle: "@ranzee.ron", icon: "fa-brands fa-tiktok", url: "https://www.tiktok.com/@ranzee.ron" }
 ];
 
