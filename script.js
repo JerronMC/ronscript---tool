@@ -62,10 +62,10 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "11.0.0",
-  build: "RON-ULTIMATE-V11.0.0-HUMAN-UI-2026.08.25.1",
+  version: "12.1.0",
+  build: "RON-ULTIMATE-V12.1.0-100-REAL-LINKS-2026.08.25.1",
   channel: "ULTIMATE",
-  release: "100 FEATURES • VIP APPROVAL • PREMIUM APPROVAL • PRISM UI",
+  release: "100 MICRO-UPDATES • VIP • PREMIUM • NEW UI",
   updated: "2026-08-25"
 };
 
@@ -1081,6 +1081,990 @@ const realLinkSkins = [
 ];
 scriptData.push(...realLinkSkins);
 
+const V12_CUSTOM_CONCEPTS = [
+  {
+    "id": "custom_v12_001_aamon",
+    "title": "Aamon — Cyber Custom",
+    "hero": "Aamon",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "cyber"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Cyber-themed visual concept for Aamon. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_002_alice",
+    "title": "Alice — Eclipse Custom",
+    "hero": "Alice",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "eclipse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Eclipse-themed visual concept for Alice. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_003_alpha",
+    "title": "Alpha — Arc Custom",
+    "hero": "Alpha",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "arc"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Arc-themed visual concept for Alpha. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_004_angela",
+    "title": "Angela — Frost Custom",
+    "hero": "Angela",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "frost"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Frost-themed visual concept for Angela. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_005_atlas",
+    "title": "Atlas — Void Custom",
+    "hero": "Atlas",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "void"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Void-themed visual concept for Atlas. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_006_aulus",
+    "title": "Aulus — Crimson Custom",
+    "hero": "Aulus",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "crimson"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Crimson-themed visual concept for Aulus. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_007_aurora",
+    "title": "Aurora — Solar Custom",
+    "hero": "Aurora",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "solar"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Solar-themed visual concept for Aurora. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_008_badang",
+    "title": "Badang — Phantom Custom",
+    "hero": "Badang",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "phantom"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Phantom-themed visual concept for Badang. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_009_balmond",
+    "title": "Balmond — Aether Custom",
+    "hero": "Balmond",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "aether"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Aether-themed visual concept for Balmond. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_010_barats",
+    "title": "Barats — Pulse Custom",
+    "hero": "Barats",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "pulse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Pulse-themed visual concept for Barats. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_011_baxia",
+    "title": "Baxia — Cyber Custom",
+    "hero": "Baxia",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "cyber"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Cyber-themed visual concept for Baxia. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_012_beatrix",
+    "title": "Beatrix — Eclipse Custom",
+    "hero": "Beatrix",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "eclipse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Eclipse-themed visual concept for Beatrix. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_013_belerick",
+    "title": "Belerick — Arc Custom",
+    "hero": "Belerick",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "arc"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Arc-themed visual concept for Belerick. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_014_bruno",
+    "title": "Bruno — Frost Custom",
+    "hero": "Bruno",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "frost"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Frost-themed visual concept for Bruno. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_015_carmilla",
+    "title": "Carmilla — Void Custom",
+    "hero": "Carmilla",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "void"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Void-themed visual concept for Carmilla. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_016_cecilion",
+    "title": "Cecilion — Crimson Custom",
+    "hero": "Cecilion",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "crimson"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Crimson-themed visual concept for Cecilion. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_017_chang-e",
+    "title": "Chang'e — Solar Custom",
+    "hero": "Chang'e",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "solar"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Solar-themed visual concept for Chang'e. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_018_claude",
+    "title": "Claude — Phantom Custom",
+    "hero": "Claude",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "phantom"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Phantom-themed visual concept for Claude. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_019_clint",
+    "title": "Clint — Aether Custom",
+    "hero": "Clint",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "aether"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Aether-themed visual concept for Clint. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_020_cyclops",
+    "title": "Cyclops — Pulse Custom",
+    "hero": "Cyclops",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "pulse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Pulse-themed visual concept for Cyclops. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_021_diggie",
+    "title": "Diggie — Cyber Custom",
+    "hero": "Diggie",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "cyber"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Cyber-themed visual concept for Diggie. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_022_edith",
+    "title": "Edith — Eclipse Custom",
+    "hero": "Edith",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "eclipse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Eclipse-themed visual concept for Edith. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_023_esmeralda",
+    "title": "Esmeralda — Arc Custom",
+    "hero": "Esmeralda",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "arc"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Arc-themed visual concept for Esmeralda. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_024_estes",
+    "title": "Estes — Frost Custom",
+    "hero": "Estes",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "frost"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Frost-themed visual concept for Estes. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_025_eudora",
+    "title": "Eudora — Void Custom",
+    "hero": "Eudora",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "void"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Void-themed visual concept for Eudora. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_026_faramis",
+    "title": "Faramis — Crimson Custom",
+    "hero": "Faramis",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "crimson"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Crimson-themed visual concept for Faramis. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_027_floryn",
+    "title": "Floryn — Solar Custom",
+    "hero": "Floryn",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "solar"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Solar-themed visual concept for Floryn. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_028_franco",
+    "title": "Franco — Phantom Custom",
+    "hero": "Franco",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "phantom"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Phantom-themed visual concept for Franco. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_029_freya",
+    "title": "Freya — Aether Custom",
+    "hero": "Freya",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "aether"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Aether-themed visual concept for Freya. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_030_gatotkaca",
+    "title": "Gatotkaca — Pulse Custom",
+    "hero": "Gatotkaca",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "pulse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Pulse-themed visual concept for Gatotkaca. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_031_gloo",
+    "title": "Gloo — Cyber Custom",
+    "hero": "Gloo",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "cyber"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Cyber-themed visual concept for Gloo. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_032_granger",
+    "title": "Granger — Eclipse Custom",
+    "hero": "Granger",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "eclipse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Eclipse-themed visual concept for Granger. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_033_grock",
+    "title": "Grock — Arc Custom",
+    "hero": "Grock",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "arc"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Arc-themed visual concept for Grock. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_034_guinevere",
+    "title": "Guinevere — Frost Custom",
+    "hero": "Guinevere",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "frost"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Frost-themed visual concept for Guinevere. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_035_hanabi",
+    "title": "Hanabi — Void Custom",
+    "hero": "Hanabi",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "void"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Void-themed visual concept for Hanabi. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_036_hanzo",
+    "title": "Hanzo — Crimson Custom",
+    "hero": "Hanzo",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "crimson"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Crimson-themed visual concept for Hanzo. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_037_harith",
+    "title": "Harith — Solar Custom",
+    "hero": "Harith",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "solar"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Solar-themed visual concept for Harith. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_038_harley",
+    "title": "Harley — Phantom Custom",
+    "hero": "Harley",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "phantom"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Phantom-themed visual concept for Harley. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_039_helcurt",
+    "title": "Helcurt — Aether Custom",
+    "hero": "Helcurt",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "aether"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Aether-themed visual concept for Helcurt. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_040_hilda",
+    "title": "Hilda — Pulse Custom",
+    "hero": "Hilda",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "pulse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Pulse-themed visual concept for Hilda. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_041_hirara",
+    "title": "Hirara — Cyber Custom",
+    "hero": "Hirara",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "cyber"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Cyber-themed visual concept for Hirara. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_042_hylos",
+    "title": "Hylos — Eclipse Custom",
+    "hero": "Hylos",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "eclipse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Eclipse-themed visual concept for Hylos. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_043_irithel",
+    "title": "Irithel — Arc Custom",
+    "hero": "Irithel",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "arc"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Arc-themed visual concept for Irithel. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_044_jawhead",
+    "title": "Jawhead — Frost Custom",
+    "hero": "Jawhead",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "frost"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Frost-themed visual concept for Jawhead. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_045_johnson",
+    "title": "Johnson — Void Custom",
+    "hero": "Johnson",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "void"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Void-themed visual concept for Johnson. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_046_kaja",
+    "title": "Kaja — Crimson Custom",
+    "hero": "Kaja",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "crimson"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Crimson-themed visual concept for Kaja. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_047_kalea",
+    "title": "Kalea — Solar Custom",
+    "hero": "Kalea",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "solar"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Solar-themed visual concept for Kalea. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_048_karina",
+    "title": "Karina — Phantom Custom",
+    "hero": "Karina",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "phantom"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Phantom-themed visual concept for Karina. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_049_khaleed",
+    "title": "Khaleed — Aether Custom",
+    "hero": "Khaleed",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "aether"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Aether-themed visual concept for Khaleed. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_050_khufra",
+    "title": "Khufra — Pulse Custom",
+    "hero": "Khufra",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "pulse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Pulse-themed visual concept for Khufra. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_051_kimmy",
+    "title": "Kimmy — Cyber Custom",
+    "hero": "Kimmy",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "cyber"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Cyber-themed visual concept for Kimmy. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_052_lancelot",
+    "title": "Lancelot — Eclipse Custom",
+    "hero": "Lancelot",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "eclipse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Eclipse-themed visual concept for Lancelot. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_053_lapu-lapu",
+    "title": "Lapu-Lapu — Arc Custom",
+    "hero": "Lapu-Lapu",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "arc"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Arc-themed visual concept for Lapu-Lapu. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_054_leomord",
+    "title": "Leomord — Frost Custom",
+    "hero": "Leomord",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "frost"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Frost-themed visual concept for Leomord. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_055_lolita",
+    "title": "Lolita — Void Custom",
+    "hero": "Lolita",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "void"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Void-themed visual concept for Lolita. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_056_lunox",
+    "title": "Lunox — Crimson Custom",
+    "hero": "Lunox",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "crimson"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Crimson-themed visual concept for Lunox. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_057_luo-yi",
+    "title": "Luo Yi — Solar Custom",
+    "hero": "Luo Yi",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "solar"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Solar-themed visual concept for Luo Yi. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_058_marcel",
+    "title": "Marcel — Phantom Custom",
+    "hero": "Marcel",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "phantom"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Phantom-themed visual concept for Marcel. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_059_martis",
+    "title": "Martis — Aether Custom",
+    "hero": "Martis",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "aether"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Aether-themed visual concept for Martis. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_060_masha",
+    "title": "Masha — Pulse Custom",
+    "hero": "Masha",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "pulse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Pulse-themed visual concept for Masha. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_061_mathilda",
+    "title": "Mathilda — Cyber Custom",
+    "hero": "Mathilda",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "cyber"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Cyber-themed visual concept for Mathilda. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_062_minotaur",
+    "title": "Minotaur — Eclipse Custom",
+    "hero": "Minotaur",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "eclipse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Eclipse-themed visual concept for Minotaur. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_063_minsitthar",
+    "title": "Minsitthar — Arc Custom",
+    "hero": "Minsitthar",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "arc"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Arc-themed visual concept for Minsitthar. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_064_odette",
+    "title": "Odette — Frost Custom",
+    "hero": "Odette",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "frost"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Frost-themed visual concept for Odette. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_065_pharsa",
+    "title": "Pharsa — Void Custom",
+    "hero": "Pharsa",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "void"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Void-themed visual concept for Pharsa. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_066_popol-and-kupa",
+    "title": "Popol and Kupa — Crimson Custom",
+    "hero": "Popol and Kupa",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "crimson"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Crimson-themed visual concept for Popol and Kupa. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_067_rafaela",
+    "title": "Rafaela — Solar Custom",
+    "hero": "Rafaela",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "solar"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Solar-themed visual concept for Rafaela. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_068_roger",
+    "title": "Roger — Phantom Custom",
+    "hero": "Roger",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "phantom"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Phantom-themed visual concept for Roger. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_069_saber",
+    "title": "Saber — Aether Custom",
+    "hero": "Saber",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "aether"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Aether-themed visual concept for Saber. No public download URL is attached."
+  },
+  {
+    "id": "custom_v12_070_selena",
+    "title": "Selena — Pulse Custom",
+    "hero": "Selena",
+    "type": "Custom",
+    "tags": [
+      "custom",
+      "v12",
+      "pulse"
+    ],
+    "customOnly": true,
+    "preserveDefault": true,
+    "description": "RON SCRIPTS v12 Custom Lab concept. Pulse-themed visual concept for Selena. No public download URL is attached."
+  }
+];
+scriptData.push(...V12_CUSTOM_CONCEPTS);
+
 const heroVault = [
   "Argus",
   "Aldous",
@@ -1346,6 +2330,96 @@ const heroVault = [
   "Kalea",
   "Sora"];
 
+
+const V12_HERO_EXPANSION = [
+  "Aamon",
+  "Alice",
+  "Alpha",
+  "Angela",
+  "Atlas",
+  "Aulus",
+  "Aurora",
+  "Badang",
+  "Balmond",
+  "Barats",
+  "Baxia",
+  "Beatrix",
+  "Belerick",
+  "Bruno",
+  "Carmilla",
+  "Cecilion",
+  "Chang'e",
+  "Claude",
+  "Clint",
+  "Cyclops",
+  "Diggie",
+  "Edith",
+  "Esmeralda",
+  "Estes",
+  "Eudora",
+  "Faramis",
+  "Floryn",
+  "Franco",
+  "Freya",
+  "Gatotkaca",
+  "Gloo",
+  "Granger",
+  "Grock",
+  "Guinevere",
+  "Hanabi",
+  "Hanzo",
+  "Harith",
+  "Harley",
+  "Helcurt",
+  "Hilda",
+  "Hirara",
+  "Hylos",
+  "Irithel",
+  "Jawhead",
+  "Johnson",
+  "Kaja",
+  "Kalea",
+  "Karina",
+  "Khaleed",
+  "Khufra",
+  "Kimmy",
+  "Lancelot",
+  "Lapu-Lapu",
+  "Leomord",
+  "Lolita",
+  "Lunox",
+  "Luo Yi",
+  "Marcel",
+  "Martis",
+  "Masha",
+  "Mathilda",
+  "Minotaur",
+  "Minsitthar",
+  "Odette",
+  "Pharsa",
+  "Popol and Kupa",
+  "Rafaela",
+  "Roger",
+  "Saber",
+  "Selena",
+  "Silvanna",
+  "Sun",
+  "Terizla",
+  "Thamuz",
+  "Tigreal",
+  "Uranus",
+  "Valir",
+  "Vexana",
+  "Wanwan",
+  "X.Borg",
+  "Yve",
+  "Yu Zhong",
+  "Zetian",
+  "Zhask",
+  "Zilong"
+];
+heroVault.push(...V12_HERO_EXPANSION.filter(h => !heroVault.includes(h)));
+
 const state = {
   query: "",
   hero: "all",
@@ -1354,7 +2428,7 @@ const state = {
   favoritesOnly: false,
   view: localStorage.getItem("ron_view") || "grid",
   theme: localStorage.getItem("ron_theme") || "neon",
-  uiStyle: localStorage.getItem("ron_ui_style") || "workbench",
+  uiStyle: localStorage.getItem("ron_ui_style") || "ronconsole",
   language: localStorage.getItem("ron_language") || "en",
   reduceMotion: localStorage.getItem("ron_motion") === "off",
   compact: localStorage.getItem("ron_compact") === "on",
@@ -2358,12 +3432,26 @@ $("#shuffle-btn").addEventListener(
   }
 );
 
+$("#command-explore")?.addEventListener("click",()=>$("#tab-skins")?.scrollIntoView({behavior:state.reduceMotion?"auto":"smooth"}));
+$("#command-heroes")?.addEventListener("click",()=>{$('[data-tab="heroes"]')?.click();$("#tab-heroes")?.scrollIntoView({behavior:state.reduceMotion?"auto":"smooth"})});
+$("#command-vip")?.addEventListener("click",()=>openVipCenter());
+$("#command-settings")?.addEventListener("click",()=>$("#settings-modal")?.showModal());
+
 // =========================================================
 // V3.3 SETTINGS • UI STYLE • FULL SCREEN • LANGUAGE
 // =========================================================
-const UPDATE_FEATURES_V10 = ["Prism OS main dashboard", "Animated command bar", "Animated nav icons", "Micro-interaction buttons", "Card hover depth", "Mobile bottom actions", "Desktop keyboard focus", "Instant filter chips", "Faster search debounce", "Lazy card paint", "Virtualized-style contain hints", "Better empty state", "Script tier badges", "VIP approval workflow", "Premium approval workflow", "One-question approval flow", "Approval progress bar", "Approval back button", "Approval proof screen", "Real-time approval status", "VIP request watcher", "Premium request watcher", "Creator approval sync", "Creator sign-in status", "Creator role guard", "VIP member lookup", "Member ID persistence", "Member ID copy flow", "VIP status refresh", "Protected download refresh", "Download action animation", "Access lock animation", "Debug close control", "Debug query cleanup", "Debug event feed", "Build version sync", "Release label sync", "Theme persistence", "Prism style persistence", "Style picker searchless visual grid", "26+ UI styles", "Aurora style", "Cyber style", "Midnight style", "Arcade style", "Nebula style", "Ocean style", "Ember style", "Matrix style", "Violet style", "Crimson style", "Mint style", "Solar style", "Frost style", "Royal style", "Graphite style", "Plasma style", "Hologram style", "Tokyo style", "Ghost style", "Toxic style", "Sandstorm style", "Deep Sea style", "Sakura style", "Monochrome style", "Prism style", "Language search", "Custom language cards", "Language selection animation", "Language persistence", "Fullscreen toggle", "Fullscreen status", "Motion toggle", "Compact cards", "Favorite persistence", "Favorite filtering", "Hero grouping", "Hero vault expansion", "Custom lab expansion", "Custom safe-slot labels", "Default-skin safety metadata", "Premium badge polish", "VIP badge polish", "Crossover badge polish", "Script count sync", "Hero count sync", "Category count sync", "Featured strip refresh", "Spotlight cards", "Tester build panel", "Runtime error capture", "Unhandled rejection capture", "Firebase lazy boot", "Firebase offline fallback", "Realtime script metrics", "Cloud write warnings", "Local preference safety", "Safer clear-local behavior", "Responsive settings modal", "Responsive language picker", "Responsive approval modal", "Mobile approval layout", "Desktop approval layout", "Animated quest buttons", "Quest progress bar", "Quest return tracking", "Simple English UI copy", "Reduced backdrop work", "Content visibility cards", "GPU-friendly transforms"];
+const UPDATE_FEATURES_V12 = ["RON Console dashboard", "Compact command deck", "Mobile command grid", "Desktop command bar", "Two-task creator gate", "30-second return check", "Quest mistake counter", "Quest lockout after repeated mistakes", "Persistent quest state", "Simple English gate copy", "No manual completion buttons", "Quest state recovery", "VIP approval flow", "Premium approval flow", "One-question approval", "Approval progress", "Creator approval sync", "Member ID persistence", "Protected download refresh", "Debug close control", "Debug error capture", "Build version sync", "100 micro-update matrix", "50+ functional UI themes", "New RON Console theme", "Searchable language picker", "Fullscreen control", "Motion control", "Compact cards", "Favorite persistence", "Hero Vault expansion", "70+ new Custom Lab concepts", "Default-skin safety labels", "Tier badges", "Fast filters", "Fast search", "Hero sorting", "Newest sorting", "Spotlight strip", "Quick actions", "Command shortcuts", "Touch-friendly controls", "Safe-area padding", "Responsive modals", "Responsive settings", "Reduced blur", "Reduced shadow work", "GPU-friendly transforms", "Firebase lazy boot", "Firebase offline fallback", "Local cache guard", "Stale build detection", "Script count sync", "Hero count sync", "Category count sync", "Runtime diagnostics", "Performance counters", "Release diagnostics", "Error toasts", "Stable dialogs", "Modal escape handling", "Fast tab switching", "Search focus shortcut", "Surprise script action", "Hero request slots", "Custom Lab tags", "Tier filtering", "VIP request logging", "Premium request logging", "Approval watcher", "Creator role guard", "Member-to-VIP action", "Remove-VIP action", "Access-state redraw", "Download-state redraw", "Safer external links", "Empty state improvements", "Accessible focus rings", "Keyboard navigation", "Mobile navigation", "Desktop navigation", "Theme persistence", "Language persistence", "Fullscreen persistence", "Settings persistence", "Debug persistence", "Library health view", "Gate health view", "Firebase health view", "UI health view", "100-link release milestone", "Versioned cache busting", "Cleaner release log", "New update cards", "Faster card paint", "Less startup work", "Deferred metrics", "Stable render order", "Consistent spacing", "Cleaner typography", "Reduced marketing copy", "New command cards", "Better hero panel", "Better stats cards", "Better quick bar", "Better mobile header", "Better mobile tabs", "Better script cards", "Better access cards", "Better VIP center", "Better creator panel", "Better tester panel"];
+const REAL_LINK_TARGET = 100;
+const REAL_LINK_CATALOG = (typeof scriptData !== "undefined" ? scriptData : [])
+  .filter(s => /^https?:\/\/(?:sfile\.co|sfile\.mobi|www\.mediafire\.com|mediafire\.com)\//i.test(s?.url || ""))
+  .slice(0, REAL_LINK_TARGET);
 
-function renderUpdateFeatures(){ const grid=$("#updates-grid"); if(!grid)return; grid.innerHTML=UPDATE_FEATURES_V10.map((x,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">${String(i+1).padStart(3,"0")}</span><h3>${escapeHTML(x)}</h3><p>Included in RON SCRIPTS v11.0.0.</p></article>`).join(""); }
+function renderUpdateFeatures(){
+  const grid=$("#updates-grid");
+  if(!grid)return;
+  const linkCards=REAL_LINK_CATALOG.map((s,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">LINK</span><h3>${String(i+1).padStart(3,"0")} • ${escapeHTML(s.title || "Script")}</h3><p>${escapeHTML(s.hero || "Script")} • ${escapeHTML(s.type || "Free")}</p><a class="primary-btn" href="${escapeHTML(s.url)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open link</a></article>`).join("");
+  grid.innerHTML=`<article class="update-card glass feature-v12 featured"><span class="update-tag">100</span><h3>100 real hosted links</h3><p>${REAL_LINK_CATALOG.length} real external script links are cataloged from the current library without removing your existing entries.</p></article>`+UPDATE_FEATURES_V12.filter(x=>!String(x).includes("micro-update")&&!String(x).includes("1M release")).map((x,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">${String(i+1).padStart(3,"0")}</span><h3>${escapeHTML(x)}</h3><p>Included in RON SCRIPTS v12.1.0.</p></article>`).join("")+linkCards;
+}
 
 const UI_STYLES = [
   { id:"workbench",title:"Workbench",text:"Clean app-style layout",icon:"fa-solid fa-table-columns" },
@@ -2396,6 +3484,9 @@ const UI_STYLES = [
   { id:"monochrome",title:"Monochrome",text:"Pure black + white",icon:"fa-solid fa-circle-half-stroke" }
 ];
 
+
+const V12_UI_STYLES = [{"id": "ronconsole", "title": "RON Console", "text": "Compact creator dashboard", "icon": "fa-solid fa-terminal"}, {"id": "slate", "title": "Slate", "text": "Calm steel panels", "icon": "fa-solid fa-square"}, {"id": "paperdark", "title": "Paper Dark", "text": "Flat editorial layout", "icon": "fa-solid fa-file-lines"}, {"id": "signal", "title": "Signal", "text": "Status-first interface", "icon": "fa-solid fa-signal"}, {"id": "studio", "title": "Studio", "text": "Creator workspace", "icon": "fa-solid fa-pen-ruler"}, {"id": "terminal", "title": "Terminal", "text": "Dense tool layout", "icon": "fa-solid fa-terminal"}, {"id": "carbon", "title": "Carbon", "text": "Dark industrial", "icon": "fa-solid fa-cube"}, {"id": "skyline", "title": "Skyline", "text": "Cool city accent", "icon": "fa-solid fa-building"}, {"id": "mariner", "title": "Mariner", "text": "Deep blue utility", "icon": "fa-solid fa-anchor"}, {"id": "mintglass", "title": "Mint Glass", "text": "Fresh glass panels", "icon": "fa-solid fa-leaf"}, {"id": "copper", "title": "Copper", "text": "Warm metal accent", "icon": "fa-solid fa-gem"}, {"id": "royalnight", "title": "Royal Night", "text": "Dark premium blue", "icon": "fa-solid fa-crown"}, {"id": "lavender", "title": "Lavender", "text": "Soft violet app", "icon": "fa-solid fa-seedling"}, {"id": "iceblue", "title": "Ice Blue", "text": "Cool clean panels", "icon": "fa-solid fa-snowflake"}, {"id": "moss", "title": "Moss", "text": "Natural dark green", "icon": "fa-solid fa-tree"}, {"id": "amber", "title": "Amber", "text": "Warm alert accent", "icon": "fa-solid fa-triangle-exclamation"}, {"id": "ruby", "title": "Ruby", "text": "Dark red utility", "icon": "fa-solid fa-gem"}, {"id": "pearl", "title": "Pearl", "text": "Soft bright surfaces", "icon": "fa-solid fa-circle"}, {"id": "indigo", "title": "Indigo", "text": "Deep blue-violet", "icon": "fa-solid fa-droplet"}, {"id": "teal", "title": "Teal", "text": "Balanced aqua", "icon": "fa-solid fa-water"}, {"id": "lime", "title": "Lime", "text": "Sharp green accent", "icon": "fa-solid fa-bolt"}, {"id": "coral", "title": "Coral", "text": "Warm modern accent", "icon": "fa-solid fa-heart"}, {"id": "steel", "title": "Steel", "text": "Hard clean edges", "icon": "fa-solid fa-shield"}, {"id": "ink", "title": "Ink", "text": "Very dark minimal", "icon": "fa-solid fa-pen"}, {"id": "cobalt", "title": "Cobalt", "text": "Strong blue accent", "icon": "fa-solid fa-bolt"}, {"id": "orchid", "title": "Orchid", "text": "Purple clean UI", "icon": "fa-solid fa-flower"}, {"id": "sand", "title": "Sand", "text": "Warm neutral UI", "icon": "fa-solid fa-sun"}, {"id": "forest", "title": "Forest", "text": "Deep green UI", "icon": "fa-solid fa-tree"}, {"id": "nightshift", "title": "Night Shift", "text": "Low-light tool UI", "icon": "fa-solid fa-moon"}, {"id": "paper", "title": "Paper", "text": "Flat bright workspace", "icon": "fa-solid fa-note-sticky"}];
+UI_STYLES.push(...V12_UI_STYLES);
 const LANGUAGES = [
   ["en","English","English"],["fil","Filipino","Filipino"],["es","Español","Spanish"],["pt","Português","Portuguese"],
   ["id","Bahasa Indonesia","Indonesian"],["ms","Bahasa Melayu","Malay"],["vi","Tiếng Việt","Vietnamese"],["th","ไทย","Thai"],
@@ -2439,15 +3530,10 @@ function applyTranslations() {
   document.documentElement.lang = state.language;
 }
 
-function applyUIStyle(styleId) {
-  const style = UI_STYLES.some(x => x.id === styleId) ? styleId : "prism";
-  state.uiStyle = style;
-  localStorage.setItem("ron_ui_style", style);
-  document.documentElement.dataset.uiStyle = style;
-  document.body.classList.remove(...UI_STYLES.map(x => `ui-${x.id}`));
-  document.body.classList.add(`ui-${style}`);
-  $$(".ui-style-card").forEach(card => card.classList.toggle("active", card.dataset.style === style));
-}
+const UI_STYLE_VARS={ronconsole:{bg:"#0d1117",panel:"#151b23",panel2:"#1b2330",line:"#2b3644",accent:"#72a7ff",accent2:"#a7c7ff",text:"#eef4fb",muted:"#8e9aaa"},slate:{bg:"#11151a",panel:"#1b222b",panel2:"#222b35",line:"#36414d",accent:"#9db2c8",accent2:"#d3dde7",text:"#f3f6f8",muted:"#9da8b4"},signal:{bg:"#0d1114",panel:"#13191e",panel2:"#192229",line:"#26353f",accent:"#46d98a",accent2:"#8ef0b9",text:"#eef9f3",muted:"#8ba19a"},studio:{bg:"#101216",panel:"#181b22",panel2:"#20242c",line:"#303642",accent:"#ff7a66",accent2:"#ffb3a7",text:"#f7f4f2",muted:"#a39d99"},terminal:{bg:"#07110b",panel:"#0d180f",panel2:"#112115",line:"#1d3a22",accent:"#62ef86",accent2:"#b0ffbf",text:"#e8ffe9",muted:"#7ca485"},carbon:{bg:"#0c0d0f",panel:"#17191c",panel2:"#1f2226",line:"#34383e",accent:"#d7dde4",accent2:"#ffffff",text:"#f4f6f8",muted:"#9099a3"},copper:{bg:"#120f0d",panel:"#1d1714",panel2:"#271e19",line:"#4a352a",accent:"#e39a5c",accent2:"#f3c49d",text:"#fff6ee",muted:"#a99485"},royalnight:{bg:"#0b0e16",panel:"#141a29",panel2:"#1b2336",line:"#303b57",accent:"#7d9cff",accent2:"#c2d0ff",text:"#eef2ff",muted:"#8f9bb6"},moss:{bg:"#0d120e",panel:"#151d16",panel2:"#1d281f",line:"#324336",accent:"#79b783",accent2:"#b4e6b8",text:"#eff8f0",muted:"#91a493"},ink:{bg:"#08090b",panel:"#111316",panel2:"#17191c",line:"#24282d",accent:"#e6eaf0",accent2:"#ffffff",text:"#f5f7fa",muted:"#858c95"}};
+function applyUIStyle(styleId){const style=UI_STYLES.some(x=>x.id===styleId)?styleId:"ronconsole";state.uiStyle=style;localStorage.setItem("ron_ui_style",style);document.documentElement.dataset.uiStyle=style;document.body.classList.remove(...UI_STYLES.map(x=>`ui-${x.id}`));document.body.classList.add(`ui-${style}`);let v=UI_STYLE_VARS[style];if(!v){const i=Math.max(0,UI_STYLES.findIndex(x=>x.id===style));const hue=(i*47)%360;v={bg:`hsl(${hue} 20% 7%)`,panel:`hsl(${hue} 18% 11%)`,panel2:`hsl(${hue} 20% 15%)`,line:`hsl(${hue} 18% 24%)`,accent:`hsl(${hue} 85% 68%)`,accent2:`hsl(${(hue+25)%360} 85% 78%)`,text:"#f2f5f8",muted:"#95a0ad"};}Object.entries(v).forEach(([k,val])=>document.documentElement.style.setProperty(`--ron-${k}`,val));$$('.ui-style-card').forEach(card=>card.classList.toggle('active',card.dataset.style===style));}
+
+function updateReleaseMeta(){$("#quick-build")?.replaceChildren(document.createTextNode(APP_META.version));$("#release-update-count")?.replaceChildren(document.createTextNode(MICRO_UPDATE_COUNT.toLocaleString()));}
 
 function renderUIStyles() {
   const grid = $("#ui-style-grid");
@@ -2644,17 +3730,15 @@ if (debugNavBtn) debugNavBtn.addEventListener("click", () => { state.debug = tru
 // =========================================================
 // RANDOM REAL-TIME QUEST GATE (no CAPTCHA)
 // =========================================================
-const GATE_STORAGE_KEY = "ron_gate_complete_v10_1";
+const GATE_STORAGE_KEY = "ron_gate_complete_v12";
 const QUEST_MIN_SECONDS = 30;
-const QUEST_COUNT = 3;
+const QUEST_COUNT = 2;
+const QUEST_MISTAKE_LIMIT = 3;
+const QUEST_LOCKOUT_SECONDS = 60;
 
 const QUEST_POOL = [
-  { id: "yt_sub", platform: "YouTube", title: "Subscribe @NCRONNMLBB", subtitle: "Open the channel", icon: "fa-brands fa-youtube", url: "https://www.youtube.com/@NCRONNMLBB" },
-  { id: "tt_follow", platform: "TikTok", title: "Follow @ranzee.ron", subtitle: "Open the profile", icon: "fa-brands fa-tiktok", url: "https://www.tiktok.com/@ranzee.ron" },
-  { id: "yt_videos", platform: "YouTube", title: "Open @NCRONNMLBB videos", subtitle: "Open the video page", icon: "fa-solid fa-play", url: "https://www.youtube.com/@NCRONNMLBB/videos" },
-  { id: "tt_profile", platform: "TikTok", title: "Open @ranzee.ron", subtitle: "Open the creator page", icon: "fa-solid fa-user", url: "https://www.tiktok.com/@ranzee.ron" },
-  { id: "yt_channel", platform: "YouTube", title: "Visit the creator channel", subtitle: "Open the creator home", icon: "fa-solid fa-tv", url: "https://www.youtube.com/@NCRONNMLBB" },
-  { id: "tt_posts", platform: "TikTok", title: "Open creator posts", subtitle: "Open recent posts", icon: "fa-solid fa-video", url: "https://www.tiktok.com/@ranzee.ron" }
+  { id: "yt_sub", platform: "YouTube", title: "Subscribe on YouTube", subtitle: "@NCRONNMLBB", icon: "fa-brands fa-youtube", url: "https://www.youtube.com/@NCRONNMLBB" },
+  { id: "tt_follow", platform: "TikTok", title: "Follow on TikTok", subtitle: "@ranzee.ron", icon: "fa-brands fa-tiktok", url: "https://www.tiktok.com/@ranzee.ron" }
 ];
 
 const questState = {

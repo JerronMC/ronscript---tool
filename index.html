@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0c0e12" />
   <meta name="description" content="RON SCRIPTS — premium skin script and hero hub." />
-  <title>RON SCRIPTS — v11.0</title>
+  <title>RON SCRIPTS — v12.1.0</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -18,25 +18,25 @@
       <header class="gate-top">
         <div class="gate-brand-clean">
           <span class="brand-mark-clean"><i class="fa-solid fa-bolt"></i></span>
-          <div><strong>RON SCRIPTS</strong><small>ACCESS CHECK • V11.0</small></div>
+          <div><strong>RON SCRIPTS</strong><small>ACCESS CHECK • V12.1</small></div>
         </div>
-        <span class="gate-build">BUILD 11.0.0</span>
+        <span class="gate-build">BUILD 12.1.0</span>
       </header>
 
       <section class="gate-intro-clean">
         <span class="gate-kicker-clean">STEP 1</span>
         <h1>Before you enter</h1>
-        <p>Open each task. Come back here when you are done.</p>
+        <p>Open both tasks. Come back when you are done.</p>
       </section>
 
       <section class="quest-board quest-board-clean">
         <div class="quest-board-head-clean">
-          <div><span class="gate-kicker-clean">YOUR TASKS</span><h2>3 quick tasks</h2></div>
-          <div class="quest-progress-pill-clean"><b id="quest-progress-text">0 / 3</b><span>done</span></div>
+          <div><span class="gate-kicker-clean">YOUR TASKS</span><h2>2 quick tasks</h2></div>
+          <div class="quest-progress-pill-clean"><b id="quest-progress-text">0 / 2</b><span>done</span></div><div class="quest-mistake-pill"><b id="quest-mistake-text">0 / 3</b><span>mistakes</span></div>
         </div>
         <div id="quest-list" class="quest-list quest-list-v33"></div>
         <div class="quest-progress quest-progress-v33"><span id="quest-progress-fill"></span></div>
-        <div class="quest-foot-row quest-foot-clean"><span id="quest-intro">Complete all 3 tasks.</span><span id="quest-timer-text">Ready</span></div>
+        <div class="quest-foot-row quest-foot-clean"><span id="quest-intro">Open a task, then come back.</span><span id="quest-timer-text">Ready</span></div>
       </section>
 
       <div class="gate-note-clean"><i class="fa-solid fa-lock"></i><span>Tap the arrow to open a task. Come back when you finish it.</span></div>
@@ -69,7 +69,9 @@
     <span>•</span><span id="live-clock">--:--</span>
   </div>
 
-  <main id="top" class="app-shell">
+  <section class="command-deck glass" aria-label="Quick actions"><div class="command-deck-head"><div><span class="eyebrow">RON CONSOLE</span><h2>Quick actions</h2></div><span class="command-version">v12.1.0</span></div><div class="command-grid"><button class="command-card" id="command-explore"><i class="fa-solid fa-layer-group"></i><span><b>Skin Vault</b><small>Browse scripts</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-heroes"><i class="fa-solid fa-mask-face"></i><span><b>Hero Vault</b><small>Browse heroes</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-vip"><i class="fa-solid fa-crown"></i><span><b>VIP Center</b><small>Check access</small></span><i class="fa-solid fa-arrow-right"></i></button><button class="command-card" id="command-settings"><i class="fa-solid fa-sliders"></i><span><b>Settings</b><small>Change the site</small></span><i class="fa-solid fa-arrow-right"></i></button></div></section>
+
+<main id="top" class="app-shell">
     <section class="hero-panel glass">
       <div class="hero-copy">
         <div class="eyebrow"><span class="pulse"></span> RON ONLINE • SKINS • HEROES • SCRIPTS</div>
@@ -101,7 +103,7 @@
     </section>
 
     <section class="desktop-quickbar glass" aria-label="Quick overview">
-      <div class="quick-stat"><span>BUILD</span><strong id="quick-build">10.0.0</strong></div>
+      <div class="quick-stat"><span>BUILD</span><strong id="quick-build">12.1.0</strong></div>
       <div class="quick-stat"><span>STATUS</span><strong class="status-live"><i class="fa-solid fa-circle"></i> ONLINE</strong></div>
       <div class="quick-stat"><span>MODE</span><strong>FAST UI</strong></div>
       <div class="quick-stat"><span>ACCESS</span><strong>VIP READY</strong></div>
@@ -195,7 +197,7 @@
       </div>
     </section>
 
-    <section id="tab-updates" class="tab-panel">
+    <section id="tab-updates" class="tab-panel"><div class="release-milestone glass"><span class="release-milestone-icon"><i class="fa-solid fa-bolt"></i></span><div><b><span id="release-update-count">100</span> real hosted links</b><p>100 hosted download links are included without bloating the page with a million fake update rows.</p></div></div>
       <div id="updates-grid" class="updates-grid">
         <article class="update-card glass featured"><span class="update-tag">ULTIMATE</span><h3>10× smarter library engine</h3><p>Client-side search, filters, favorites, hero grouping, sorting, realtime metrics.</p></article>
         <article class="update-card glass"><span class="update-tag">NEW</span><h3>Hero Vault</h3><p>Hero-focused discovery lets you jump from a hero to all matching skin scripts in one tap.</p></article>
@@ -211,12 +213,12 @@
     <section id="tab-debug" class="tab-panel">
       <div class="debug-hero glass">
         <div><span class="eyebrow">TESTER MODE</span><h2>Build diagnostics without guesswork.</h2><p>Turn on Tester Mode while testing a new upload. The panel shows the exact build, library size, VIP member ID, render timestamp, and latest JavaScript error. Use the × button to close it at any time.</p></div>
-        <div class="debug-build"><strong>BUILD</strong><span>10.0.0 • BIG UPDATE • VIP • PREMIUM • TESTER</span></div>
+        <div class="debug-build"><strong>BUILD</strong><span id="debug-build-version">12.1.0</span><small>100 REAL LINKS • VIP • PREMIUM • TESTER</small></div>
       </div>
       <div id="debug-report-card" class="glass debug-report-card"><div class="debug-report-title"><i class="fa-solid fa-terminal"></i><strong>Runtime report</strong></div><div id="debug-report-lines" class="debug-report-lines"><span>Enable Tester mode to see diagnostics.</span></div></div>
     </section>
 
-  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile-first • Prism UI • v10.0.0</span></footer>
+  <footer class="site-footer"><span>© <span id="year"></span> RON SCRIPTS</span><span>Built for creators • Mobile + desktop • RON Console • v12.1.0</span></footer>
 
   <div id="toast-root" class="toast-root" aria-live="polite"></div>
 
@@ -334,37 +336,28 @@
     </article>
   </template>
 
-  <script type="module" src="script.js?v=20260825-1100"></script>
+  <script type="module" src="script.js?v=20260825-1200"></script>
 </body>
 </html>
 <script>
 (function(){
-  const KEY='ron_gate_complete_v11_0', TASK_KEY='ron_gate_tasks_v11_0', DONE_KEY='ron_gate_done_v11_0', TIMER_KEY='ron_gate_timer_v11_0';
-  const tasks=[
-    {id:'youtube',title:'Subscribe on YouTube',subtitle:'@NCRONNMLBB',icon:'fa-brands fa-youtube',url:'https://www.youtube.com/@NCRONNMLBB'},
-    {id:'tiktok',title:'Follow on TikTok',subtitle:'@ranzee.ron',icon:'fa-brands fa-tiktok',url:'https://www.tiktok.com/@ranzee.ron'},
-    {id:'punishment',title:'Punishment',subtitle:'Open the latest creator videos',icon:'fa-solid fa-play',url:'https://www.youtube.com/@NCRONNMLBB/videos'}
-  ];
-  const $=(s,p=document)=>p.querySelector(s);
-  const safeGet=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}};
-  const safeSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
-  let order=safeGet(TASK_KEY,null); if(!Array.isArray(order)||order.length!==3){order=tasks.map(t=>t.id).sort(()=>Math.random()-.5);safeSet(TASK_KEY,order)}
-  let done=new Set(safeGet(DONE_KEY,[])); let current=null; let timer=null;
-  const taskOf=id=>tasks.find(t=>t.id===id);
-  function render(){
-    const list=$('#quest-list'); if(!list)return;
-    list.innerHTML=order.map(id=>{const t=taskOf(id), ok=done.has(id); return `<article class="quest-item human-quest ${ok?'complete':''}" data-quest-id="${id}"><div class="quest-item-icon"><i class="${t.icon}"></i></div><div class="quest-item-main"><strong>${t.title}</strong><span>${t.subtitle}</span><small class="quest-item-state">${ok?'Done':'Open task'}</small></div><button class="quest-open quest-open-v33 ${ok?'complete':''}" type="button" ${ok?'disabled':''}>${ok?'<i class="fa-solid fa-check"></i>':'<i class="fa-solid fa-arrow-right"></i>'}</button></article>`}).join('');
-    list.querySelectorAll('.quest-open:not(.complete)').forEach((b,i)=>b.addEventListener('click',()=>openTask(order[i])));
-    const pct=Math.round(done.size/3*100); if($('#quest-progress-fill'))$('#quest-progress-fill').style.width=pct+'%'; if($('#quest-progress-text'))$('#quest-progress-text').textContent=`${done.size} / 3`; if($('#quest-intro'))$('#quest-intro').textContent=done.size===3?'All tasks are done.':'Complete all 3 tasks.'; if($('#gate-next-1'))$('#gate-next-1').disabled=done.size!==3;
-  }
-  function paintTimer(id,left){const item=$(`[data-quest-id="${id}"]`);if(!item)return;item.classList.add('checking');const st=item.querySelector('.quest-item-state'),b=item.querySelector('.quest-open');if(st)st.textContent=`Checking • ${left}s`;if(b){b.disabled=true;b.className='quest-open quest-open-v33 timer';b.innerHTML=`<span class="quest-countdown">${left}</span>`}if($('#quest-timer-text'))$('#quest-timer-text').textContent=`Checking ${left}s`}
-  function finish(id){clearInterval(timer);timer=null;done.add(id);safeSet(DONE_KEY,[...done]);render();if($('#quest-timer-text'))$('#quest-timer-text').textContent='Done';}
-  function startTimer(id){clearInterval(timer);let left=30;paintTimer(id,left);timer=setInterval(()=>{left--;if(left<=0)finish(id);else paintTimer(id,left)},1000)}
-  function openTask(id){if(done.has(id))return;current=id;safeSet(TIMER_KEY,{id,started:Date.now()});const item=$(`[data-quest-id="${id}"]`);if(item){item.classList.add('checking');const st=item.querySelector('.quest-item-state'),b=item.querySelector('.quest-open');if(st)st.textContent='Return here when done';if(b)b.innerHTML='<i class="fa-solid fa-clock"></i>'}try{window.open(taskOf(id).url,'_blank','noopener,noreferrer')}catch{}}
-  function onReturn(){if(!current||done.has(current))return;const info=safeGet(TIMER_KEY,null);if(!info||info.id!==current)return;current=null;startTimer(info.id)}
-  function unlock(){if(done.size!==3)return;safeSet(KEY,1);document.body.classList.remove('gate-locked');document.body.classList.add('gate-open');$('#access-gate')?.remove();window.__RON_GATE_V11_BOOTED=true;window.dispatchEvent(new Event('ron:gatecomplete'))}
-  function boot(){if(localStorage.getItem(KEY)==='1'){document.body.classList.remove('gate-locked');document.body.classList.add('gate-open');$('#access-gate')?.remove();window.__RON_GATE_V11_BOOTED=true;return}render();window.addEventListener('focus',onReturn);document.addEventListener('visibilitychange',()=>{if(!document.hidden)onReturn()});$('#gate-next-1')?.addEventListener('click',unlock)}
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+const KEY='ron_gate_complete_v12_0',TASK_KEY='ron_gate_tasks_v12_0',DONE_KEY='ron_gate_done_v12_0',TIMER_KEY='ron_gate_timer_v12_0',MISTAKE_KEY='ron_gate_mistakes_v12_0',LOCK_KEY='ron_gate_lock_v12_0';
+const TASKS=[{id:'youtube',title:'Subscribe on YouTube',subtitle:'@NCRONNMLBB',icon:'fa-brands fa-youtube',url:'https://www.youtube.com/@NCRONNMLBB'},{id:'tiktok',title:'Follow on TikTok',subtitle:'@ranzee.ron',icon:'fa-brands fa-tiktok',url:'https://www.tiktok.com/@ranzee.ron'}];
+const $=(s,p=document)=>p.querySelector(s),get=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}},set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+const shuffle=a=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x};
+let order=get(TASK_KEY,null);if(!Array.isArray(order)||order.length!==2){order=shuffle(TASKS.map(t=>t.id));set(TASK_KEY,order)}
+let done=new Set(get(DONE_KEY,[])),mistakes=Number(get(MISTAKE_KEY,0))||0,current=null,timer=null;const LIMIT=3,LOCK=60;
+const locked=()=>Date.now()<(Number(get(LOCK_KEY,0))||0),taskOf=id=>TASKS.find(t=>t.id===id);
+function render(){const list=$('#quest-list');if(!list)return;const lock=locked();list.innerHTML=order.map(id=>{const t=taskOf(id),ok=done.has(id),active=current===id&&!ok;return `<article class="quest-item quest-v12 ${ok?'complete':''} ${active?'checking':''}" data-quest-id="${id}"><div class="quest-item-icon"><i class="${t.icon}"></i></div><div class="quest-item-main"><strong>${t.title}</strong><span>${t.subtitle}</span><small class="quest-item-state">${ok?'Done':active?'Return when finished':'Open task'}</small></div><button class="quest-open quest-open-v33 ${ok?'complete':''} ${lock?'locked':''}" type="button" ${ok||lock?'disabled':''}>${ok?'<i class="fa-solid fa-check"></i>':lock?'<i class="fa-solid fa-lock"></i>':'<i class="fa-solid fa-arrow-right"></i>'}</button></article>`}).join('');list.querySelectorAll('.quest-open:not(.complete):not(.locked)').forEach((b,i)=>b.addEventListener('click',()=>openTask(order[i])));if($('#quest-progress-fill'))$('#quest-progress-fill').style.width=`${Math.round(done.size/2*100)}%`;if($('#quest-progress-text'))$('#quest-progress-text').textContent=`${done.size} / 2`;if($('#quest-mistake-text'))$('#quest-mistake-text').textContent=`${mistakes} / ${LIMIT}`;if($('#quest-intro'))$('#quest-intro').textContent=lock?'Too many mistakes. Wait before trying again.':done.size===2?'All tasks are done. You can enter.':'Open a task, then come back.';if($('#quest-timer-text'))$('#quest-timer-text').textContent=lock?'Locked':'Ready';if($('#gate-next-1'))$('#gate-next-1').disabled=done.size!==2||lock}
+function punish(){done.clear();set(DONE_KEY,[]);set(MISTAKE_KEY,0);set(LOCK_KEY,Date.now()+LOCK*1000);mistakes=0;current=null;if(timer)clearInterval(timer);timer=null;render()}
+function mistake(){mistakes++;set(MISTAKE_KEY,mistakes);if(mistakes>=LIMIT)punish();else render()}
+function finish(id){if(timer)clearInterval(timer);timer=null;done.add(id);set(DONE_KEY,[...done]);current=null;render();if($('#quest-timer-text'))$('#quest-timer-text').textContent='Done'}
+function startTimer(id,left){if(timer)clearInterval(timer);let n=Math.max(0,left);const tick=()=>{const item=$(`[data-quest-id="${id}"]`);if(item){item.classList.add('checking');const st=item.querySelector('.quest-item-state'),b=item.querySelector('.quest-open');if(st)st.textContent=`Checking • ${n}s`;if(b){b.disabled=true;b.className='quest-open quest-open-v33 timer';b.innerHTML=`<span class="quest-countdown">${n}</span>`}}if($('#quest-timer-text'))$('#quest-timer-text').textContent=n?`Checking ${n}s`:'Done';if(n<=0){finish(id);return}n--};tick();timer=setInterval(tick,1000)}
+function openTask(id){if(locked()||done.has(id))return;if(current&&current!==id){mistake();return}current=id;set(TIMER_KEY,{id,started:Date.now()});const item=$(`[data-quest-id="${id}"]`);if(item){item.classList.add('checking');const st=item.querySelector('.quest-item-state'),b=item.querySelector('.quest-open');if(st)st.textContent='Return when finished';if(b){b.disabled=true;b.innerHTML='<i class="fa-solid fa-clock"></i>'}}try{window.open(taskOf(id).url,'_blank','noopener,noreferrer')}catch{}}
+function onReturn(){if(!current||done.has(current)||locked())return;const info=get(TIMER_KEY,null);if(!info||info.id!==current)return;const elapsed=Math.floor((Date.now()-Number(info.started||Date.now()))/1000);startTimer(info.id,Math.max(0,30-elapsed))}
+function unlock(){if(done.size!==2||locked())return;set(KEY,1);document.body.classList.remove('gate-locked');document.body.classList.add('gate-open');$('#access-gate')?.remove();window.__RON_GATE_V11_BOOTED=true;window.dispatchEvent(new Event('ron:gatecomplete'))}
+function boot(){if(localStorage.getItem(KEY)==='1'){document.body.classList.remove('gate-locked');document.body.classList.add('gate-open');$('#access-gate')?.remove();window.__RON_GATE_V11_BOOTED=true;return}render();window.addEventListener('focus',onReturn);document.addEventListener('visibilitychange',()=>{if(!document.hidden)onReturn()});$('#gate-next-1')?.addEventListener('click',unlock)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
 </script>
 

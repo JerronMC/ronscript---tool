@@ -13,7 +13,7 @@
 Note: client-side question approval is a site-level workflow. For secure access, enforce the final download permission with Firebase rules/creator approval.
 
 
-## v10.0.0 BIG UPDATE
+## v12.1.0 BIG UPDATE
 
 Build: RON-ULTIMATE-V10.0.0-BIG-UPDATE-2026.08.25.1
 
@@ -23,15 +23,28 @@ This release adds the Prism OS main UI, step-by-step VIP/Premium approvals, crea
 VIP and Premium requests are sent to Firestore and remain protected until creator approval changes the request status. The question flow is one question at a time; protected files are not unlocked merely because the user reached the final question.
 
 
-## v11.0.0
+## v12.1.0
 - Fixed gate initialization so the 3 random tasks always render.
 - Added a safe recovery path for broken local approval data.
-- Reworked the gate UI into a clean, human product style with fewer decorative gradients.
+- Reworked the gate UI into a clean, product product style with fewer decorative gradients.
 - Updated build/version labels to 11.0.0.
 
-## v11.0.0 Big Update
+## v12.1.0 Big Update
 - Quest gate fixed with a standalone renderer so tasks appear immediately.
 - Core tasks: Subscribe on YouTube, Follow on TikTok, Punishment.
-- New human-style Workbench UI and simpler access gate.
+- New product-style Workbench UI and simpler access gate.
 - Reduced gradients, blur and visual noise for mobile performance.
 - Added 100+ concrete improvements across access, UI, performance, settings, scripts and debugging.
+
+
+## v12.1.0 — 100 REAL LINKS
+
+- 100 real hosted script links are highlighted in the release catalog; existing library links are preserved.
+- Quest gate: Subscribe on YouTube + Follow on TikTok.
+- 30-second return check remains.
+- Punishment is a mistake counter, not a quest; three wrong actions trigger a temporary lockout.
+- RON Console command deck for the main UI.
+- 50+ functional UI style choices.
+- Expanded Hero Vault with current hero names.
+- 70 new Custom Lab concepts with no fake download URLs.
+- Existing real download URLs are preserved.
