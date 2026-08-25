@@ -66,8 +66,8 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "12.2.3",
-  build: "RON-ULTIMATE-V12.2.3-100-REAL-LINKS-2026.08.25.3",
+  version: "12.2.4",
+  build: "RON-ULTIMATE-V12.2.4-SERIOUS-FIX-2026.08.25.4",
   channel: "ULTIMATE",
   release: "100 MICRO-UPDATES • VIP • PREMIUM • NEW UI",
   updated: "2026-08-25"
@@ -2441,7 +2441,7 @@ const state = {
   isCreator: false,
   vipId: localStorage.getItem("ron_vip_id") || "",
   vipActive: localStorage.getItem("ron_vip_active") === "1",
-  debug: new URLSearchParams(location.search).get("debug") === "1" || localStorage.getItem("ron_debug") === "1",
+  debug: new URLSearchParams(location.search).get("debug") === "1",
   lastRender: "never",
   lastError: "none",
   approvals: (() => { try { return JSON.parse(localStorage.getItem("ron_approvals") || "{}"); } catch { localStorage.removeItem("ron_approvals"); return {}; } })()
@@ -2847,6 +2847,19 @@ if (removeVipBtn) removeVipBtn.addEventListener("click", () => creatorSetVip(fal
 
 const debugClose = $("#debug-close");
 if (debugClose) debugClose.addEventListener("click", closeDebugPanel);
+
+function forceCloseDebug() {
+  closeDebugPanel();
+  const panel = document.getElementById("debug-panel");
+  if (panel) {
+    panel.hidden = true;
+    panel.style.display = "none";
+  }
+}
+document.addEventListener("click", e => {
+  const btn = e.target.closest("#debug-close, .debug-close");
+  if (btn) { e.preventDefault(); e.stopImmediatePropagation(); forceCloseDebug(); }
+}, true);
 const debugToggle = $("#debug-toggle");
   if (debugToggle) debugToggle.textContent = state.debug ? "On" : "Off";
 
@@ -2978,6 +2991,14 @@ function setupAccessButton(button, s) {
 
 function getApprovalKey(s){ return `${getVipId()}::${s.id}`; }
 function getApprovalStatus(s){ return state.approvals?.[getApprovalKey(s)] || "none"; }
+
+// Never show an old local approval result as if it were a fresh approval.
+const APPROVAL_SCHEMA = "2";
+if (localStorage.getItem("ron_approval_schema") !== APPROVAL_SCHEMA) {
+  state.approvals = {};
+  localStorage.setItem("ron_approvals", "{}");
+  localStorage.setItem("ron_approval_schema", APPROVAL_SCHEMA);
+}
 function setApprovalStatus(s,status){ state.approvals[getApprovalKey(s)]=status; localStorage.setItem("ron_approvals",JSON.stringify(state.approvals)); }
 
 function approvalQuestionsFor(s){
@@ -3750,6 +3771,19 @@ if (removeVipBtn) removeVipBtn.addEventListener("click", () => creatorSetVip(fal
 
 const debugClose = $("#debug-close");
 if (debugClose) debugClose.addEventListener("click", closeDebugPanel);
+
+function forceCloseDebug() {
+  closeDebugPanel();
+  const panel = document.getElementById("debug-panel");
+  if (panel) {
+    panel.hidden = true;
+    panel.style.display = "none";
+  }
+}
+document.addEventListener("click", e => {
+  const btn = e.target.closest("#debug-close, .debug-close");
+  if (btn) { e.preventDefault(); e.stopImmediatePropagation(); forceCloseDebug(); }
+}, true);
 const debugToggle = $("#debug-toggle");
 if (debugToggle) debugToggle.addEventListener("click", () => { state.debug = !state.debug; localStorage.setItem("ron_debug", state.debug ? "1" : "0"); debugToggle.textContent = state.debug ? "On" : "Off"; updateDebugPanel("toggle"); });
 const debugNavBtn = $(`[data-tab="debug"]`);
@@ -4031,17 +4065,17 @@ if (document.readyState === "loading") {
 // Direct-entry build: main UI loads immediately. Firebase is optional and lazy.
 // Load Firebase after the UI is already visible. The site works in local mode
 // even when the Firebase CDN is unavailable.
-bootFirebase().then(ok => {
+bootFirebase().then(async ok => {
   if (!ok) {
     toast("Offline mode: library loaded without cloud sync.");
     return;
   }
 
-  wireCreatorAuth();
   if (auth && getRedirectResult) {
     try { await getRedirectResult(auth); } catch (e) { console.warn("Google redirect result failed", e); }
   }
-  refreshVipStatus();
+  wireCreatorAuth();
+  await refreshVipStatus();
   wireRealtime();
 });
 

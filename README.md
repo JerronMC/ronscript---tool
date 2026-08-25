@@ -54,9 +54,18 @@ VIP and Premium requests are sent to Firestore and remain protected until creato
 Direct-entry build: the quest gate has been removed. The site opens directly to the main library; script links open their real hosted pages/files.
 
 
-## v12.2.3 fixes
+## v12.2.4 fixes
 - Debug panel close button now truly hides the panel.
 - Approval result sections respect the hidden attribute.
 - Google creator login uses redirect on mobile and popup/fallback on desktop.
 - Creator/Auth status refreshes VIP state automatically.
 - Settings modal and buttons improved for mobile/desktop.
+
+
+## v12.2.4 serious fixes
+- Fixed fatal JavaScript startup syntax error in Firebase boot.
+- Fixed direct library startup so cards can render before cloud sync.
+- Fixed debug close behavior and persisted debug-off state.
+- Added safe approval-state versioning so old local approval results do not appear as new approvals.
+- Improved Google redirect result handling.
+- Updated cache-busting version to 12.2.4.
