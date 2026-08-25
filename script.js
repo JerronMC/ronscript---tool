@@ -62,8 +62,8 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "10.1.0",
-  build: "RON-ULTIMATE-V10.1.0-HUMAN-UI-2026.08.25.1",
+  version: "11.0.0",
+  build: "RON-ULTIMATE-V11.0.0-HUMAN-UI-2026.08.25.1",
   channel: "ULTIMATE",
   release: "100 FEATURES • VIP APPROVAL • PREMIUM APPROVAL • PRISM UI",
   updated: "2026-08-25"
@@ -1354,7 +1354,7 @@ const state = {
   favoritesOnly: false,
   view: localStorage.getItem("ron_view") || "grid",
   theme: localStorage.getItem("ron_theme") || "neon",
-  uiStyle: localStorage.getItem("ron_ui_style") || "prism",
+  uiStyle: localStorage.getItem("ron_ui_style") || "workbench",
   language: localStorage.getItem("ron_language") || "en",
   reduceMotion: localStorage.getItem("ron_motion") === "off",
   compact: localStorage.getItem("ron_compact") === "on",
@@ -2363,9 +2363,10 @@ $("#shuffle-btn").addEventListener(
 // =========================================================
 const UPDATE_FEATURES_V10 = ["Prism OS main dashboard", "Animated command bar", "Animated nav icons", "Micro-interaction buttons", "Card hover depth", "Mobile bottom actions", "Desktop keyboard focus", "Instant filter chips", "Faster search debounce", "Lazy card paint", "Virtualized-style contain hints", "Better empty state", "Script tier badges", "VIP approval workflow", "Premium approval workflow", "One-question approval flow", "Approval progress bar", "Approval back button", "Approval proof screen", "Real-time approval status", "VIP request watcher", "Premium request watcher", "Creator approval sync", "Creator sign-in status", "Creator role guard", "VIP member lookup", "Member ID persistence", "Member ID copy flow", "VIP status refresh", "Protected download refresh", "Download action animation", "Access lock animation", "Debug close control", "Debug query cleanup", "Debug event feed", "Build version sync", "Release label sync", "Theme persistence", "Prism style persistence", "Style picker searchless visual grid", "26+ UI styles", "Aurora style", "Cyber style", "Midnight style", "Arcade style", "Nebula style", "Ocean style", "Ember style", "Matrix style", "Violet style", "Crimson style", "Mint style", "Solar style", "Frost style", "Royal style", "Graphite style", "Plasma style", "Hologram style", "Tokyo style", "Ghost style", "Toxic style", "Sandstorm style", "Deep Sea style", "Sakura style", "Monochrome style", "Prism style", "Language search", "Custom language cards", "Language selection animation", "Language persistence", "Fullscreen toggle", "Fullscreen status", "Motion toggle", "Compact cards", "Favorite persistence", "Favorite filtering", "Hero grouping", "Hero vault expansion", "Custom lab expansion", "Custom safe-slot labels", "Default-skin safety metadata", "Premium badge polish", "VIP badge polish", "Crossover badge polish", "Script count sync", "Hero count sync", "Category count sync", "Featured strip refresh", "Spotlight cards", "Tester build panel", "Runtime error capture", "Unhandled rejection capture", "Firebase lazy boot", "Firebase offline fallback", "Realtime script metrics", "Cloud write warnings", "Local preference safety", "Safer clear-local behavior", "Responsive settings modal", "Responsive language picker", "Responsive approval modal", "Mobile approval layout", "Desktop approval layout", "Animated quest buttons", "Quest progress bar", "Quest return tracking", "Simple English UI copy", "Reduced backdrop work", "Content visibility cards", "GPU-friendly transforms"];
 
-function renderUpdateFeatures(){ const grid=$("#updates-grid"); if(!grid)return; grid.innerHTML=UPDATE_FEATURES_V10.map((x,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">${String(i+1).padStart(3,"0")}</span><h3>${escapeHTML(x)}</h3><p>Included in RON SCRIPTS v10.1.0.</p></article>`).join(""); }
+function renderUpdateFeatures(){ const grid=$("#updates-grid"); if(!grid)return; grid.innerHTML=UPDATE_FEATURES_V10.map((x,i)=>`<article class="update-card glass feature-v10"><span class="update-tag">${String(i+1).padStart(3,"0")}</span><h3>${escapeHTML(x)}</h3><p>Included in RON SCRIPTS v11.0.0.</p></article>`).join(""); }
 
 const UI_STYLES = [
+  { id:"workbench",title:"Workbench",text:"Clean app-style layout",icon:"fa-solid fa-table-columns" },
   { id:"prism",title:"Prism OS",text:"New RON main interface",icon:"fa-solid fa-diamond" },
   { id:"hypernova",title:"Hypernova",text:"New RON main style",icon:"fa-solid fa-atom" },
   { id:"aurora",title:"Aurora Glass",text:"Soft glow + glass",icon:"fa-solid fa-wand-magic-sparkles" },
@@ -2822,6 +2823,8 @@ function setGateStep(step) {
   });
 }
 
+window.addEventListener("ron:gatecomplete", () => { try { bootMainUI(); } catch(e) { console.warn("Main UI boot failed", e); } });
+
 function bootMainUI() {
   fillFilters();
   hydrateControls();
@@ -2882,16 +2885,15 @@ function ensureGatePainted() {
 }
 
 function bootUI() {
-  if (gateComplete()) {
-    document.body.classList.remove("gate-locked");
-    document.body.classList.add("gate-open");
-    const gate = $("#access-gate");
-    if (gate) gate.remove();
-    bootMainUI();
-  } else {
-    bootGate();
-    setTimeout(ensureGatePainted, 100);
+  // v11 uses the standalone gate in index.html. Do not boot the old gate again.
+  if (window.__RON_GATE_V11_BOOTED) {
+    try { bootMainUI(); } catch (e) { console.warn("Main UI boot failed", e); }
+    return;
   }
+  if (document.querySelector("#access-gate")) {
+    return;
+  }
+  try { bootMainUI(); } catch (e) { console.warn("Main UI boot failed", e); }
 }
 
 if (document.readyState === "loading") {

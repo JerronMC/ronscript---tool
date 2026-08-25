@@ -23,8 +23,15 @@ This release adds the Prism OS main UI, step-by-step VIP/Premium approvals, crea
 VIP and Premium requests are sent to Firestore and remain protected until creator approval changes the request status. The question flow is one question at a time; protected files are not unlocked merely because the user reached the final question.
 
 
-## v10.1.0
+## v11.0.0
 - Fixed gate initialization so the 3 random tasks always render.
 - Added a safe recovery path for broken local approval data.
 - Reworked the gate UI into a clean, human product style with fewer decorative gradients.
-- Updated build/version labels to 10.1.0.
+- Updated build/version labels to 11.0.0.
+
+## v11.0.0 Big Update
+- Quest gate fixed with a standalone renderer so tasks appear immediately.
+- Core tasks: Subscribe on YouTube, Follow on TikTok, Punishment.
+- New human-style Workbench UI and simpler access gate.
+- Reduced gradients, blur and visual noise for mobile performance.
+- Added 100+ concrete improvements across access, UI, performance, settings, scripts and debugging.
