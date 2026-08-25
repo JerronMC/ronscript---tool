@@ -304,5 +304,15 @@
   </template>
 
   <script type="module" src="script.js?v=20260825-1211"></script>
+
+  <script>
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    if (typeof renderScripts === "function") {
+      renderScripts();
+    }
+  }, 500);
+});
+  </script>
 </body>
 </html>
