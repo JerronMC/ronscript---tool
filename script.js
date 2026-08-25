@@ -10,6 +10,7 @@ let arrayUnion = null;
 let getAuth = null;
 let GoogleAuthProvider = null;
 let signInWithPopup = null;
+let signInWithRedirect = null;
 let signOut = null;
 let onAuthStateChanged = null;
 let auth = null;
@@ -44,6 +45,7 @@ async function bootFirebase() {
     getAuth = authModule.getAuth;
     GoogleAuthProvider = authModule.GoogleAuthProvider;
     signInWithPopup = authModule.signInWithPopup;
+    signInWithRedirect = authModule.signInWithRedirect;
     signOut = authModule.signOut;
     onAuthStateChanged = authModule.onAuthStateChanged;
 
@@ -62,8 +64,8 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "12.1.0",
-  build: "RON-ULTIMATE-V12.1.0-100-REAL-LINKS-2026.08.25.1",
+  version: "12.2.2",
+  build: "RON-ULTIMATE-V12.2.2-100-REAL-LINKS-2026.08.25.2",
   channel: "ULTIMATE",
   release: "100 MICRO-UPDATES • VIP • PREMIUM • NEW UI",
   updated: "2026-08-25"
@@ -2614,14 +2616,45 @@ async function checkCreatorAccess() {
 }
 
 async function creatorSignIn() {
-  if (!auth || !signInWithPopup || !GoogleAuthProvider) {
-    return toast("Creator login is unavailable until Firebase Auth is enabled.");
+  if (!auth || !GoogleAuthProvider) {
+    return toast("Google login is not ready. Enable Google in Firebase Auth.");
   }
+  const provider = new GoogleAuthProvider();
   try {
-    await signInWithPopup(auth, new GoogleAuthProvider());
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+    if (isMobile && signInWithRedirect) {
+      await signInWithRedirect(auth, provider);
+      return;
+    }
+    if (signInWithPopup) {
+      await signInWithPopup(auth, provider);
+      return;
+    }
+    if (signInWithRedirect) {
+      await signInWithRedirect(auth, provider);
+      return;
+    }
+    toast("Google login is not available.");
   } catch (e) {
     console.warn("Creator sign-in failed", e);
-    toast("Creator login failed. Try again.");
+    if (signInWithRedirect) {
+      try {
+        await signInWithRedirect(auth, provider);
+        return;
+      } catch (redirectError) {
+        console.warn("Google redirect sign-in failed", redirectError);
+      }
+    }
+    const code = e?.code || "";
+    if (code.includes("popup-blocked")) {
+      toast("Google popup was blocked. Tap Creator login again.");
+    } else if (code.includes("unauthorized-domain")) {
+      toast("Add your GitHub Pages domain in Firebase Auth authorized domains.");
+    } else if (code.includes("operation-not-allowed")) {
+      toast("Enable Google sign-in in Firebase Authentication.");
+    } else {
+      toast("Google login failed. Check Firebase Auth settings.");
+    }
   }
 }
 
@@ -4008,6 +4041,7 @@ function wireCreatorAuth() {
     await checkCreatorAccess();
     await refreshVipStatus();
     updateCreatorUI();
+    try { updateDebugPanel("auth updated"); } catch {}
   });
 }
 

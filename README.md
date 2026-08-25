@@ -52,3 +52,11 @@ VIP and Premium requests are sent to Firestore and remain protected until creato
 
 ## v12.2.0
 Direct-entry build: the quest gate has been removed. The site opens directly to the main library; script links open their real hosted pages/files.
+
+
+## v12.2.2 fixes
+- Debug panel close button now truly hides the panel.
+- Approval result sections respect the hidden attribute.
+- Google creator login uses redirect on mobile and popup/fallback on desktop.
+- Creator/Auth status refreshes VIP state automatically.
+- Settings modal and buttons improved for mobile/desktop.
