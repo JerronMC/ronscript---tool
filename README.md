@@ -13,7 +13,7 @@
 Note: client-side question approval is a site-level workflow. For secure access, enforce the final download permission with Firebase rules/creator approval.
 
 
-## v12.1.0 BIG UPDATE
+## v12.1.1 BIG UPDATE
 
 Build: RON-ULTIMATE-V10.0.0-BIG-UPDATE-2026.08.25.1
 
@@ -23,13 +23,13 @@ This release adds the Prism OS main UI, step-by-step VIP/Premium approvals, crea
 VIP and Premium requests are sent to Firestore and remain protected until creator approval changes the request status. The question flow is one question at a time; protected files are not unlocked merely because the user reached the final question.
 
 
-## v12.1.0
+## v12.1.1
 - Fixed gate initialization so the 3 random tasks always render.
 - Added a safe recovery path for broken local approval data.
 - Reworked the gate UI into a clean, product product style with fewer decorative gradients.
 - Updated build/version labels to 11.0.0.
 
-## v12.1.0 Big Update
+## v12.1.1 Big Update
 - Quest gate fixed with a standalone renderer so tasks appear immediately.
 - Core tasks: Subscribe on YouTube, Follow on TikTok, Punishment.
 - New product-style Workbench UI and simpler access gate.
@@ -37,7 +37,7 @@ VIP and Premium requests are sent to Firestore and remain protected until creato
 - Added 100+ concrete improvements across access, UI, performance, settings, scripts and debugging.
 
 
-## v12.1.0 — 100 REAL LINKS
+## v12.1.1 — 100 REAL LINKS
 
 - 100 real hosted script links are highlighted in the release catalog; existing library links are preserved.
 - Quest gate: Subscribe on YouTube + Follow on TikTok.

@@ -18,9 +18,9 @@
       <header class="gate-top">
         <div class="gate-brand-clean">
           <span class="brand-mark-clean"><i class="fa-solid fa-bolt"></i></span>
-          <div><strong>RON SCRIPTS</strong><small>ACCESS CHECK • V12.1</small></div>
+          <div><strong>RON SCRIPTS</strong><small>ACCESS CHECK • V12.1.1</small></div>
         </div>
-        <span class="gate-build">BUILD 12.1.0</span>
+        <span class="gate-build">BUILD 12.1.1</span>
       </header>
 
       <section class="gate-intro-clean">
@@ -336,28 +336,6 @@
     </article>
   </template>
 
-  <script type="module" src="script.js?v=20260825-1200"></script>
+  <script type="module" src="script.js?v=20260825-1211"></script>
 </body>
 </html>
-<script>
-(function(){
-const KEY='ron_gate_complete_v12_0',TASK_KEY='ron_gate_tasks_v12_0',DONE_KEY='ron_gate_done_v12_0',TIMER_KEY='ron_gate_timer_v12_0',MISTAKE_KEY='ron_gate_mistakes_v12_0',LOCK_KEY='ron_gate_lock_v12_0';
-const TASKS=[{id:'youtube',title:'Subscribe on YouTube',subtitle:'@NCRONNMLBB',icon:'fa-brands fa-youtube',url:'https://www.youtube.com/@NCRONNMLBB'},{id:'tiktok',title:'Follow on TikTok',subtitle:'@ranzee.ron',icon:'fa-brands fa-tiktok',url:'https://www.tiktok.com/@ranzee.ron'}];
-const $=(s,p=document)=>p.querySelector(s),get=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}},set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
-const shuffle=a=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x};
-let order=get(TASK_KEY,null);if(!Array.isArray(order)||order.length!==2){order=shuffle(TASKS.map(t=>t.id));set(TASK_KEY,order)}
-let done=new Set(get(DONE_KEY,[])),mistakes=Number(get(MISTAKE_KEY,0))||0,current=null,timer=null;const LIMIT=3,LOCK=60;
-const locked=()=>Date.now()<(Number(get(LOCK_KEY,0))||0),taskOf=id=>TASKS.find(t=>t.id===id);
-function render(){const list=$('#quest-list');if(!list)return;const lock=locked();list.innerHTML=order.map(id=>{const t=taskOf(id),ok=done.has(id),active=current===id&&!ok;return `<article class="quest-item quest-v12 ${ok?'complete':''} ${active?'checking':''}" data-quest-id="${id}"><div class="quest-item-icon"><i class="${t.icon}"></i></div><div class="quest-item-main"><strong>${t.title}</strong><span>${t.subtitle}</span><small class="quest-item-state">${ok?'Done':active?'Return when finished':'Open task'}</small></div><button class="quest-open quest-open-v33 ${ok?'complete':''} ${lock?'locked':''}" type="button" ${ok||lock?'disabled':''}>${ok?'<i class="fa-solid fa-check"></i>':lock?'<i class="fa-solid fa-lock"></i>':'<i class="fa-solid fa-arrow-right"></i>'}</button></article>`}).join('');list.querySelectorAll('.quest-open:not(.complete):not(.locked)').forEach((b,i)=>b.addEventListener('click',()=>openTask(order[i])));if($('#quest-progress-fill'))$('#quest-progress-fill').style.width=`${Math.round(done.size/2*100)}%`;if($('#quest-progress-text'))$('#quest-progress-text').textContent=`${done.size} / 2`;if($('#quest-mistake-text'))$('#quest-mistake-text').textContent=`${mistakes} / ${LIMIT}`;if($('#quest-intro'))$('#quest-intro').textContent=lock?'Too many mistakes. Wait before trying again.':done.size===2?'All tasks are done. You can enter.':'Open a task, then come back.';if($('#quest-timer-text'))$('#quest-timer-text').textContent=lock?'Locked':'Ready';if($('#gate-next-1'))$('#gate-next-1').disabled=done.size!==2||lock}
-function punish(){done.clear();set(DONE_KEY,[]);set(MISTAKE_KEY,0);set(LOCK_KEY,Date.now()+LOCK*1000);mistakes=0;current=null;if(timer)clearInterval(timer);timer=null;render()}
-function mistake(){mistakes++;set(MISTAKE_KEY,mistakes);if(mistakes>=LIMIT)punish();else render()}
-function finish(id){if(timer)clearInterval(timer);timer=null;done.add(id);set(DONE_KEY,[...done]);current=null;render();if($('#quest-timer-text'))$('#quest-timer-text').textContent='Done'}
-function startTimer(id,left){if(timer)clearInterval(timer);let n=Math.max(0,left);const tick=()=>{const item=$(`[data-quest-id="${id}"]`);if(item){item.classList.add('checking');const st=item.querySelector('.quest-item-state'),b=item.querySelector('.quest-open');if(st)st.textContent=`Checking • ${n}s`;if(b){b.disabled=true;b.className='quest-open quest-open-v33 timer';b.innerHTML=`<span class="quest-countdown">${n}</span>`}}if($('#quest-timer-text'))$('#quest-timer-text').textContent=n?`Checking ${n}s`:'Done';if(n<=0){finish(id);return}n--};tick();timer=setInterval(tick,1000)}
-function openTask(id){if(locked()||done.has(id))return;if(current&&current!==id){mistake();return}current=id;set(TIMER_KEY,{id,started:Date.now()});const item=$(`[data-quest-id="${id}"]`);if(item){item.classList.add('checking');const st=item.querySelector('.quest-item-state'),b=item.querySelector('.quest-open');if(st)st.textContent='Return when finished';if(b){b.disabled=true;b.innerHTML='<i class="fa-solid fa-clock"></i>'}}try{window.open(taskOf(id).url,'_blank','noopener,noreferrer')}catch{}}
-function onReturn(){if(!current||done.has(current)||locked())return;const info=get(TIMER_KEY,null);if(!info||info.id!==current)return;const elapsed=Math.floor((Date.now()-Number(info.started||Date.now()))/1000);startTimer(info.id,Math.max(0,30-elapsed))}
-function unlock(){if(done.size!==2||locked())return;set(KEY,1);document.body.classList.remove('gate-locked');document.body.classList.add('gate-open');$('#access-gate')?.remove();window.__RON_GATE_V11_BOOTED=true;window.dispatchEvent(new Event('ron:gatecomplete'))}
-function boot(){if(localStorage.getItem(KEY)==='1'){document.body.classList.remove('gate-locked');document.body.classList.add('gate-open');$('#access-gate')?.remove();window.__RON_GATE_V11_BOOTED=true;return}render();window.addEventListener('focus',onReturn);document.addEventListener('visibilitychange',()=>{if(!document.hidden)onReturn()});$('#gate-next-1')?.addEventListener('click',unlock)}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-})();
-</script>
-
