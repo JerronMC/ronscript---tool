@@ -66,8 +66,8 @@ async function bootFirebase() {
 
 const APP_META = {
   name: "RON SCRIPTS",
-  version: "12.2.4",
-  build: "RON-ULTIMATE-V12.2.4-SERIOUS-FIX-2026.08.25.4",
+  version: "12.2.5",
+  build: "RON-ULTIMATE-V12.2.5-REAL-FIX-2026.08.25.5",
   channel: "ULTIMATE",
   release: "100 MICRO-UPDATES • VIP • PREMIUM • NEW UI",
   updated: "2026-08-25"
@@ -3208,6 +3208,14 @@ function renderScripts() {
   try { updateDebugPanel("renderScripts"); } catch {}
 }
 
+// EARLY LIBRARY PAINT
+// Render the library before optional Firebase/settings code runs.
+try {
+  renderScripts();
+} catch (error) {
+  console.error("Early library render failed:", error);
+}
+
 function renderHeroes() {
   const grid = $("#heroes-grid");
   if (!grid) return;
@@ -3288,8 +3296,8 @@ function openDetails(id){
   else action=`<a class="primary-btn" href="${escapeHTML(s.url||"#")}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download</a>`;
   const notice=s.accessOnly?`<div class="access-notice"><strong><i class="fa-solid fa-crown"></i> VIP Access Required</strong><p>${escapeHTML(getAccessMessage(s))}</p></div>`:s.premiumApprovalOnly?`<div class="access-notice premium-notice"><strong><i class="fa-solid fa-gem"></i> Premium Approval</strong><p>Answer the approval questions. Your result is saved in real time.</p></div>`:s.customOnly?`<div class="access-notice custom-notice"><strong><i class="fa-solid fa-flask"></i> Custom Lab Entry</strong><p>${escapeHTML(shortDescription(s))}</p></div>`:"";
   $("#modal-body").innerHTML=`<div class="details-hero"><div class="details-orb">${initials(s.hero)}</div><div><span class="eyebrow">${escapeHTML((s.type||"SKIN").toUpperCase())}</span><h3>${escapeHTML(s.title)}</h3><p>${escapeHTML(s.hero)}</p><div class="details-tags">${(s.tags||[]).map(t=>`<span class="tag">#${escapeHTML(t)}</span>`).join("")}</div></div></div><div class="details-grid"><div class="detail-stat"><b>${s.likes||0}</b><span>Likes</span></div><div class="detail-stat"><b>${s.views||0}</b><span>Views</span></div><div class="detail-stat"><b>${rating}</b><span>Rating</span></div></div><div class="details-description"><p>${escapeHTML(shortDescription(s))}</p></div>${notice}<div class="details-actions">${action}<button class="ghost-btn" id="details-copy"><i class="fa-solid fa-link"></i> Copy ID</button></div>`;
-  if(s.accessOnly)$("#details-access").addEventListener("click",e=>{e.preventDefault();openVipDownload(s);});if(s.premiumApprovalOnly)$("#details-premium").addEventListener("click",e=>{e.preventDefault();openPremiumDownload(s);});if(s.customOnly)$("#details-custom").addEventListener("click",()=>toast("Custom concept only."));
-  $("#details-copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(s.id);toast("Skin ID copied.");}catch{toast(s.id);}});$("#details-modal").showModal();
+  if(s.accessOnly)$("#details-access")?.addEventListener("click",e=>{e.preventDefault();openVipDownload(s);});if(s.premiumApprovalOnly)$("#details-premium")?.addEventListener("click",e=>{e.preventDefault();openPremiumDownload(s);});if(s.customOnly)$("#details-custom")?.addEventListener("click",()=>toast("Custom concept only."));
+  $("#details-copy")?.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(s.id);toast("Skin ID copied.");}catch{toast(s.id);}});$("#details-modal").showModal();
 }
 
 function wireRealtime() {
